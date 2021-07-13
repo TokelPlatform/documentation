@@ -20,7 +20,7 @@ tags:
 
 Tokel is a dedicated token platform. This platform will provide a solid foundation, using existing Komodo Technologies, for token projects to launch and succeed from by offering end-to-end token solutions for fixed supply and non-fungible tokens (NFT's). Furthermore Tokel aims to provide a wealth of knowledge, information and assistance for open-sourced applications, projects and businesses looking to capitalize on token economics or token applications. The Tokel platform will provide simple to use, streamlined token creation, explorer and wallet integration, decentralized exchange integration assistance and more.
 
-#### What Tokel aims to offer:
+### What Tokel aims to offer
 
 - The blockchain that facilitates the tokens.
 - An open-sourced all-in-one GUI application.
@@ -33,7 +33,7 @@ Tokel is a dedicated token platform. This platform will provide a solid foundati
 - Immediate token wallet integration.
 - Open source Discord bot integration.
 
-#### The benefits of creating a token on the Tokel blockchain:
+### The benefits of creating a token on the Tokel blockchain
 
 - There are no requirements to create and manage your own blockchain.
 - Free, simple to use GUI for token usage, management and creation.
@@ -52,7 +52,7 @@ The all-in-one Tokel application is an open-sourced application that will be the
 This application is in development. You can keep up with progress on the github, or find out more by having a chat in our discord.
 [https://github.com/TokelPlatform/tokel_app](https://github.com/TokelPlatform/tokel_app)
 
-#### Application features include:
+### Application features include
 
 - A TKL coin wallet
 - A multi-token wallet (you are able to hold all tokens that are in existence on the Tokel blockchain)

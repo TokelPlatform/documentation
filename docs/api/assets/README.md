@@ -6,15 +6,15 @@ The Assets Module provides basic decentralised exchange (DEX) functionality for 
 
 The Asset Module allows anyone to buy or sell tokens by using Tokel coins to submit buy/sell orders/bids. This information is referenced from the [Komodo developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html)
 
-#### Assets Module Flow
+### Assets Module Flow
 
-##### Seller's Perspective
+#### Seller's Perspective
 
 - A token owner places a new "ask" request with the <b>tokenv2ask</b> method specifying the amount of tokens they want to sell and the price. The assets module then creates a new token ask order and the specified amount of tokens is locked in the module's global address.
 - To fulfill the ask, a buyer executes the <b>tokenv2fillask</b> method. The purchased token amount moves from the global address to the buyer's token Antara Address. At the same time, the required amount of coins move from the buyer's address to the seller's address. This process can be repeated so long as tokens remain in the ask order.
 - At any time, the creator of an order can cancel it via the <b>tokenv2cancelask</b> method. The remaining tokens will return to their token Antara Address.
 
-##### Buyer's Perspective
+#### Buyer's Perspective
 
 - A buyer places a new bid using the <b>tokenv2bid</b> method. The bid specifies the amount of tokens and the price. The Assets Module creates a new token bid order and the specified amount of coins is locked in the module's global address.
 - A willing seller executes the <b>tokenv2fillbid</b> method. The token amount sold moves from the seller's token Antara Address to the buyer's token Antara Address. At the same time, the locked coins move from the global address to the seller's address. This process can be repeated so long as tokens remain in the bid order.
@@ -23,6 +23,7 @@ The Asset Module allows anyone to buy or sell tokens by using Tokel coins to sub
 To retrieve a current list of all active orders, use the <b>tokenv2orders</b> or <b>mytokenv2orders</b> methods.
 
 ## Assets RPCs
+
 - `assetsv2address [pubkey]`
 - `mytokenv2orders [evalcode]`
 - `tokenv2ask numtokens tokenid price`
@@ -32,9 +33,6 @@ To retrieve a current list of all active orders, use the <b>tokenv2orders</b> or
 - `tokenv2fillask tokenid asktxid fillunits`
 - `tokenv2fillbid tokenid bidtxid fillamount`
 - `tokenv2orders [tokenid]`
-
-[[toc]]
-
 
 ## assetsv2address
 
