@@ -16,7 +16,7 @@ jobs:
       - name: Build and Deploy to gh_pages
         uses: KomodoPlatform/vuepress-deploy@1.0.1
         env:
-          ACCESS_TOKEN: $GITHUB_TOKEN
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           TARGET_REPO: ${{ github.repository }}
           TARGET_BRANCH: gh-pages
           CNAME: "docs.tokel.io"
