@@ -2,13 +2,14 @@
 
 ## Introduction
 
-This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html). 
+This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html).
 
 The Tokens Module enables support for the on-chain creation of colored coins, also called tokens. The created tokens are used with another module that supports operations on tokens. For example, the [Assets Module](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html) provides buy/sell (tokenDEX) operations for `tokens`. Please refer to the Assets API documentation for further information on Assets.
 
 The `tokens` module requires locking a proportional amount of Tokel (TKL) coins. Each satoshi (0.00000001) of TKL is equal to one token within the total supply. For example, if you wanted to create a token with a supply of 100 million, this would require locking 1 TKL. Once the coins are locked, they are effectively unusable, or burnt; tokens now take the place of the native coin.
 
 ## TokensV2 RPC
+
 - `tokenv2address [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
 - `tokenv2create name supply [description] [tokens data]`
@@ -27,8 +28,8 @@ The `tokenv2address` method returns information about a token address according 
 
 ### Arguments
 
-| Name   | Type               | Description                       |
-| ------ | ------------------ | --------------------------------- |
+| Name   | Type               | Description                                                                                                          |
+| ------ | ------------------ | -------------------------------------------------------------------------------------------------------------------- |
 | pubkey | (string, optional) | the pubkey of the desired address; if no pubkey is provided, the pubkey used to launch the daemon is used by default |
 
 ### Response
@@ -37,7 +38,7 @@ The `tokenv2address` method returns information about a token address according 
 | --------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | result          | (string) | whether the command executed successfully                                                                                                                                  |
 | TokensCCaddress | (string) | taking the token contract's EVAL code as a modifier, this is the public address that corresponds to the token contract's privkey, also known as Tokens CC's global address |
-| myCCaddress     | (string) | taking the token contract's EVAL code as a modifier, this is the Tokens Antara address from the pubkey of the user                                                              |
+| myCCaddress     | (string) | taking the token contract's EVAL code as a modifier, this is the Tokens Antara address from the pubkey of the user                                                         |
 | myaddress       | (string) | the normal public address of the pubkey used to launch the chain                                                                                                           |
 
 #### :pushpin: Examples
@@ -54,15 +55,15 @@ Command:
 {
   "result": "success",
   "GlobalPk Tokensv2 CC Address": "RSc4RycihBEWQP2GDvSYS46MvFJsTKaNVU",
-  "GlobalPk Tokensv2 CC Balance": 0.00000000,
+  "GlobalPk Tokensv2 CC Balance": 0.0,
   "GlobalPk Tokensv2 Normal Address": "RDVU97zvJamGmVBSUyTm7RcYZtxjriNGkj",
-  "GlobalPk Tokensv2 Normal Balance": 0.00000000,
+  "GlobalPk Tokensv2 Normal Balance": 0.0,
   "pubkey Tokensv2 CC Address": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
-  "pubkey Tokensv2 CC Balance": 0.00000000,
+  "pubkey Tokensv2 CC Balance": 0.0,
   "mypk Tokensv2 CC Address": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
-  "mypk Tokensv2 CC Balance": 0.00000000,
+  "mypk Tokensv2 CC Balance": 0.0,
   "mypk Normal Address": "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh",
-  "mypk Normal Balance": 9999899.99990000
+  "mypk Normal Balance": 9999899.9999
 }
 ```
 
@@ -107,9 +108,9 @@ The `tokenv2balance` method checks the token balance for the provided `pubkey`. 
 
 ### Arguments
 
-| Name    | Type     | Description                                                                                                                |
-| ------- | -------- | -------------------------------------------------------------------------------------------------------------------------- |
-| tokenid | (string) | the txid that identifies the token                                                                                         |
+| Name    | Type     | Description                                                                                                                    |
+| ------- | -------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| tokenid | (string) | the txid that identifies the token                                                                                             |
 | pubkey  | (string) | the pubkey for which to examine the balance; if no pubkey is provided, the pubkey used to launch the daemon is used by default |
 
 ### Response
@@ -155,7 +156,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```json
 {
   "result": {
-     "result": "success",
+    "result": "success",
     "CCaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
     "tokenid": "a283693b37b3bd94edd91ba31345310a9b47946c626cb14189d67931a0cde705",
     "balance": 1
@@ -211,7 +212,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 
-## tokenv2createtokel
+<!-- ## tokenv2createtokel -->
 
 ## tokenv2create
 
@@ -230,6 +231,7 @@ The method returns a hex-encoded transaction which should then be broadcast usin
 A non-fungible token contains an additional array of data describing its corresponding asset. The data has an eval code which binds this non-fungible token to an Antara Module responsible for validation. Arbitrary data can be added to the NFT data field using the `XX` evalcode. This information needs to be converted from a string to HEX code using a website like https://www.rapidtables.com/convert/number/ascii-to-hex.html.
 
 ### Tokel Standard 1 validation code: f7 (01-02-03-04)
+
 ```
 'f701' - NFT data evalcode (f7) and version (01)
 '01' - Code of field 'ID'
@@ -245,6 +247,7 @@ A non-fungible token contains an additional array of data describing its corresp
 ```
 
 ### Arbitrary data validation code: 00
+
 ```
 '00' - Arbitrary data evalcode
 'XXX' - Data field (any format converted to hex)
@@ -262,12 +265,12 @@ To create a token that is divisible to one decimal place, for example, consider 
 
 ### Arguments
 
-| Name        | Type     | Description                                   |
-| ----------- | -------- | --------------------------------------------- |
-| name        | (string) | the name of the token                         |
+| Name        | Type     | Description                                                                                                                                                          |
+| ----------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| name        | (string) | the name of the token                                                                                                                                                |
 | supply      | (number) | the amount of TKL coins used to create the tokens, NOT the amount/supply of tokens you want in existence; 1 satoshi creates 1 token. 1 TKL creates 100000000 tokens. |
-| description | (string) | the description of the token                  |
-| nft data    | (hex)    | Arbitrary data that is hex encoded (NFTs only) |
+| description | (string) | the description of the token                                                                                                                                         |
+| nft data    | (hex)    | Arbitrary data that is hex encoded (NFTs only)                                                                                                                       |
 
 - TOKENS_MAX_NAME_LENGTH = 32;
 - TOKENS_MAX_DESC_LENGTH = 4096;
@@ -427,7 +430,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 {
   "result": {
     "result": "success",
-    "hex":    "0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000"
+    "hex": "0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000"
   },
   "error": null,
   "id": null
@@ -470,7 +473,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 
-Step 3 (Optional): Use decoderawtransaction to verify the output is sane ***Need to update this***
+Step 3 (Optional): Use decoderawtransaction to verify the output is sane **_Need to update this_**
 
 ```bash
 ./komodo-cli -ac_name=TKLTEST decoderawtransaction 0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000
@@ -633,7 +636,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 
-## tokenv2infotokel
+<!-- ## tokenv2infotokel -->
 
 ## tokenv2info
 
@@ -661,7 +664,8 @@ The `tokeninfo` method reveals information about any token.
 | IsImported    | (string,optional) | if 'yes' this token was imported from another chain                          |
 | sourceChain   | (string,optional) | the name of the imported token's source chain                                |
 | sourceTokenId | (string,optional) | for an imported token, the `tokenid` of the source token on the source chain |
-***ISMIXED?***
+
+**_ISMIXED?_**
 
 #### :pushpin: Examples
 
@@ -719,23 +723,22 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 ## tokenv2list
 
-**tokenv2list [begin-height] [end-height]**
+**tokenv2list [begin-height][end-height]**
 
 The `tokenv2list` method lists all available tokens on Tokel. Enter an optional begin and end block height number to search for tokens created between specific block numbers.
 
 ### Arguments
 
-| Name   | Type | Description |
-| ------ | ---- | ----------- |
+| Name         | Type               | Description                          |
+| ------------ | ------------------ | ------------------------------------ |
 | begin-height | (number, optional) | Block number to start searching from |
-| end-height | (number, optional) | Block number to end searching from |
+| end-height   | (number, optional) | Block number to end searching from   |
 
 ### Response
 
 | Name    | Type               | Description                           |
 | ------- | ------------------ | ------------------------------------- |
 | tokenid | (array of strings) | the identifying txid for the token id |
-
 
 #### :pushpin: Examples
 
@@ -846,8 +849,8 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```json
 {
   "result": {
-  "result": "success",
-    "hex":  "0400008085202f8902cc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d020000004847304402200ac4ec79ed4c60307d4eb66bece4dca4e347ce8f016100ce83ed5113cc86211902203dda7eb751f7016e600a62c102fa4eaeb2c83c1336667657ab139e8d8e75924301ffffffffcc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140d3a7e35af97ab89719ffd8fd529ab5eb077be6906ee20957981f42b34c6d9e3c0277f560742064011e128bdcb0037b303a11c984236ea27fed6789387abbba31a100af038001f5a10001ffffffff046400000000000000403e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc9ce0f50500000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204ccc01ec44a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000256a23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc000000001e0400000000000000000000000000"
+    "result": "success",
+    "hex": "0400008085202f8902cc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d020000004847304402200ac4ec79ed4c60307d4eb66bece4dca4e347ce8f016100ce83ed5113cc86211902203dda7eb751f7016e600a62c102fa4eaeb2c83c1336667657ab139e8d8e75924301ffffffffcc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140d3a7e35af97ab89719ffd8fd529ab5eb077be6906ee20957981f42b34c6d9e3c0277f560742064011e128bdcb0037b303a11c984236ea27fed6789387abbba31a100af038001f5a10001ffffffff046400000000000000403e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc9ce0f50500000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204ccc01ec44a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000256a23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc000000001e0400000000000000000000000000"
   },
   "error": null,
   "id": "curltest"
@@ -862,7 +865,8 @@ Step 2: Broadcast using `sendrawtransaction`
 ./komodo-cli -ac_name=TKLTEST sendrawtransaction 0400008085202f8902cc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d020000004847304402200ac4ec79ed4c60307d4eb66bece4dca4e347ce8f016100ce83ed5113cc86211902203dda7eb751f7016e600a62c102fa4eaeb2c83c1336667657ab139e8d8e75924301ffffffffcc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140d3a7e35af97ab89719ffd8fd529ab5eb077be6906ee20957981f42b34c6d9e3c0277f560742064011e128bdcb0037b303a11c984236ea27fed6789387abbba31a100af038001f5a10001ffffffff046400000000000000403e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc9ce0f50500000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204ccc01ec44a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000256a23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc000000001e0400000000000000000000000000
 ```
 
-***update***
+**_update_**
+
 <collapse-text hidden title="Response">
 
 ```bash
@@ -1098,8 +1102,8 @@ A token may be burned by using `tokentransfer` to send to a burn address.
 
 | Name       | Type               | Description                                |
 | ---------- | ------------------ | ------------------------------------------ |
-| tokenid1    | (string) | the identifying txid for first token id             |
-| tokenid2    | (string, optional) | the identifying txid for another token id |
+| tokenid1   | (string)           | the identifying txid for first token id    |
+| tokenid2   | (string, optional) | the identifying txid for another token id  |
 | destpubkey | (string)           | the pubkey where the tokens should be sent |
 | amount     | (number)           | the number of tokens to send               |
 
@@ -1141,7 +1145,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```json
 {
   "result": {
-    "hex":  "0400008085202f890305e7cda03179d68941b16c626c94479b0a314513a31bd9ed94bdb3373b6983a20200000049483045022100e6091d6a95173e9644c47989c777583dfb8221e9ffc9c4c05278f63f856e815202202fa05629cd16f96c68f0acbcdc64a6efc3882962b2aef4c9e073ac95182ca97201ffffffff42c21f0d3bc13a799c4c8f138594da9cdae29f0e4610dc8ccd546c9a1b63d70c010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140ce42ad2400f4ebd60d324431ca7ecf16ef2ed5e528f042c783fd380b825f6ff918079488a6a95c18218d30868b219419efdf87aafa359aa3bd1f327c1fb58577a100af038001f5a10001ffffffffe50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140f0b23b17e0dfefc18b9ce41ac14c22cd8495adfa96b7ecefa656d66a7dfa79f205bc62094490c7dc89f49b43edf5d253501e61ea861cc083868f694fefef57b9a100af038001f5a10001ffffffff053200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc24275de26000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242753200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc756ae0f50500000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc755f34c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac00000000430400000000000000000000000000"
+    "hex": "0400008085202f890305e7cda03179d68941b16c626c94479b0a314513a31bd9ed94bdb3373b6983a20200000049483045022100e6091d6a95173e9644c47989c777583dfb8221e9ffc9c4c05278f63f856e815202202fa05629cd16f96c68f0acbcdc64a6efc3882962b2aef4c9e073ac95182ca97201ffffffff42c21f0d3bc13a799c4c8f138594da9cdae29f0e4610dc8ccd546c9a1b63d70c010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140ce42ad2400f4ebd60d324431ca7ecf16ef2ed5e528f042c783fd380b825f6ff918079488a6a95c18218d30868b219419efdf87aafa359aa3bd1f327c1fb58577a100af038001f5a10001ffffffffe50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140f0b23b17e0dfefc18b9ce41ac14c22cd8495adfa96b7ecefa656d66a7dfa79f205bc62094490c7dc89f49b43edf5d253501e61ea861cc083868f694fefef57b9a100af038001f5a10001ffffffff053200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc24275de26000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242753200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc756ae0f50500000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc755f34c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac00000000430400000000000000000000000000"
   },
   "error": null,
   "id": "curltest"
@@ -1156,7 +1160,8 @@ Step 2: Broadcast using `sendrawtransaction`
 ./komodo-cli -ac_name=TKLTEST sendrawtransaction 0400008085202f890305e7cda03179d68941b16c626c94479b0a314513a31bd9ed94bdb3373b6983a20200000049483045022100e6091d6a95173e9644c47989c777583dfb8221e9ffc9c4c05278f63f856e815202202fa05629cd16f96c68f0acbcdc64a6efc3882962b2aef4c9e073ac95182ca97201ffffffff42c21f0d3bc13a799c4c8f138594da9cdae29f0e4610dc8ccd546c9a1b63d70c010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140ce42ad2400f4ebd60d324431ca7ecf16ef2ed5e528f042c783fd380b825f6ff918079488a6a95c18218d30868b219419efdf87aafa359aa3bd1f327c1fb58577a100af038001f5a10001ffffffffe50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140f0b23b17e0dfefc18b9ce41ac14c22cd8495adfa96b7ecefa656d66a7dfa79f205bc62094490c7dc89f49b43edf5d253501e61ea861cc083868f694fefef57b9a100af038001f5a10001ffffffff053200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc24275de26000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242753200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc756ae0f50500000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc755f34c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac00000000430400000000000000000000000000
 ```
 
-***update***
+**_update_**
+
 <collapse-text hidden title="Response">
 
 ```bash

@@ -72,14 +72,14 @@ Response:
 {
   "result": "success",
   "GlobalPk Assetsv2 CC Address": "RX99NCswvrLiM6vNE4zmpKKBWMZU9zqwAk",
-  "GlobalPk Assetsv2 CC Balance": 0.00000000,
+  "GlobalPk Assetsv2 CC Balance": 0.0,
   "GlobalPk Assetsv2 Normal Address": "RSB4NhRbvEShUFDkZz2KACj5EEBGDtDsV9",
-  "GlobalPk Assetsv2 Normal Balance": 0.00000000,
+  "GlobalPk Assetsv2 Normal Balance": 0.0,
   "GlobalPk Assetsv2/Tokens CC Address": "RLN5VzzcMmiiGEyjsM66dkKxKdiERbGtCf",
   "pubkey Assetsv2 CC Address": "RP7Yf1iWAwFFnRehd6Dtcdm2L6ybEmfLNS",
-  "pubkey Assetsv2 CC Balance": 0.00000000,
+  "pubkey Assetsv2 CC Balance": 0.0,
   "mypk Assetsv2 CC Address": "RP7Yf1iWAwFFnRehd6Dtcdm2L6ybEmfLNS",
-  "mypk Assetsv2 CC Balance": 0.00020000,
+  "mypk Assetsv2 CC Balance": 0.0002,
   "mypk Normal Address": "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh",
   "mypk Normal Balance": 1.09844996
 }
@@ -102,14 +102,14 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
   "result": {
     "result": "success",
     "GlobalPk Assetsv2 CC Address": "RX99NCswvrLiM6vNE4zmpKKBWMZU9zqwAk",
-    "GlobalPk Assetsv2 CC Balance": 0.00000000,
+    "GlobalPk Assetsv2 CC Balance": 0.0,
     "GlobalPk Assetsv2 Normal Address": "RSB4NhRbvEShUFDkZz2KACj5EEBGDtDsV9",
-    "GlobalPk Assetsv2 Normal Balance": 0.00000000,
+    "GlobalPk Assetsv2 Normal Balance": 0.0,
     "GlobalPk Assetsv2/Tokens CC Address": "RLN5VzzcMmiiGEyjsM66dkKxKdiERbGtCf",
     "pubkey Assetsv2 CC Address": "RP7Yf1iWAwFFnRehd6Dtcdm2L6ybEmfLNS",
-    "pubkey Assetsv2 CC Balance": 0.00000000,
+    "pubkey Assetsv2 CC Balance": 0.0,
     "mypk Assetsv2 CC Address": "RP7Yf1iWAwFFnRehd6Dtcdm2L6ybEmfLNS",
-    "mypk Assetsv2 CC Balance": 0.00020000,
+    "mypk Assetsv2 CC Balance": 0.0002,
     "mypk Normal Address": "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh",
     "mypk Normal Balance": 1.09844996
   },
@@ -130,10 +130,10 @@ The method returns a hex value which must then be broadcast using the [sendrawtr
 
 ### Arguments
 
-| Structure | Type     | Description                                                                    |
-| --------- | -------- | ------------------------------------------------------------------------------ |
-| numtokens | (number) | the number of tokens to request in the order                                   |
-| tokenid   | (string) | the txid that identifies the token                                             |
+| Structure | Type     | Description                                               |
+| --------- | -------- | --------------------------------------------------------- |
+| numtokens | (number) | the number of tokens to request in the order              |
+| tokenid   | (string) | the txid that identifies the token                        |
 | price     | (number) | the price to pay for each token (units are in Tokel coin) |
 
 ### Response
@@ -176,7 +176,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
   "result": {
     "result": "success",
     "hex": "0400008085202f89022bb8ca3b9be7b1f4c759399f787621004f4faf4befb828a3b5e41866e865f9fe0500000049483045022100a48724fa61b066e88b9bfb85495b9bd986e924949a4577a2076ac426c102fcf5022023918ee7a3696d63d8a7bd050e1aadd11006b8bfced403b261a301bf997ee38901ffffffff576c15d4b12ec74f019e33829e065faed42cf3361d0eef6a4258cd2dc01f12f701000000804c7ea27ba077a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140fcb7aa887e757fc2739492b691b4ef227a48fe8843381ea594d7f7cb5c4ffe747da4b99aa0931a8458c20d24d64af75563cd138627d42ea8331041a5147fdfd0a100af038001f5af038001f7a10001ffffffff0401000000000000004a484da245a014a003800104af038001f5af038001f6af038001f7a12da22b8020372291b16b9c8bab27def01f3d96e96f97f5ab14b1cab090dbe9296b70fd87bb810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f6a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204ccc0d73aa40b000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000546a4c51f57401f7121fc02dcd58426aef0e1d36f32cd4ae5f069e82339e014fc72eb1d4156c572df6730100e40b54020000002102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee000000002ef200000000000000000000000000"
-},
+  },
   "error": null,
   "id": "curltest"
 }
@@ -232,10 +232,10 @@ The `sendrawtransaction` method then returns a `txid`, which is the identificati
 
 ### Arguments
 
-| Structure | Type     | Description                                                                    |
-| --------- | -------- | ------------------------------------------------------------------------------ |
-| numtokens | (number) | the number of tokens to request in the order                                   |
-| tokenid   | (string) | the txid that identifies the token                                             |
+| Structure | Type     | Description                                               |
+| --------- | -------- | --------------------------------------------------------- |
+| numtokens | (number) | the number of tokens to request in the order              |
+| tokenid   | (string) | the txid that identifies the token                        |
 | price     | (number) | the price to pay for each token (units are in Tokel coin) |
 
 ### Response
@@ -470,13 +470,11 @@ Step 3 (optional): Decode the raw transaction (check if the values are sane)
         "hex": "434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc",
         "reqSigs": 1,
         "type": "cryptocondition",
-        "addresses": [
-          "RVCq5bZcRgP5xsDfUacC8cDCMauzzRB1RE"
-        ]
+        "addresses": ["RVCq5bZcRgP5xsDfUacC8cDCMauzzRB1RE"]
       }
     },
     {
-      "value": 0.00010000,
+      "value": 0.0001,
       "valueZat": 10000,
       "n": 1,
       "scriptPubKey": {
@@ -484,9 +482,7 @@ Step 3 (optional): Decode the raw transaction (check if the values are sane)
         "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
         "reqSigs": 1,
         "type": "pubkey",
-        "addresses": [
-          "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-        ]
+        "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
       }
     },
     {
@@ -498,13 +494,11 @@ Step 3 (optional): Decode the raw transaction (check if the values are sane)
         "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
         "reqSigs": 1,
         "type": "pubkey",
-        "addresses": [
-          "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-        ]
+        "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
       }
     },
     {
-      "value": 0.00000000,
+      "value": 0.0,
       "valueZat": 0,
       "n": 3,
       "scriptPubKey": {
@@ -514,13 +508,10 @@ Step 3 (optional): Decode the raw transaction (check if the values are sane)
       }
     }
   ],
-  "vjoinsplit": [
-  ],
-  "valueBalance": 0.00000000,
-  "vShieldedSpend": [
-  ],
-  "vShieldedOutput": [
-  ]
+  "vjoinsplit": [],
+  "valueBalance": 0.0,
+  "vShieldedSpend": [],
+  "vShieldedOutput": []
 }
 ```
 
@@ -584,13 +575,11 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
           "hex": "434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc",
           "reqSigs": 1,
           "type": "cryptocondition",
-          "addresses": [
-            "RVCq5bZcRgP5xsDfUacC8cDCMauzzRB1RE"
-          ]
+          "addresses": ["RVCq5bZcRgP5xsDfUacC8cDCMauzzRB1RE"]
         }
       },
       {
-        "value": 0.00010000,
+        "value": 0.0001,
         "valueZat": 10000,
         "n": 1,
         "scriptPubKey": {
@@ -598,9 +587,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
           "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
           "reqSigs": 1,
           "type": "pubkey",
-          "addresses": [
-            "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-          ]
+          "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
         }
       },
       {
@@ -612,13 +599,11 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
           "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
           "reqSigs": 1,
           "type": "pubkey",
-          "addresses": [
-            "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-          ]
+          "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
         }
       },
       {
-        "value": 0.00000000,
+        "value": 0.0,
         "valueZat": 0,
         "n": 3,
         "scriptPubKey": {
@@ -628,13 +613,10 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
         }
       }
     ],
-    "vjoinsplit": [
-    ],
-    "valueBalance": 0.00000000,
-    "vShieldedSpend": [
-    ],
-    "vShieldedOutput": [
-    ]
+    "vjoinsplit": [],
+    "valueBalance": 0.0,
+    "vShieldedSpend": [],
+    "vShieldedOutput": []
   },
   "error": null,
   "id": "curltest"
@@ -786,7 +768,7 @@ Step 3: Decode the raw transaction (optional to check if the values are sane)
   ],
   "vout": [
     {
-      "value": 1250.00000000,
+      "value": 1250.0,
       "valueZat": 125000000000,
       "n": 0,
       "scriptPubKey": {
@@ -794,13 +776,11 @@ Step 3: Decode the raw transaction (optional to check if the values are sane)
         "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
         "reqSigs": 1,
         "type": "pubkey",
-        "addresses": [
-          "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-        ]
+        "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
       }
     },
     {
-      "value": 0.00010000,
+      "value": 0.0001,
       "valueZat": 10000,
       "n": 1,
       "scriptPubKey": {
@@ -808,13 +788,11 @@ Step 3: Decode the raw transaction (optional to check if the values are sane)
         "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
         "reqSigs": 1,
         "type": "pubkey",
-        "addresses": [
-          "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-        ]
+        "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
       }
     },
     {
-      "value": 499.99950000,
+      "value": 499.9995,
       "valueZat": 49999950000,
       "n": 2,
       "scriptPubKey": {
@@ -822,13 +800,11 @@ Step 3: Decode the raw transaction (optional to check if the values are sane)
         "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
         "reqSigs": 1,
         "type": "pubkey",
-        "addresses": [
-          "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-        ]
+        "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
       }
     },
     {
-      "value": 0.00000000,
+      "value": 0.0,
       "valueZat": 0,
       "n": 3,
       "scriptPubKey": {
@@ -838,13 +814,10 @@ Step 3: Decode the raw transaction (optional to check if the values are sane)
       }
     }
   ],
-  "vjoinsplit": [
-  ],
-  "valueBalance": 0.00000000,
-  "vShieldedSpend": [
-  ],
-  "vShieldedOutput": [
-  ]
+  "vjoinsplit": [],
+  "valueBalance": 0.0,
+  "vShieldedSpend": [],
+  "vShieldedOutput": []
 }
 ```
 
@@ -900,7 +873,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
     ],
     "vout": [
       {
-        "value": 1250.00000000,
+        "value": 1250.0,
         "valueZat": 125000000000,
         "n": 0,
         "scriptPubKey": {
@@ -908,13 +881,11 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
           "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
           "reqSigs": 1,
           "type": "pubkey",
-          "addresses": [
-            "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-          ]
+          "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
         }
       },
       {
-        "value": 0.00010000,
+        "value": 0.0001,
         "valueZat": 10000,
         "n": 1,
         "scriptPubKey": {
@@ -922,13 +893,11 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
           "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
           "reqSigs": 1,
           "type": "pubkey",
-          "addresses": [
-            "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-          ]
+          "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
         }
       },
       {
-        "value": 499.99950000,
+        "value": 499.9995,
         "valueZat": 49999950000,
         "n": 2,
         "scriptPubKey": {
@@ -936,13 +905,11 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
           "hex": "2102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac",
           "reqSigs": 1,
           "type": "pubkey",
-          "addresses": [
-            "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"
-          ]
+          "addresses": ["RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh"]
         }
       },
       {
-        "value": 0.00000000,
+        "value": 0.0,
         "valueZat": 0,
         "n": 3,
         "scriptPubKey": {
@@ -952,13 +919,10 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
         }
       }
     ],
-    "vjoinsplit": [
-    ],
-    "valueBalance": 0.00000000,
-    "vShieldedSpend": [
-    ],
-    "vShieldedOutput": [
-    ]
+    "vjoinsplit": [],
+    "valueBalance": 0.0,
+    "vShieldedSpend": [],
+    "vShieldedOutput": []
   },
   "error": null,
   "id": "curltest"
@@ -1004,7 +968,6 @@ Step 1: Create the raw transaction
 {
   "hex": "0400008085202f890277772b304e259a46c8494b8894711d054fad23812ca8beea11ac773f1b9aba91020000004847304402203d150fde5b65be03af6e3d64eec8e9b31f3ac6cea73ae08033ec97a0e1127b560220571fbc07ad968e08adfe6565cdeed3123576cd847a4cb94d3371dede073245fb01ffffffffb8027526fcf0604b9b496451b98448057f9c5c0c704cc9340166a66029bca2ec00000000804c7ea27ba077a26ba067a56580210345d2e7ab018619da6ed58ccc0138c5f58a7b754bd8e9a1a9d2b811c5fe72d4678140e0ca8262db61ef8a31003beaa42e79aab3d8d76d2e7be40f252b2c6dfaef800c0974efbb4b690aeed7392ccaa20bee6361de31e11104bca902fa3d39714ddd7da100af038001f5af038001f6a10001ffffffff06000000000000000045434da240a00fa003800103af038001f5af038001f6a12da22b8020372291b16b9c8bab27def01f3d96e96f97f5ab14b1cab090dbe9296b70fd87bb810302040082020204cc0100000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc00e40b5402000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac1027000000000000403e4da23ba00aa003800102af038001f6a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc907e2e5009000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000546a4c51f574013e54d1f345949815edb138c29ae81972dc96a47c5499804490b555a8b421b1422df6530100e40b54020000002102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee00000000d0f700000000000000000000000000"
 }
-
 ```
 
 </collapse-text>
@@ -1104,7 +1067,6 @@ Step 1: Create raw transaction
 {
   "hex": "0400008085202f890331403437e4dd8ec547a76f767552011a9a5aec695484b81b066deae2e38060d902000000484730440220033f014052a029fd5ad4229b48afae6a12528de1383a099ec335763bff05b6f8022013cf0be07a6b799c2452e8223345292abef85bac45e91ffc45d9a568f3d1b32d01fffffffff1508545d4c194c8194ac277547baaff16ba2bd51ec602581854a27445b0817d000000007b4c79a276a072a26ba067a56580210345d2e7ab018619da6ed58ccc0138c5f58a7b754bd8e9a1a9d2b811c5fe72d4678140a2733e0f88a5ec6cb855d26c8f86d2a01bf6da55911130eb108eb564473033f717bbf505061e3a19de422f20eca7455805d1791b53376badf2fcc1716603373da100af038001f6a10001ffffffff31403437e4dd8ec547a76f767552011a9a5aec695484b81b066deae2e38060d9010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140d57f9323abff870873d88a65e25f60dd8bf5e57e68a2d5aef68debf1917854b469a1801d26f704e24328a9d36be7301a6abf9e9708608a0e2e7ab2dbaffabe53a100af038001f5a10001ffffffff060082357a0a000000403e4da23ba00aa003800102af038001f6a12da22b8020372291b16b9c8bab27def01f3d96e96f97f5ab14b1cab090dbe9296b70fd87bb810302040082020204cc00f2052a01000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0100000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f6a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cce0950b5402000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000546a4c51f574013e54d1f345949815edb138c29ae81972dc96a47c5499804490b555a8b421b1422df6420100f2052a010000002102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee00000000d4f700000000000000000000000000"
 }
-
 ```
 
 </collapse-text>
@@ -1185,8 +1147,8 @@ Information about the `funcid` property:
 
 ### Arguments
 
-| Structure | Type               | Description                           |
-| --------- | ------------------ | ------------------------------------- |
+| Structure | Type               | Description                                                                                       |
+| --------- | ------------------ | ------------------------------------------------------------------------------------------------- |
 | tokenid   | (string, optional) | the identifying txid for the token id. Leave this blank to see all of your orders, on all tokens. |
 
 ### Response
@@ -1225,7 +1187,7 @@ Show all available orders for a specific token
     "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
     "tokenid": "ffc5d13dffb392509b8470435b610502649af953d813c6841119622b9966ccb3",
     "totalrequired": 10,
-    "price": 1.00000000
+    "price": 1.0
   }
 ]
 ```
@@ -1255,7 +1217,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
       "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
       "tokenid": "ffc5d13dffb392509b8470435b610502649af953d813c6841119622b9966ccb3",
       "totalrequired": 10,
-      "price": 1.00000000
+      "price": 1.0
     }
   ],
   "error": null,
@@ -1285,7 +1247,7 @@ Show all available orders
     "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
     "tokenid": "17aa08ceb43f772c172daa347ea8c24ef7e2ddd517c3b9ede811ff32929a1278",
     "totalrequired": 1,
-    "price": 12.00000000
+    "price": 12.0
   },
   {
     "funcid": "B",
@@ -1297,7 +1259,7 @@ Show all available orders
     "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
     "tokenid": "3e54d1f345949815edb138c29ae81972dc96a47c5499804490b555a8b421b142",
     "totalrequired": 9,
-    "price": 50.00000000
+    "price": 50.0
   },
   {
     "funcid": "b",
@@ -1309,7 +1271,7 @@ Show all available orders
     "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
     "tokenid": "ffc5d13dffb392509b8470435b610502649af953d813c6841119622b9966ccb3",
     "totalrequired": 10,
-    "price": 1.00000000
+    "price": 1.0
   }
 ]
 ```
@@ -1339,7 +1301,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
       "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
       "tokenid": "17aa08ceb43f772c172daa347ea8c24ef7e2ddd517c3b9ede811ff32929a1278",
       "totalrequired": 1,
-      "price": 12.00000000
+      "price": 12.0
     },
     {
       "funcid": "B",
@@ -1351,7 +1313,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
       "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
       "tokenid": "3e54d1f345949815edb138c29ae81972dc96a47c5499804490b555a8b421b142",
       "totalrequired": 9,
-      "price": 50.00000000
+      "price": 50.0
     },
     {
       "funcid": "b",
@@ -1363,7 +1325,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
       "origtokenaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
       "tokenid": "ffc5d13dffb392509b8470435b610502649af953d813c6841119622b9966ccb3",
       "totalrequired": 10,
-      "price": 1.00000000
+      "price": 1.0
     }
   ],
   "error": null,
