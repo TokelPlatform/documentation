@@ -17,6 +17,7 @@ module.exports = {
     // redirect: {
     //   alias: redirectAliases,
     // },
+    "@vuepress/back-to-top": {},
     autometa: autometa_options,
     "@vuepress/last-updated": {
       transformer: (timestamp) => {
@@ -103,8 +104,7 @@ module.exports = {
     nav: [
       {
         text: "White Paper",
-        link:
-          "https://tokel.io/TokelPaper1stEdition.pdf",
+        link: "https://tokel.io/TokelPaper1stEdition.pdf",
       },
       {
         text: "tokel.io",
