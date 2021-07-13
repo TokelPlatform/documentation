@@ -1,22 +1,23 @@
 require("dotenv").config();
-var redirectAliases = require("./public/_redirects.js");
+//var redirectAliases = require("./public/_redirects.js");
 var sidebarImport = require("./sidebar.js");
-var algoliaSecret = require("./algolia-secret.js");
+//var algoliaSecret = require("./algolia-secret.js");
 
 const autometa_options = {
   schema: true,
   site: {
-    name: "Komodo Documentation",
-    twitter: "komodoplatform",
+    name: "Tokel Documentation",
+    //twitter: "tokel",
   },
-  canonical_base: "https://developers.komodoplatform.com",
+  canonical_base: "https://docs.tokel.io",
 };
 
 module.exports = {
   plugins: {
-    redirect: {
-      alias: redirectAliases,
-    },
+    // redirect: {
+    //   alias: redirectAliases,
+    // },
+    "@vuepress/back-to-top": {},
     autometa: autometa_options,
     "@vuepress/last-updated": {
       transformer: (timestamp) => {
@@ -34,19 +35,19 @@ module.exports = {
         scrollOffset: 0,
       },
     },
-    "vuepress-plugin-google-tag-manager": {
-      gtm: "GTM-PC28587",
-    },
+    // "vuepress-plugin-google-tag-manager": {
+    //   gtm: "GTM-PC28587",
+    // },
   },
   head: [
     [
       "link",
       {
         rel: "icon",
-        href: "/KMD_Mark_Black.png",
+        href: "/tokel_fav.svg",
       },
     ],
-    [
+    /*[
       "meta",
       {
         name: "twitter:image",
@@ -54,7 +55,7 @@ module.exports = {
           "https://developers.komodoplatform.com/start-here-pics/Dev_Docs_Introduction_small.png",
       },
     ],
-    /* [
+    [
       "meta",
       {
         name: "twitter:card",
@@ -65,57 +66,51 @@ module.exports = {
       "meta",
       {
         name: "twitter:site",
-        content: "@komodoplatform",
+        content: "@tokel",
       },
     ],
     [
       "meta",
       {
         name: "twitter:title",
-        content: "Komodo Developer Documentation",
+        content: "Tokel Developer Documentation",
       },
     ],
     [
       "meta",
       {
         name: "twitter:description",
-        content: "Documentation for developers building on the Komodo Platform",
+        content: "Documentation for developers building on the Tokel Platform",
       },
     ],
    */
   ],
-  title: "Komodo Documentation",
+  title: "Tokel Documentation",
   base: "/",
-  description: "Documentation for developers building on Komodo",
+  description: "Documentation for developers building on Tokel",
   themeConfig: {
-    repo: "komodoplatform/developer-docs",
+    repo: "TokelPlatform/documentation",
     repoLabel: "Github",
     docsDir: "docs",
     editLinks: true,
     editLinkText: "Suggest an improvement for this page",
     //lastUpdated: "Last Updated",
     // sidebarDepth: 3,
-    logo: "/KMD_Horiz_White.svg",
-    algolia: {
-      apiKey: algoliaSecret.key,
-      indexName: "komodoplatform",
-    },
+    logo: "/tokel_logo.svg",
+    // algolia: {
+    //   apiKey: algoliaSecret.key,
+    //   indexName: "komodoplatform",
+    // },
     nav: [
       {
-        text: "Start Here",
-        link:
-          "/basic-docs/start-here/about-komodo-platform/about-komodo-platform.md",
+        text: "White Paper",
+        link: "https://tokel.io/TokelPaper1stEdition.pdf",
       },
       {
-        text: "KomodoPlatform.com",
-        link: "https://komodoplatform.com",
+        text: "tokel.io",
+        link: "https://tokel.io",
       },
     ],
-    sidebar: {
-      "/basic-docs/": sidebarImport,
-
-      // Repeat everything from above
-      "/": sidebarImport,
-    },
+    sidebar: sidebarImport,
   },
 };

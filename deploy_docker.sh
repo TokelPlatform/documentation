@@ -14,7 +14,7 @@ docker run --rm -v $(pwd):/app/ -w /app/ -u $(id -u):$(id -g) komodo_docs_image
 cd docs/.vuepress/dist
 
 # if you are deploying to a custom domain
-#echo 'developers.komodoplatform.com' > CNAME
+#echo 'docs.tokel.io' > CNAME
 
 git init
 git add -A

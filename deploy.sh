@@ -10,7 +10,7 @@ yarn docs:build
 cd docs/.vuepress/dist
 
 # if you are deploying to a custom domain
-#echo 'developers.komodoplatform.com' > CNAME
+#echo 'docs.tokel.io' > CNAME
 
 git init
 git add -A

@@ -1,14 +1,15 @@
 {
   "name": "docs",
-  "description": "dev docs for Komodo Platform",
+  "description": "dev docs for Tokel Platform",
   "keywords": [
     "documentation",
-    "komodo",
+    "tokel",
     "developer"
   ],
-  "author": "Contributors from Komodo Platform",
+  "author": "Contributors from Tokel Platform",
   "license": "MIT",
   "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.8.2",
     "moment": "^2.27.0",
     "vue-cookie-law": "^1.13.3",
     "vuepress": "^1.8.2",
