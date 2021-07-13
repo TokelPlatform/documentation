@@ -165,19 +165,19 @@ export default {
 <style lang="stylus">
 .Cookie--custom {
   color: #fff;
-  background-color: #026782;
-  background: #026782;
+  background-color: #263867;
+  background: #263867;
   padding: 1.250em;
   .Cookie__button {
-      background: #18f4bf;
+      background: #687bf7;
       padding: 0.625em 1.125em;
-      color: #000;
+      color: #13182a;
       font-weight: bold;
       border-radius: 0;
       border: 0;
       font-size: 1em;
       &:hover {
-        background: darken(#18f4bf, 10%);
+        background: darken(#687bf7, 10%);
       }
   }
   }
