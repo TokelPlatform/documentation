@@ -1,12 +1,12 @@
 {
   "name": "docs",
-  "description": "dev docs for Komodo Platform",
+  "description": "dev docs for Tokel Platform",
   "keywords": [
     "documentation",
-    "komodo",
+    "tokel",
     "developer"
   ],
-  "author": "Contributors from Komodo Platform",
+  "author": "Contributors from Tokel Platform",
   "license": "MIT",
   "devDependencies": {
     "moment": "^2.27.0",
