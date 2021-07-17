@@ -212,23 +212,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 
-<!-- ## tokenv2createtokel -->
-
-## tokenv2create
-
-**tokenv2create name supply description [token data]**
-
-The `tokenv2create` method creates a new token.
-
-For every token created, the method requires one satoshi of the Tokel coin. For example, `1 TKL` creates a maximum `100000000` tokens. As each TKL satoshi is used to create a coloured coin, once the TKL has been spent to create the token, it is effectively burnt and no longer in the circulating supply of TKL.
-
-The method returns a hex-encoded transaction which should then be broadcast using `sendrawtransaction`.
-
-`sendrawtransaction` then returns a `txid`, which is your `tokenid`.
-
-#### Non-Fungible Tokens
-
-A non-fungible token contains an additional array of data describing its corresponding asset. The data has an eval code which binds this non-fungible token to an Antara Module responsible for validation. Arbitrary data can be added to the NFT data field using the `XX` evalcode. This information needs to be converted from a string to HEX code using a website like https://www.rapidtables.com/convert/number/ascii-to-hex.html.
+<!-- ## tokenv2createtokel 
 
 ### Tokel Standard 1 validation code: f7 (01-02-03-04)
 
@@ -252,10 +236,26 @@ A non-fungible token contains an additional array of data describing its corresp
 '00' - Arbitrary data evalcode
 'XXX' - Data field (any format converted to hex)
 ```
+-->
 
-To create a non-fungible token, use only 1 satoshi (0.00000001 TKL). You will not be able to add the data field to tokens that are not NFTs.
+## tokenv2createtokel
 
-For more information on NFT data validation and evalcodes, please read `XYZ`
+**tokenv2createtokel name supply description [token data]**
+
+The `tokenv2createtokel` method creates a new fixed supply or non-fungible token that incorporates the Tokel Standard token data format.
+
+For every token created, you are required to spend one satoshi (.00000001) of the Tokel coin (TKL). For example, 1 TKL creates a maximum 100000000 tokens. As each TKL satoshi is used to create a coloured coin, once the TKL has been spent to create the token, it is effectively burnt and no longer in the circulating supply of TKL. This method is used to create all types (NFT & Fixed supply) of tokens on the Tokel blockchain. The data you input into the token on creation is non editable. Once it is created, you cannot change it, so be dilligent and ensure you haven't made any errors! If you would like to write external data to your token, consider using the OraclesCC methods.
+
+The token data field is optional and is broken down into a URL (we suggest using IPFS for storing images/audio/video/other), ID (used to identify sets of NFTs), a royalty amount (x/1000), and an arbitrary data field that is input as hex.
+
+
+#### Non-Fungible Tokens
+
+To create a non-fungible token, simply set the `supply` field of the RPC to `0.00000001`. This will use 1 satoshi of TKL to create a single token. As the name suggests, non-fungible tokens are not fungible with anything else. As each NFT is individual and unique, it should only ever have a supply of 1. NFT's are perfect to signify the ownership of digital or physical assets. The creator can input 
+
+#### Fixed Supply Tokens
+
+If you would like to divide the ownership of a single asset into many allocations, you should set the supply to however many allocations you want. These coins are not considered NFT's as they are then all fungible with one another. If you would like to 
 
 #### Fractional Tokens
 
@@ -265,15 +265,16 @@ To create a token that is divisible to one decimal place, for example, consider 
 
 ### Arguments
 
+The method returns a hex-encoded transaction which should then be broadcast using `sendrawtransaction`.
+
+`sendrawtransaction` then returns a `txid`, which is your `tokenid`.
+
 | Name        | Type     | Description                                                                                                                                                          |
 | ----------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name        | (string) | the name of the token                                                                                                                                                |
+| name        | (string) | the name of the token (max length, 32)                                                                                                                                                |
 | supply      | (number) | the amount of TKL coins used to create the tokens, NOT the amount/supply of tokens you want in existence; 1 satoshi creates 1 token. 1 TKL creates 100000000 tokens. |
-| description | (string) | the description of the token                                                                                                                                         |
-| nft data    | (hex)    | Arbitrary data that is hex encoded (NFTs only)                                                                                                                       |
-
-- TOKENS_MAX_NAME_LENGTH = 32;
-- TOKENS_MAX_DESC_LENGTH = 4096;
+| description | (string) | the description of the token (max length, 4096)                                                                                                                                         |
+| token data    | (json, optional)    | Additional token data using the Tokel Standard data format                                                                                                                        |
 
 ### Response
 
