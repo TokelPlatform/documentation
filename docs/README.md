@@ -1,16 +1,20 @@
 ---
 title: Tokel Documentation
-description: Documentation for developers building on the Tokel Platform.
+description: Documentation for creators building on the Tokel Platform.
 
 tags:
   - Tokel
   - docs
+  - documentation
+  - creator
+  - NFT
+  - tokens
   - developers
   - blockchain
 
 ---
 
-# Welcome to Tokel's Developer Documentation
+# Welcome to Tokel's Creator Documentation
 
 <div style="width: 4rem; height: .5rem; margin: .1rem 0rem 2rem .3rem; background-color: #687bf7;"></div>
 
