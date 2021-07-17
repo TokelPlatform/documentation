@@ -11,7 +11,7 @@ Prerequisites:
 
 ---
 
-**Tip:**
+**Tip**
 
 If you prefer using Docker, installation of nodejs and yarn is not required. See below for Docker instructions.
 
