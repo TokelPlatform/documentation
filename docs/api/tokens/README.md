@@ -214,7 +214,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 <!-- ## tokenv2createtokel 
 
-### Tokel Standard 1 validation code: f7 (01-02-03-04)
+### Tokel Standard validation code: f7 (01-02-03-04)
 
 ```
 'f701' - NFT data evalcode (f7) and version (01)
@@ -248,20 +248,21 @@ For every token created, you are required to spend one satoshi (.00000001) of th
 
 The token data field is optional and is broken down into a URL (we suggest using IPFS for storing images/audio/video/other), ID (used to identify sets of NFTs), a royalty amount (x/1000), and an arbitrary data field that is input as hex.
 
-
 #### Non-Fungible Tokens
 
-To create a non-fungible token, simply set the `supply` field of the RPC to `0.00000001`. This will use 1 satoshi of TKL to create a single token. As the name suggests, non-fungible tokens are not fungible with anything else. As each NFT is individual and unique, it should only ever have a supply of 1. NFT's are perfect to signify the ownership of digital or physical assets. The creator can input 
+To create a non-fungible token, simply set the `supply` field of the RPC to `0.00000001`. This will use 1 satoshi of TKL to create a single token. As the name suggests, non-fungible tokens are not fungible with anything else. As each NFT is individual and unique, it should only ever have a supply of 1. NFT's are perfect to signify the ownership of digital or physical assets.
+
+If you would like to divide the ownership of a single asset into many allocations, you should set the supply to however many allocations you want. These coins are not considered NFT's as they are then all fungible with one another. 
 
 #### Fixed Supply Tokens
 
-If you would like to divide the ownership of a single asset into many allocations, you should set the supply to however many allocations you want. These coins are not considered NFT's as they are then all fungible with one another. If you would like to 
+All tokens created on Tokel are of a fixed supply, meaning that nobody can create additional supply of any specific token on chain, once the token has been created. Although this is the case, users can burn tokens. Creators/projects can incentivise users burning tokens to permanently reduce the supply of their token. 
 
 #### Fractional Tokens
 
 In order to create a token that can be divided and transferred in fractional amounts, it must be handled on the application side of development.
 
-To create a token that is divisible to one decimal place, for example, consider 10 tokens as a single unit. Sending one satoshi's worth of the token is the equivalent of sending one decimal point of the actual token.
+For example, to create a token that is divisible to one decimal place, have your application consider 10 tokens as a single unit. In this case, sending one token is the equivalent of sending one decimal point of the actual token.
 
 ### Arguments
 
