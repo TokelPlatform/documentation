@@ -1,4 +1,4 @@
-## Launching the Tokel blockchain
+## Preparing your environment
 
 ### Build Komodo (yep, the komodo daemon runs Tokel)
 
