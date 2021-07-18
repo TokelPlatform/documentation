@@ -68,7 +68,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -99,7 +99,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 ## tokenv2balance
 
 **tokenv2balance tokenid [pubkey]**
@@ -142,7 +142,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -167,7 +167,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Check the token balance of a specific pubkey
 
 ```bash
@@ -186,7 +186,7 @@ Check the token balance of a specific pubkey
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -211,7 +211,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 ## tokenv2createtokel
 
 **tokenv2createtokel name supply description [token data]**
@@ -650,7 +650,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -674,7 +674,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 #### Search the tokens created between specific block numbers
 
 An example to search for tokens created between specified block numebrs. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
@@ -748,7 +748,7 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-
+<!-- ## Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -771,7 +771,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Step 2: Broadcast using `sendrawtransaction`
 
 ```bash
@@ -791,7 +791,7 @@ AssetValidate.(t) passed
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -811,7 +811,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Step 3: Decode the raw transaction and check against the following if the data is sane
 
 ```bash
@@ -898,7 +898,7 @@ Step 3: Decode the raw transaction and check against the following if the data i
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -992,7 +992,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 ## tokenv2transfermany
 
 **tokenv2transfermany tokenid1 tokenid2 ... destpubkey amount**
@@ -1044,7 +1044,7 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -1066,7 +1066,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Step 2: Broadcast using `sendrawtransaction`
 
 ```bash
@@ -1082,7 +1082,7 @@ fc0c7149d367acd92b530bb2a075bf206156122757cf148ee72cc2dd1ca78f4c
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -1102,3 +1102,4 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
