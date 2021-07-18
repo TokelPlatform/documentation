@@ -1,4 +1,4 @@
-## Launching the Tokel blockchain
+## Preparing your environment
 
 ### Build Komodo (yep, the komodo daemon runs Tokel)
 
@@ -142,11 +142,6 @@ cd ~/komodo/src
 ```
 
 You are now ready to use the Tokel blockchain to its fullest extent.
-
-
-**NOTE TO EXCHANGES:**
-Please use the `-exchange` option when launching the Tokel chain. Please ensure you have the entire transaction history under the same `exchange` mode. Otherwise you will get wallet conflicts.
-
 
 License
 -------
