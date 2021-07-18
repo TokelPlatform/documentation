@@ -10,7 +10,7 @@ Tokel uses the v2 version of the tokens module that Komodo offers, thus all comm
 
 This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html). Tokel has added features that some branches of Komodo do not have. Please refer to this documentation for all Tokel specific RPCs.
 
-## Tokensv2 RPC
+## Tokensv2 RPCs
 
 - `tokenv2address [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
