@@ -1,4 +1,4 @@
-# Tokel Tokens RPCs
+# Tokel Token RPCs
 
 ## Introduction
 
