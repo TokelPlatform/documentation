@@ -1,12 +1,17 @@
+## Introduction
+
+Tokel is a completely independant blockchain created using Komodo technologies. In order to run the Tokel blockchain, you must build the Komodo daemon and launch the Tokel blockchain through that. You do **not** have to run the Komodo blockchain in order to run and use the Tokel blockchain.
+
+[Komodo technology](https://developers.komodoplatform.com/basic-docs/start-here/about-komodo-platform/product-introductions.html#smart-chains-antara) allows anyone to create smartchains which are independent blockchains, such as Tokel.
+
+You must ensure you are running the chain from the `tokel` [branch of komodo](https://github.com/KomodoPlatform/komodo/tree/tokel)
+
 ## Preparing your environment
 
 ### Build Komodo (yep, the komodo daemon runs Tokel)
 
-Tokel is a completely independant blockchain created using Komodo technologies. In order to run the Tokel blockchain, you must build the Komodo daemon and launch the Tokel blockchain using that. You do **not** have to run the Komodo blockchain in order to run and use the Tokel blockchain.
-
-Komodo technology allows anyone to create smartchains which are independent blockchains, such as Tokel.
-
 #### Dependencies
+
 
 ```shell
 #The following packages are needed:
