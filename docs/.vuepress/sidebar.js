@@ -13,7 +13,11 @@ var sidebar = [
     children: [
       [
         "/guides/LaunchTheChain/",
-        "Launch the Chain",
+        "Launch the Tokel Chain",
+      ],
+      [
+        "/guides/LaunchTKLTESTchain/",
+        "Launch the TKLTEST Chain",
       ],
     ],
   },

@@ -2,11 +2,31 @@
 
 The TKLTEST chain is an identical version of the main Tokel chain, but is used for testing. Creators, application developers, or blockchain developers can all test their work on the TKLTEST chain before it is submitted to the main chain. You can use TKLTEST to ensure the formatting of your token is correct prior to launching it on the main chain, or enabled your application to work with the TKLTEST chain prior to launch. 
 
-You can expect the TKLTEST blockchain to be hardforked more regularly than the main chain. This will be done on an adhoc basis when new features are being worked on. Please join the [Tokel discord](http://discord.tokel.io) and check out the #tokel-test channel for the most up to date information.
+You can expect the TKLTEST blockchain to be hardforked more regularly than the main chain. This will be done on an adhoc basis when new features are being worked on. 
 
 If a large hard fork is required, we will use a numerical nomenclature to restart the test chain. For example, if a large, consensus change is required, we may opt to start another test chain named `TKLTEST1`, or `TKLTEST2`, so on and so fourth. This is opposed to setting block height activated hard forks, which we may use if we would like to test backwards compatibility. All previous test chains will remain available as long as somebody continues to run a full node and mine it, so there is no fear that you need to update to the new test chain unless you decide to. If you would like to run a specific TKLTEST# chain, replace the below commands with the number of the chain you wish to run.
 
-A list of TKLTEST chains & the updates associated with each one can be found under ("TKLTEST updates")[http://docs.tokel.io/xyz].
+### TKLTEST Updates
+
+This list shows the current TKLTEST chains and what number we are up to, along with the associated updates for each chain.
+
+Although we try to keep this page as up to date as possibly, please join the [Tokel discord](http://discord.tokel.io) and check out the #tokel-test channel for the most up to date information.
+
+### Test Chains
+
+#### TKLTEST - current test chain
+
+The `TKLTEST` chain is the first TKLTEST chain created. It is an identical copy of the original Tokel main chain. This chain is the first testing grounds for the Tokel community. 
+
+Launch Parameters:
+
+<collapse-text hidden title="Response">
+
+```bash
+./komodod -ac_name=TKLTEST ****ADD PARAMS***** -pubkey=**YOURPUBKEYHERE** &
+```
+
+</collapse-text>
 
 ## Preparing your environment
 
