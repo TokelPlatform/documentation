@@ -12,9 +12,7 @@ The `tokens` module requires locking a proportional amount of Tokel (TKL) coins.
 
 - `tokenv2address [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
-- `tokenv2create name supply [description] [tokens data]`
 - `tokenv2createtokel name supply [description] [tokens data]`
-- `tokenv2info tokenid`
 - `tokenv2infotokel tokenid`
 - `tokenv2list [begin-height] [end-height]`
 - `tokenv2transfer tokenid destpubkey amount`
