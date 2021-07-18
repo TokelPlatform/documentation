@@ -576,36 +576,54 @@ Command:
 
 **tokenv2list [begin-height][end-height]**
 
-The `tokenv2list` method lists all available tokens on Tokel. Enter an optional begin and end block height number to search for tokens created between specific block numbers.
+The `tokenv2list` method lists all tokens created on Tokel. Enter an optional begin and end block height number to search for tokens created between specific block numbers.
 
 ### Arguments
 
 | Name         | Type               | Description                          |
 | ------------ | ------------------ | ------------------------------------ |
-| begin-height | (number, optional) | Block number to start searching from |
-| end-height   | (number, optional) | Block number to end searching from   |
+| begin-height | (number, optional) | Block number to start searching from, inclusive |
+| end-height   | (number, optional) | Block number to end searching from, inclusive   |
 
 ### Response
 
 | Name    | Type               | Description                           |
 | ------- | ------------------ | ------------------------------------- |
-| tokenid | (array of strings) | the identifying txid for the token id |
+| tokenid | (array of strings) | the identifying txid (tokenid) for tokens created within the block begin & end heights, or all blocks if left blank |
 
 #### :pushpin: Examples
+
+#### Search all tokens
+
+An example to search for all tokens created on the blockchain. Note that the time take to output the tokenids is proportional to how many tokens there are on the blockchain. The more tokens created, the longer this will take.
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2list 2000 2200
+./komodo-cli -ac_name=TKLTEST tokenv2list
 ```
 
 <collapse-text hidden title="Response">
 
 ```bash
 [
-  "a283693b37b3bd94edd91ba31345310a9b47946c626cb14189d67931a0cde705",
-  "0cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242",
-  "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc"
+  "5efd03ac08eac8e075320ffe6a3bb6b9593a55231b7b3c8752d76b8814e96b04",
+  "b6ccd393052944f9c6aee83711585c8cc3b1be6ba3c95c31f31401a891bdbf1f",
+  "8b1fbb05db52f5e273ddaad24046fe705cbd9feebe5727bf27764fec721a2a3d",
+  "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
+  "5509c6e019ce1e592badda96823890e5d83d56b08c2af277ae6c39720fa61968",
+  "fc6df1be0e84be874f86d3a1b9b9bdcf6b2d0fc02438f0784e27b9ee08106575",
+  "5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b",
+  "5040a4770793d85993f1420707b4e1eafc76851190bb63ba88e7f40216ff0d80",
+  "f3ef3ed5a9a26245ab09e7d0e6ade2e5bd053c27315be0184ee17fc58c3ab083",
+  "428f4d075c042f16cc9ff6166fb88598321de8dd08838c51335642d2c85eed8e",
+  "8903e66e56221726fdbf8b361a07afe33a54bb2c5a2fe1df463ed606a20f4395",
+  "5ff88aaf58ae1d04c6b9c41a22dd66d9872411b8ca25fd5ee1ccdcb80aaba4ca",
+  "b905d627b3967405521f2aa2f8ab8aed70a4e474ec62df52db07965e29a3f5cb",
+  "14fc2fbd6777b31a24d505e97d597b27771263c0d0acfcf14c1d9326bad2b8cc",
+  "30902e829d335f748403434ca442cfae06c9bdd34249e289657c23585a1e82d7",
+  "a85eac6f1894e24c4e07ca4f96849bfcbbf1f24bd27efa1a1d1f60a033f5e6e1",
+  "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8"
 ]
 ```
 
@@ -631,6 +649,28 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
   "error": null,
   "id": "curltest"
 }
+```
+
+</collapse-text>
+
+#### Search the tokens created between specific block numbers
+
+An example to search for tokens created between specified block numebrs. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
+
+Command:
+
+```bash
+./komodo-cli -ac_name=TKLTEST5 tokenv2list 16000 16337
+```
+
+<collapse-text hidden title="Response">
+
+```bash
+[
+  "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
+  "5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b",
+  "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8"
+]
 ```
 
 </collapse-text>
