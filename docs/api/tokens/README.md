@@ -2,13 +2,15 @@
 
 ## Introduction
 
-This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html).
+The Tokens Module enables support for the on-chain creation of colored coins, otherwise called tokens. The created tokens are used with another module that supports on-chain operations for tokens. For example, the [Assets Module](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html) provides buy/sell (tokenDEX) operations for tokens. Please refer to the Assets API documentation for further information on Assets.
 
-The Tokens Module enables support for the on-chain creation of colored coins, also called tokens. The created tokens are used with another module that supports operations on tokens. For example, the [Assets Module](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html) provides buy/sell (tokenDEX) operations for `tokens`. Please refer to the Assets API documentation for further information on Assets.
+The tokens module requires locking a proportional amount of Tokel (TKL) coins. Each satoshi (0.00000001) of TKL is equal to one token within the total supply. For example, if you wanted to create a token with a supply of 100 million, this would require locking 1 TKL. Once the coins are locked, they are effectively unusable, or burnt; tokens now take the place of the native coin.
 
-The `tokens` module requires locking a proportional amount of Tokel (TKL) coins. Each satoshi (0.00000001) of TKL is equal to one token within the total supply. For example, if you wanted to create a token with a supply of 100 million, this would require locking 1 TKL. Once the coins are locked, they are effectively unusable, or burnt; tokens now take the place of the native coin.
+Tokel uses the v2 version of the tokens module that Komodo offers, thus all commands are required to be lead with `tokenv2`. Although it lists `token` (v1) commands on the blockchain `help` output, these are not supported or enabled on the Tokel blockchain.
 
-## TokensV2 RPC
+This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html). Tokel has added features that some branches of Komodo do not have. Please refer to this documentation for all Tokel specific RPCs.
+
+## Tokensv2 RPC
 
 - `tokenv2address [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
