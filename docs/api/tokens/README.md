@@ -212,32 +212,6 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 
-<!-- ## tokenv2createtokel 
-
-### Tokel Standard validation code: f7 (01-02-03-04)
-
-```
-'f701' - NFT data evalcode (f7) and version (01)
-'01' - Code of field 'ID'
-'33' - Value of field 'ID' (51) in compact size format, 65535 (example of a big value) (format is here https://en.bitcoin.it/wiki/Protocol_documentation#Variable_length_integer)
-'02' - Code of URL field
-'11' - URL length in hex (17 in decimal)
-'68747470733a2f2f746f6b656c2e696f2f' - url value in hex (https://tokel.io/)
-'03' - Code of Royalty % field
-'64' - 100 in hex (Value is represented as integer fraction of 1000, acceptable values are from 0 (no royalty) to 999 (max royalty of 0,999))
-'04' - Code of arbitrary data field
-'11' - Arbitrary data length in hex (17 in decimal)
-'68747470733a2f2f746f6b656c2e696f2f' - Arbitrary data value in hex (https://tokel.io/)
-```
-
-### Arbitrary data validation code: 00
-
-```
-'00' - Arbitrary data evalcode
-'XXX' - Data field (any format converted to hex)
-```
--->
-
 ## tokenv2createtokel
 
 **tokenv2createtokel name supply description [token data]**
@@ -290,14 +264,18 @@ The method returns a hex-encoded transaction which should then be broadcast usin
 
 Tokel standard data allows creators to add predefined properties to their token, whilst giving creators flexibility through the arbitrary data field. All fields are optional, but the format must be followed when creating your token. 
 
-URL: The URL field can be used to show users where the digital asset is stored. We recommend using IPFS (The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system.) for file storing.
+##### URL
+The URL field can be used to show users where the digital asset is stored. We recommend using IPFS (The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system.) for file storing.
 
-ID: The ID field allows for creators to uniquely identify their tokens through allocating them a specific number, and can be used however the creator wants. An example of how a creator could use the ID fields is if they wanted to create a set of 10 NFT's in a specific collection, they would simply set the same ID number for all of those NFT's, and not use it for any other creations. With this logic, a creator may set the ID of 1 for their first collection of NFT's, then set 2 for their next collection. Another use may be to identify different ranks of NFT's. Say your game created NFT's with levels associated, the ID field could be used to identify the level of the NFT. I.E. An ID of 1 may represent a level 1 NFT, an ID of 10 may represent a level 10 NFT, so on and so fourth.
+##### ID
+The ID field allows for creators to uniquely identify their tokens through allocating them a specific number, and can be used however the creator wants. An example of how a creator could use the ID fields is if they wanted to create a set of 10 NFT's in a specific collection, they would simply set the same ID number for all of those NFT's, and not use it for any other creations. With this logic, a creator may set the ID of 1 for their first collection of NFT's, then set 2 for their next collection. Another use may be to identify different ranks of NFT's. Say your game created NFT's with levels associated, the ID field could be used to identify the level of the NFT. I.E. An ID of 1 may represent a level 1 NFT, an ID of 10 may represent a level 10 NFT, so on and so fourth.
 
 
-Royalty: The royalty field allows the creator to take royalties from future sales of their token. The number in this field is x/1000 of the value of the sale. Say the royalty was 500 (500/1000), then for each sale of the token, using assetsCC RPCs, 50% of the value would be automatically transferred to the creators address. If the royalty value was 10 (10/1000), 1% of every sale would be transferred to the creators address. This feature gives the creator the ability to generate revenue from future sales of their token. This can significantly disrupt and help creators innovate the way they generate revenue from their creations, as their revenue potential is not limited to the original sale value. For example, a project could use tokens as a key to unlock access to their educational courseware. A person would buy the token from the project, then be able to onsell it once they have completed the course. The project would reap the benefits of the original sale, but also generate revenue from the onselling of the tokens in the future. The user would also benefit as they would be able to onsell the course key (token) once they have finished the course and no longer need it. There are endless possibilties of how to change incentive structures and generate revenue with this on-cahin feature.
+##### Royalty
+The royalty field allows the creator to take royalties from future sales of their token. The number in this field is x/1000 of the value of the sale. Say the royalty was 500 (500/1000), then for each sale of the token, using assetsCC RPCs, 50% of the value would be automatically transferred to the creators address. If the royalty value was 10 (10/1000), 1% of every sale would be transferred to the creators address. This feature gives the creator the ability to generate revenue from future sales of their token. This can significantly disrupt and help creators innovate the way they generate revenue from their creations, as their revenue potential is not limited to the original sale value. For example, a project could use tokens as a key to unlock access to their educational courseware. A person would buy the token from the project, then be able to onsell it once they have completed the course. The project would reap the benefits of the original sale, but also generate revenue from the onselling of the tokens in the future. The user would also benefit as they would be able to onsell the course key (token) once they have finished the course and no longer need it. There are endless possibilties of how to change incentive structures and generate revenue with this on-cahin feature.
 
-Arbitrary: This field gives creators the flexibility of adding extra properties, or application specific data to their token. The arbitrary data field is kept as hex on chain, so once the creator has the required data format, they will need to convert it to hex, and input it into this field. An example of a creator using this field to add extra properties to their token is by adding a json that holds the extra data. See the "NFT Creation Example" for an example where we store the properties of size, color, weapon and number as a json, converted to hex, within the arbitrary data field.
+##### Arbitrary
+This field gives creators the flexibility of adding extra properties, or application specific data to their token. The arbitrary data field is kept as hex on chain, so once the creator has the required data format, they will need to convert it to hex, and input it into this field. An example of a creator using this field to add extra properties to their token is by adding a json that holds the extra data. See the "NFT Creation Example" for an example where we store the properties of size, color, weapon and number as a json, converted to hex, within the arbitrary data field.
 
 See below for an example of the Tokel Standard data format.
 
@@ -309,6 +287,50 @@ See below for an example of the Tokel Standard data format.
 
 </collapse-text>
 
+See the example below for how the Tokel Standard data is stored in hex format within the opreturn field.
+
+<collapse-text hidden title="Response">
+  
+Tokel Standard validation code: f7 (01-02-03-04)
+
+```
+'f701' - Token data evalcode (f7) and version (01)
+'01' - Code of field 'ID'
+'X' - Value of field 'ID' in compact size format
+'02' - Code of URL field
+'X' - URL length in hex
+'68747470733a2f2f746f6b656c2e696f2f' - URL value in hex (this example shows "https://tokel.io/")
+'03' - Code of Royalty % field
+'X' - Royalty amount in hex (Value is represented as integer fraction of 1000, acceptable values are from 0 (no royalty) to 999 (max royalty of 0,999))
+'04' - Code of arbitrary data field
+'X' - Arbitrary data length in hex
+'X' - Arbitrary data value in hex
+```
+  
+Example from above data (note that you would be required to input data where `X` is shown):
+  
+```
+f70101X02X68747470733a2f2f746f6b656c2e696f2f03X04XX
+```
+  
+</collapse-text>
+
+See below for an example of how to store Arbitrary data (non Tokel Standard) format in hex within the opreturn field.
+
+<collapse-text hidden title="Response">
+ 
+```
+'00' - Arbitrary data evalcode
+'XXX' - Data field (any format and data converted to hex)
+```
+
+Example from the above data:
+
+```
+00XXX
+```
+</collapse-text>
+  
 #### :pushpin: Examples
 
 #### NFT Creation Example
