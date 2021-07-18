@@ -100,6 +100,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 ## tokenv2balance
 
 **tokenv2balance tokenid [pubkey]**
@@ -212,6 +213,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 ## tokenv2createtokel
 
 **tokenv2createtokel name supply description [token data]**
