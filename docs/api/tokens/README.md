@@ -853,6 +853,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 Step 2: Broadcast using `sendrawtransaction`
 
 ```bash
@@ -1074,6 +1075,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 ## tokenv2transfermany
 
 **tokenv2transfermany tokenid1 tokenid2 ... destpubkey amount**
