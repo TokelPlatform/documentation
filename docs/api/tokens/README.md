@@ -447,19 +447,17 @@ Step 3 (Optional): Check your token data
 
 </collapse-text>
 
-<!-- ## tokenv2infotokel -->
+## tokenv2infotokel
 
-## tokenv2info
+**tokenv2infotokel tokenid**
 
-**tokenv2info tokenid**
-
-The `tokeninfo` method reveals information about any token.
+The `tokeninfotokel` method reveals information about any token and outputs the `data` hex code as an easy to read json. Token data must follow the Tokel Standard for this RPC to output the data as json. If your token does not follow the Tokel Standard, use the `tokenv2info` RPC to have your data output as hex only. 
 
 ### Arguments
 
 | Name    | Type     | Description                        |
 | ------- | -------- | ---------------------------------- |
-| tokenid | (string) | the txid that identifies the token |
+| tokenid | (string) | the unique txid that identifies the token |
 
 ### Response
 
@@ -471,19 +469,25 @@ The `tokeninfo` method reveals information about any token.
 | name          | (string)          | the name of the token                                                        |
 | supply        | (number)          | the total supply of the token                                                |
 | description   | (string)          | the token description provided by the creator at token creation              |
-| data          | (string,optional) | the data related to the non-fungible token, in hex                           |
-| IsImported    | (string,optional) | if 'yes' this token was imported from another chain                          |
-| sourceChain   | (string,optional) | the name of the imported token's source chain                                |
-| sourceTokenId | (string,optional) | for an imported token, the `tokenid` of the source token on the source chain |
-
-**_ISMIXED?_**
+| data          | (string,optional) | the data related to the token, in hex                                        |
+| dataAsJson    | (string,optional) | the hex data output converted to a json                                      |
+| id            | (number,optional) | the id of the token                                                          |
+| url           | (string,optional) | the url associated with the token                                            |
+| royalty       | (number,optional) | the royalty amount (x/1000)                                                  |
+| arbitrary     | (string,optional) | the arbitrary data of the token as hex                                       |
+| version       | (number)          | indicates the opreturn token data structure version                          |
+| IsMixed       | (boolean)         | indicates whether the token is using cryptocondition v2                      |
 
 #### :pushpin: Examples
+
+#### Token with data example - using `tokenv2infotokel`
+
+Note the Tokel Standard data output in the dataAsJson field.
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2info 8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc
+./komodo-cli -ac_name=TKLTEST tokenv2info 8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e
 ```
 
 <collapse-text hidden title="Response">
@@ -491,11 +495,18 @@ Command:
 ```json
 {
   "result": "success",
-  "tokenid": "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc",
+  "tokenid": "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
   "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
-  "name": "First",
-  "supply": 100000000,
-  "description": "This is the first test token created on TKLTEST",
+  "name": "NFTShowcase",
+  "supply": 1,
+  "description": "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address.",
+  "data": "f701026668747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f546f6b656c506c6174666f726d2f746f6b656c5f6170702f646576656c6f706d656e742f6272616e645f7061636b6167652f6173736574732f746f6b656c78332e706e67010103fdf401043d7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d",
+  "dataAsJson": {
+    "id": 1,
+    "url": "https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png",
+    "royalty": 500,
+    "arbitrary": "7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d"
+  },
   "version": 1,
   "IsMixed": "yes"
 }
@@ -503,32 +514,61 @@ Command:
 
 </collapse-text>
 
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
+#### Token with data example - using `tokenv2info`
+
+Note the absence of the dataAsJson field for the same token, but the different RPC. You will need to manually decode the hex format output if you do not use the `tokenv2infotokel` RPC.
 
 Command:
 
 ```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenv2info", "params":["8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
+./komodo-cli -ac_name=TKLTEST tokenv2info 8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e
 ```
 
 <collapse-text hidden title="Response">
 
 ```json
 {
-  "result": {
-    "result": "success",
-    "tokenid": "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc",
-    "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
-    "name": "First",
-    "supply": 100000000,
-    "description": "This is the first test token created on TKLTEST",
-    "version": 1,
-    "IsMixed": "yes"
-  },
-  "error": null,
-  "id": "curltest"
+  "result": "success",
+  "tokenid": "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
+  "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
+  "name": "NFTShowcase",
+  "supply": 1,
+  "description": "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address.",
+  "data": "f701026668747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f546f6b656c506c6174666f726d2f746f6b656c5f6170702f646576656c6f706d656e742f6272616e645f7061636b6167652f6173736574732f746f6b656c78332e706e67010103fdf401043d7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d",
+  "version": 1,
+  "IsMixed": "yes"
 }
 ```
+
+</collapse-text>
+
+#### No data example
+
+Note the absence of any data output.
+
+Command:
+
+```bash
+./komodo-cli -ac_name=TKLTEST tokenv2info 3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8
+```
+
+<collapse-text hidden title="Response">
+
+```json
+{
+  "result": "success",
+  "tokenid": "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8",
+  "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
+  "name": "nodatatest",
+  "supply": 100000000,
+  "description": "This token does not have any data",
+  "version": 1,
+  "IsMixed": "yes"
+}
+```
+
+</collapse-text>
+
 
 </collapse-text>
 
