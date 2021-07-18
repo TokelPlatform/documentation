@@ -286,6 +286,29 @@ The method returns a hex-encoded transaction which should then be broadcast usin
 | result | (string) | whether the command succeeded                                                                        |
 | hex    | (string) | a raw transaction in hex-encoded format; you must broadcast this transaction to complete the command |
 
+#### Tokel Standard data format
+
+Tokel standard data allows creators to add predefined properties to their token, whilst giving creators flexibility through the arbitrary data field. All fields are optional, but the format must be followed when creating your token. 
+
+URL: The URL field can be used to show users where the digital asset is stored. We recommend using IPFS (The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system.) for file storing.
+
+ID: The ID field allows for creators to uniquely identify their tokens through allocating them a specific number, and can be used however the creator wants. An example of how a creator could use the ID fields is if they wanted to create a set of 10 NFT's in a specific collection, they would simply set the same ID number for all of those NFT's, and not use it for any other creations. With this logic, a creator may set the ID of 1 for their first collection of NFT's, then set 2 for their next collection. Another use may be to identify different ranks of NFT's. Say your game created NFT's with levels associated, the ID field could be used to identify the level of the NFT. I.E. An ID of 1 may represent a level 1 NFT, an ID of 10 may represent a level 10 NFT, so on and so fourth.
+
+
+Royalty: The royalty field allows the creator to take royalties from future sales of their token. The number in this field is x/1000 of the value of the sale. Say the royalty was 500 (500/1000), then for each sale of the token, using assetsCC RPCs, 50% of the value would be automatically transferred to the creators address. If the royalty value was 10 (10/1000), 1% of every sale would be transferred to the creators address. This feature gives the creator the ability to generate revenue from future sales of their token. This can significantly disrupt and help creators innovate the way they generate revenue from their creations, as their revenue potential is not limited to the original sale value. For example, a project could use tokens as a key to unlock access to their educational courseware. A person would buy the token from the project, then be able to onsell it once they have completed the course. The project would reap the benefits of the original sale, but also generate revenue from the onselling of the tokens in the future. The user would also benefit as they would be able to onsell the course key (token) once they have finished the course and no longer need it. There are endless possibilties of how to change incentive structures and generate revenue with this on-cahin feature.
+
+Arbitrary: This field gives creators the flexibility of adding extra properties, or application specific data to their token. The arbitrary data field is kept as hex on chain, so once the creator has the required data format, they will need to convert it to hex, and input it into this field. An example of a creator using this field to add extra properties to their token is by adding a json that holds the extra data. See the "NFT Creation Example" for an example where we store the properties of size, color, weapon and number as a json, converted to hex, within the arbitrary data field.
+
+See below for an example of the Tokel Standard data format.
+
+<collapse-text hidden title="Response">
+
+```json
+"{"url":"X", "id":X, "royalty":X, "arbitrary":"X"}"
+```
+
+</collapse-text>
+
 #### :pushpin: Examples
 
 #### NFT Creation Example
