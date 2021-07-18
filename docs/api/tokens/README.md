@@ -2,7 +2,7 @@
 
 ## Introduction
 
-The Tokens Module enables support for the on-chain creation of colored coins, otherwise called tokens. The created tokens are used with another module that supports on-chain operations for tokens. The [Assets Module](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html) provides buy/sell (tokenDEX) operations for tokens. Please refer to the Assets API documentation for further information on Assets.
+The Tokens Module enables support for the on-chain creation of colored coins, otherwise called tokens. The created tokens are used with another module that supports on-chain operations for tokens. The [Assets Module](http://docs.tokel.io/api/assets/) provides buy/sell (tokenDEX) operations for tokens. Please refer to the Assets API documentation for further information on Assets.
 
 The tokens module requires locking a proportional amount of Tokel (TKL) coins. Each satoshi (0.00000001) of TKL is equal to one token within the total supply. For example, if you wanted to create a token with a supply of 100 million, this would require locking 1 TKL. Once the coins are locked, they are effectively unusable, or burnt; tokens now take the place of the native coin.
 
@@ -10,7 +10,7 @@ Tokel uses the v2 version of the tokens module that Komodo offers, thus all comm
 
 This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html). Tokel has added features that some branches of Komodo do not have. Please refer to this documentation for all Tokel specific RPCs.
 
-## Tokensv2 RPC
+## Tokenv2 RPCs
 
 - `tokenv2address [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
@@ -68,7 +68,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -99,6 +99,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 ## tokenv2balance
 
@@ -142,7 +143,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -167,7 +168,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Check the token balance of a specific pubkey
 
 ```bash
@@ -186,7 +187,7 @@ Check the token balance of a specific pubkey
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -211,6 +212,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 ## tokenv2createtokel
 
@@ -275,7 +277,7 @@ The ID field allows for creators to uniquely identify their tokens through alloc
 The royalty field allows the creator to take royalties from future sales of their token. The number in this field is x/1000 of the value of the sale. Say the royalty was 500 (500/1000), then for each sale of the token, using assetsCC RPCs, 50% of the value would be automatically transferred to the creators address. If the royalty value was 10 (10/1000), 1% of every sale would be transferred to the creators address. This feature gives the creator the ability to generate revenue from future sales of their token. This can significantly disrupt and help creators innovate the way they generate revenue from their creations, as their revenue potential is not limited to the original sale value. For example, a project could use tokens as a key to unlock access to their educational courseware. A person would buy the token from the project, then be able to onsell it once they have completed the course. The project would reap the benefits of the original sale, but also generate revenue from the onselling of the tokens in the future. The user would also benefit as they would be able to onsell the course key (token) once they have finished the course and no longer need it. There are endless possibilties of how to change incentive structures and generate revenue with this on-cahin feature.
 
 ##### Arbitrary
-This field gives creators the flexibility of adding extra properties, or application specific data to their token. The arbitrary data field is kept as hex on chain, so once the creator has the required data format, they will need to convert it to hex, and input it into this field. An example of a creator using this field to add extra properties to their token is by adding a json that holds the extra data. See the "NFT Creation Example" for an example where we store the properties of size, color, weapon and number as a json, converted to hex, within the arbitrary data field.
+This field gives creators the flexibility of adding extra properties, or application specific data to their token. The arbitrary data field is kept as hex on chain, so once the creator has the required data format, they will need to convert it to hex, and input it into this field. An example of a creator using this field to add extra properties to their token is by adding a json that holds the extra data. See the ["NFT Creation Example"](http://docs.tokel.io/api/tokens/#tokenv2createtokel) for an example where we store the properties of size, color, weapon and number as a json, converted to hex, within the arbitrary data field.
 
 See below for an example of the Tokel Standard data format.
 
@@ -469,6 +471,85 @@ Step 3 (Optional): Check your token data
 
 </collapse-text>
 
+#### Arbitrary Data Token Creation Example
+
+This example shows a token that does not follow the Tokel Standard data format. It has completely arbitrary data within the token data section. It requires the use of the `tokenv2create` RPC.
+
+Command:
+
+```bash
+./komodo-cli -ac_name=TKLTEST5 tokenv2create ArbDataExample 0.001 "This token showcases arbitrary data field, instead of using the Tokel Standard data format" "005468697320697320636f6d706c6574656c792061726269747261727920646174612e"
+```
+
+<collapse-text hidden title="Response">
+
+```json
+{
+  "result": "success",
+  "hex": "0400008085202f8901001679091e0acafe5ad8c78b33b382c8edffd46dcd129f8226acfff789801f740000000049483045022100b6f860884685f00052c96c9249ac367d20dd0a1b7a6855c9e7cf15836557cde90220667dc5787fd12615db5778e5fe23904244711dce5fcfa9ed03a1cc540885145501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cca086010000000000693e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f501012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75400cf40500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000b66a4cb3f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0e417262446174614578616d706c655a5468697320746f6b656e2073686f776361736573206172626974726172792064617461206669656c642c20696e7374656164206f66207573696e672074686520546f6b656c205374616e64617264206461746120666f726d617423005468697320697320636f6d706c6574656c792061726269747261727920646174612e000000001c4100000000000000000000000000"
+}
+```
+
+</collapse-text>
+
+Step 2: Broadcast the raw transaction hex
+
+```bash
+./komodo-cli -ac_name=TKLTEST5 sendrawtransaction 0400008085202f8901001679091e0acafe5ad8c78b33b382c8edffd46dcd129f8226acfff789801f740000000049483045022100b6f860884685f00052c96c9249ac367d20dd0a1b7a6855c9e7cf15836557cde90220667dc5787fd12615db5778e5fe23904244711dce5fcfa9ed03a1cc540885145501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cca086010000000000693e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f501012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75400cf40500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000b66a4cb3f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0e417262446174614578616d706c655a5468697320746f6b656e2073686f776361736573206172626974726172792064617461206669656c642c20696e7374656164206f66207573696e672074686520546f6b656c205374616e64617264206461746120666f726d617423005468697320697320636f6d706c6574656c792061726269747261727920646174612e000000001c4100000000000000000000000000
+```
+
+<collapse-text hidden title="Response">
+
+```bash
+6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a
+```
+
+</collapse-text>
+
+Step 3 (Optional): Check your token data
+
+```bash
+./komodo-cli -ac_name=TKLTEST5 tokenv2info 6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a
+```
+
+<collapse-text hidden title="Response">
+
+```json
+{
+  "result": "success",
+  "tokenid": "6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a",
+  "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
+  "name": "ArbDataExample",
+  "supply": 100000,
+  "description": "This token showcases arbitrary data field, instead of using the Tokel Standard data format",
+  "data": "005468697320697320636f6d706c6574656c792061726269747261727920646174612e",
+  "version": 1,
+  "IsMixed": "yes"
+}
+```
+
+</collapse-text>
+
+Step 4 (Optional): Parse the HEX code from the arbitrary data field (in your application or using something like this http://www.unit-conversion.info/texttools/hexadecimal/) You will need to remove the leading `00`'s.
+
+<collapse-text hidden title="Response">
+
+Line of interest:
+```
+  "data": "005468697320697320636f6d706c6574656c792061726269747261727920646174612e",
+```
+
+Hex to parse: 
+```
+5468697320697320636f6d706c6574656c792061726269747261727920646174612e
+```
+
+Parsed hex: 
+```
+"This is completely arbitrary data."
+```
+</collapse-text>
+
 ## tokenv2infotokel
 
 **tokenv2infotokel tokenid**
@@ -650,7 +731,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -674,7 +755,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 #### Search the tokens created between specific block numbers
 
 An example to search for tokens created between specified block numebrs. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
@@ -748,7 +829,7 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-
+<!-- ## Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -771,6 +852,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 Step 2: Broadcast using `sendrawtransaction`
 
@@ -791,7 +873,7 @@ AssetValidate.(t) passed
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -811,7 +893,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Step 3: Decode the raw transaction and check against the following if the data is sane
 
 ```bash
@@ -898,7 +980,7 @@ Step 3: Decode the raw transaction and check against the following if the data i
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -992,6 +1074,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 ## tokenv2transfermany
 
@@ -1044,7 +1127,7 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -1066,7 +1149,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Step 2: Broadcast using `sendrawtransaction`
 
 ```bash
@@ -1082,7 +1165,7 @@ fc0c7149d367acd92b530bb2a075bf206156122757cf148ee72cc2dd1ca78f4c
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -1102,3 +1185,4 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
