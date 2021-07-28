@@ -69,23 +69,23 @@ This application is in development. You can keep up with progress on the github,
 
 - Tokel Website: [https://tokel.io](https://tokel.io)
 - Tokel Block Explorer: [https://explorer.tokel.io](https://explorer.tokel.io)
-- Tokel Discord: [https://discord.gg/DZvuAR6QzX](https://discord.gg/DZvuAR6QzX)
+- Tokel Discord: [Tokel Discord Invitation](http://discord.tokel.io)
 - Email: [contact@tokel.io](mailto:contact@tokel.io)
-- Knowledgebase & How-to: [TBD](https://TBD)
-- API references & Developer Documentation: [https://developers.komodoplatform.com](https://developers.komodoplatform.com/)
 - Whitepaper: [Tokel Paper](https://tokel.io/TokelPaper1stEdition.pdf)
-- [How to run the blockchain](/guides/LaunchTheChain.html)
-- [Tokens RPC/API documentation](/api/tokens.html)
-- [Assets RPC/API documentation](/api/assets.html)
+- Knowledgebase & How-to: [Tokel Documentation](https://docs.tokel.io)
+  - [How to run the Tokel blockchain](https://docs.tokel.io/guides/LaunchTheChain/)
+  - [Tokens RPC/API documentation](https://docs.tokel.io/api/tokens/)
+  - [Assets RPC/API documentation](https://docs.tokel.io/api/assets/)
+  - [How to run the Tokel test chain](https://docs.tokel.io/guides/LaunchTKLTESTchain/)
 
 ## List of Tokel Platform Technologies
 
-- [Delayed Proof of Work (dPoW)](https://komodoplatform.com/en/blog/delayed-proof-of-work/)- Bitcoin hashrate level protection. An additional security layer that protects from 51% attacks by notarizing Tokels hash onto Komodo's chain, then on to the Bitcoin blockchain.
-- [Tokens](/api/tokens.html)/[Assets](/api/assets.html) Technology - Create your own tokens or non-fungible tokens (NFTs) and trade them immediately on-chain with the assets based tokenDEX.
+- [Delayed Proof of Work (dPoW)](https://blog.komodoplatform.com/en/delayed-proof-of-work/)- Bitcoin hashrate level protection. An additional security layer that protects from 51% attacks by notarizing Tokels hash onto Komodo's chain, then on to the Bitcoin blockchain.
+- [Tokens](https://docs.tokel.io/api/tokens/)/[Assets](https://docs.tokel.io/api/assets/) Technology - Create your own tokens or non-fungible tokens (NFTs) and trade them immediately on-chain with the assets based tokenDEX.
 
 ## Tokel Blockchain Specifics
 
-[Documentation on how to launch & run the Tokel blockchain (CLI).](/guides/LaunchTheChain.html)
+[Documentation on how to launch & run the Tokel blockchain (CLI).](https://docs.tokel.io/guides/LaunchTheChain/)
 
 - Max Supply: Approximately 200.25 million TKL
 - Block Time: 60 seconds
