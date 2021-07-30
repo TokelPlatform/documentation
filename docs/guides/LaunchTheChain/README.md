@@ -75,26 +75,6 @@ cd komodo
 
 To reset the Tokel blockchain change into the *~/.komodo/TOKEL* data directory and delete the corresponding files by running `rm -rf blocks chainstate debug.log komodostate db.log`
 
-### Create tokel.conf
-
-Create a tokel.conf file:
-
-```
-mkdir ~/.komodo/tokel
-cd ~/.komodo/tokel
-touch tokel.conf
-
-#Add the following lines to the tokel.conf file and change the username/password:
-rpcuser=**yourrpcusername**
-rpcpassword=**yoursecurerpcpassword**
-rpcbind=127.0.0.1
-txindex=1
-addnode=135.125.204.169
-addnode=192.99.71.125
-addressindex=1
-spentindex=1
-```
-
 ## Launch the Tokel blockchain
 
 Change to the Komodo src directory:
@@ -106,7 +86,7 @@ cd ~/komodo/src
 Launch the Tokel chain command:
 
 ```
-./komodod -ac_name=TOKEL ************** ADD PARAMS
+./komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 &
 ```
 
 Now wait for the chain to finish syncing. This might take while depending on your machine and internet connection. You can check check sync progress by using tail -f on the debug.log file in the coin data directory. Double check the number of blocks you've downloaded with an explorer to verify you're up to the latest block.
@@ -143,7 +123,7 @@ Wait a minute or so for the blockchain to stop, then relaunch the Tokel blockcha
 
 ```
 cd ~/komodo/src
-./komodod -ac_name=TOKEL ****ADD PARAMS***** -pubkey=**YOURPUBKEYHERE** &
+./komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 -pubkey=**YOURPUBKEYHERE** &
 ```
 
 You are now ready to use the Tokel blockchain to its fullest extent.
