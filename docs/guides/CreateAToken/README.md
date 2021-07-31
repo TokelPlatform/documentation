@@ -23,7 +23,7 @@ Optional (Tokel Standard data):
 If you aren't familiar with what these fields represent, I'll point you to this [documentation](https://docs.tokel.io/api/tokens/#arguments-3).
 
 #### Part 2: Create your transaction
-Replaces the field names in the example below with your token data into the command listed below. Leave the optional string fields blank, or 0's in number fields, if you do not want to input data into those fields. Refer to the examples provided if you are having issues.
+Replace the field names in the example below with your token data into the command listed below. Leave the optional string fields blank, or 0's in number fields, if you do not want to input data into those fields. Refer to the examples provided if you are having issues.
 
 ```
 ./komodo-cli -ac_name=TKLTEST tokenv2createtokel Name Supply "Description" "{\"url\":\"https://yourURLHere.com\", \"id\":yourIDnumberhere, \"royalty\":yourRoyaltyamountHere, \"arbitrary\":\"yourArbitrarydatainHEXHere\"}"
