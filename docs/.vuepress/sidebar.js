@@ -8,7 +8,7 @@ var sidebar = [
     sidebarDepth: 1, 
   },
   {
-    title: "Guides",
+    title: "How-to Guides",
     collapsible: true,
     children: [
       [
@@ -19,10 +19,14 @@ var sidebar = [
         "/guides/LaunchTKLTESTchain/",
         "Launch the TKLTEST Chain",
       ],
+      [
+        "/guides/CreateAToken/",
+        "Create a token/NFT",
+      ],
     ],
   },
   {
-    title: "API",
+    title: "API/RPC",
     collapsible: true,
     children: [
       [
@@ -31,7 +35,7 @@ var sidebar = [
       ],
       [
         "/api/assets/",
-        "Assets",
+        "Assets (tokenDEX)",
       ],
     ],
   },
