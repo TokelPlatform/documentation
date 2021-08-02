@@ -100,26 +100,6 @@ cd komodo
 
 To reset the TKLTEST blockchain change into the *~/.komodo/TKLTEST* data directory and delete the corresponding files by running `rm -rf blocks chainstate debug.log komodostate db.log`
 
-### Create TKLTEST.conf
-
-Create a TKLTEST.conf file:
-
-```
-mkdir ~/.komodo/TKLTEST
-cd ~/.komodo/TKLTEST
-touch TKLTEST.conf
-
-#Add the following lines to the TKLTEST.conf file and change the username/password:
-rpcuser=**yourrpcusername**
-rpcpassword=**yoursecurerpcpassword**
-rpcbind=127.0.0.1
-txindex=1
-addnode=135.125.204.169
-addnode=192.99.71.125
-addressindex=1
-spentindex=1
-```
-
 ## Launch the TKLTEST blockchain
 
 Change to the Komodo src directory:
