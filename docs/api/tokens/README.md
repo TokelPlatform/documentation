@@ -786,9 +786,7 @@ Command:
 
 The `tokenv2transfer` method transfers tokens from one Antara Address to another.
 
-It is similar to the [sendmany](../komodo-api/wallet.html#sendmany) method used to send coins on the parent chain.
-
-The method returns a raw hex, which must be broadcast using [sendrawtransaction](../komodo-api/rawtransactions.html#sendrawtransaction) to complete the command.
+The method returns a raw hex, which must be broadcast using [sendrawtransaction](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/rawtransactions.html#sendrawtransaction) to complete the command.
 
 ::: tip
 The source `txid/vout` needs to be specified as it is critical to match outputs with inputs.
@@ -1084,9 +1082,9 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 The `tokenv2transfermany` method transfers multiple tokens from one Antara Address to another. There is no limit on how many different tokens can be sent to the one address, simply keep adding more tokenid's one after another, prior to the `destpubkey` and `amount`.
 
-It is similar to the [sendmany](../komodo-api/wallet.html#sendmany) method used to send coins on the parent chain.
+It is similar to the [sendmany](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/wallet.html#sendmany) method used to send coins on the parent chain.
 
-The method returns a raw hex, which must be broadcast using [sendrawtransaction](../komodo-api/rawtransactions.html#sendrawtransaction) to complete the command.
+The method returns a raw hex, which must be broadcast using [sendrawtransaction](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/rawtransactions.html#sendrawtransaction) to complete the command.
 
 ::: tip
 The source `txid/vout` needs to be specified as it is critical to match outputs with inputs.
