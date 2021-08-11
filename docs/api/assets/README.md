@@ -6,6 +6,8 @@ The Assets Module provides basic decentralised exchange (DEX) functionality for 
 
 The Asset Module allows anyone to buy or sell tokens by using Tokel coins to submit buy/sell orders/bids. This information is referenced from the [Komodo developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html)
 
+Each bid/ask order requires a single transaction fee and are broadcast on the blockchain for everyone to see. The orders will remain active for a default of 40320 blocks (~4 weeks) post the block that has your bid/ask transaction in it (you also have the option of specifying the expiry block in your ask/bid command, but this is not recommended). After such time, the order will remain on the blockchain but be 'expired' and unable to be filled. Anybody can then use the `tokenv2cancelask/bid` RPC to remove this order from the chain.
+
 ### Assets Module Flow
 
 #### Seller's Perspective
@@ -119,6 +121,16 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+
+## mytokenv2orders
+
+**mytokenv2orders [evalcode]**
+
+The `mytokenv2orders` method displays the public on-chain orders created by the user's pubkey, which is set in `-pubkey` parameter of komodod.
+
+The additional `evalcode` parameter allows the display of orders for non-fungible tokens bound to this evalcode.
+
+The response from this method is similar to the response from the `tokenv2orders` method.
 
 ## tokenv2ask
 
@@ -323,7 +335,7 @@ The response is the transaction id.
 
 **tokenv2cancelask tokenid asktxid**
 
-The `tokenv2cancelask` method cancels a specific `ask`/`sell` order that you created.
+The `tokenv2cancelask` method cancels a specific `ask`/`sell` order that you(or others) created, or have expired.
 
 The method returns a hex value which must then be broadcast using the [sendrawtransaction](../komodo-api/rawtransactions.html#sendrawtransaction) method.
 
@@ -629,7 +641,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 **tokenv2cancelbid tokenid bidtxid**
 
-The `tokenv2cancelbid` method cancels a specific `bid`/`buy` order that you created.
+The `tokenv2cancelbid` method cancels a specific `bid`/`buy` order that you(or others) created, or have expired.
 
 The method returns a hex value which must then be broadcast using the [sendrawtransaction](../komodo-api/rawtransactions.html#sendrawtransaction) method.
 
@@ -1334,13 +1346,3 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
-## mytokenv2orders
-
-**mytokenv2orders [evalcode]**
-
-The `mytokenv2orders` method displays the public on-chain orders created by the user's pubkey, which is set in `-pubkey` parameter of komodod.
-
-The additional `evalcode` parameter allows the display of orders for non-fungible tokens bound to this evalcode.
-
-The response from this method is similar to the response from the `tokenv2orders` method.
