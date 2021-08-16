@@ -23,7 +23,7 @@ Launch Parameters:
 <collapse-text hidden title="Response">
 
 ```bash
-./komodod -ac_name=TKLTEST ****ADD PARAMS***** -pubkey=**YOURPUBKEYHERE** &
+./komodod -ac_name=TKLTEST -ac_supply=1000000000 -ac_cbmaturity=1 -ac_reward=5000000000 -ac_decay=77700000 -ac_halving=525600 -ac_ccenable=228,236,245,246,247 -ac_adaptivepow=2 -addnode=164.132.225.134 -pubkey=**YOURPUBKEYHERE** &
 ```
 
 </collapse-text>
@@ -111,7 +111,7 @@ cd ~/komodo/src
 Launch the TKLTEST chain command:
 
 ```
-./komodod -ac_name=TKLTEST ************** ADD PARAMS
+./komodod -ac_name=TKLTEST -ac_supply=1000000000 -ac_cbmaturity=1 -ac_reward=5000000000 -ac_decay=77700000 -ac_halving=525600 -ac_ccenable=228,236,245,246,247 -ac_adaptivepow=2 -addnode=164.132.225.134 &
 ```
 
 Now wait for the chain to finish syncing. This might take while depending on your machine and internet connection. You can check check sync progress by using tail -f on the debug.log file in the coin data directory. Double check the number of blocks you've downloaded with an explorer to verify you're up to the latest block.
@@ -148,7 +148,7 @@ Wait a minute or so for the blockchain to stop, then relaunch the TKLTEST blockc
 
 ```
 cd ~/komodo/src
-./komodod -ac_name=TKLTEST ****ADD PARAMS***** -pubkey=**YOURPUBKEYHERE** &
+./komodod -ac_name=TKLTEST -ac_supply=1000000000 -ac_cbmaturity=1 -ac_reward=5000000000 -ac_decay=77700000 -ac_halving=525600 -ac_ccenable=228,236,245,246,247 -ac_adaptivepow=2 -addnode=164.132.225.134 -pubkey=**YOURPUBKEYHERE** &
 ```
 
 You are now ready to use the TKLTEST blockchain to its fullest extent.
