@@ -66,7 +66,7 @@ to use CC contracts, you need to launch daemon with valid -pubkey= for an addres
 
 Command Option 1 (start the chain with a pubkey set) - preferred method:
 ```
-**TKLTEST START PARAMS HERE WITH -PUBKEY SET**
+./komodod -ac_name=TKLTEST -ac_supply=1000000000 -ac_cbmaturity=1 -ac_reward=5000000000 -ac_decay=77700000 -ac_halving=525600 -ac_cc=1 -ac_ccenable=228,236,245,246,247 -ac_adaptivepow=2 -addnode=164.132.225.134 -pubkey=**YOURPUBKEYHERE** &
 ```
 
 Command Option 2 (set pubkey after the chain is launch) - not recommended as it will need to manually set this every time the chain is launched.
