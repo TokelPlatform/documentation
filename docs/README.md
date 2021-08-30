@@ -104,4 +104,4 @@ http://tokel.daemoncoins.com/
 
 ## Exchanges
 
-Shortly to be listed on the [AtomicDEX application](https://atomicdex.io/).
+[AtomicDEX application](https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/tag/0.5.0-beta)
