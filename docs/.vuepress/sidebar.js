@@ -23,6 +23,10 @@ var sidebar = [
         "/guides/CreateAToken/",
         "Create a token/NFT",
       ],
+      [
+        "/guides/HowToUseAtomicDEX/",
+        "How to use AtomicDEX",
+      ],
     ],
   },
   {
