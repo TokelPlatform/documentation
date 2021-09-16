@@ -342,7 +342,7 @@ Example from the above data:
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel NFTShowcase 0.00000001 "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address." "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "NFTShowcase" 0.00000001 "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address." "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
 ```
 
 <collapse-text hidden title="Response">
@@ -415,7 +415,7 @@ Step 4 (Optional): Parse the HEX code from the arbitrary data field (in your app
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel FixedSUPPLY 0.00001 "This token showcases a token that has a set supply of 1000 tokens. Each token is fungible with one another, meaning they hold exactly the same value and can be traded 1:1. This token also has a royalty amount of 1%." "{\"url\":\"https://tokel.io/\", \"id\":2, \"royalty\":10, \"arbitrary\":\"\"}"
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "ixedSUPPLY" 0.00001 "This token showcases a token that has a set supply of 1000 tokens. Each token is fungible with one another, meaning they hold exactly the same value and can be traded 1:1. This token also has a royalty amount of 1%." "{\"url\":\"https://tokel.io/\", \"id\":2, \"royalty\":10, \"arbitrary\":\"\"}"
 ```
 
 <collapse-text hidden title="Response">
@@ -480,7 +480,7 @@ This example shows a token that does not follow the Tokel Standard data format. 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2create ArbDataExample 0.001 "This token showcases arbitrary data field, instead of using the Tokel Standard data format" "005468697320697320636f6d706c6574656c792061726269747261727920646174612e"
+./komodo-cli -ac_name=TKLTEST5 tokenv2create "ArbDataExample" 0.001 "This token showcases arbitrary data field, instead of using the Tokel Standard data format" "005468697320697320636f6d706c6574656c792061726269747261727920646174612e"
 ```
 
 <collapse-text hidden title="Response">
@@ -758,6 +758,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 #### Search the tokens created between specific block numbers
 
 An example to search for tokens created between specified block numebrs. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
@@ -894,6 +895,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 Step 3: Decode the raw transaction and check against the following if the data is sane
 
 ```bash
@@ -1150,6 +1152,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 Step 2: Broadcast using `sendrawtransaction`
 
 ```bash

@@ -26,33 +26,33 @@ If you aren't familiar with what these fields represent, I'll point you to this 
 Replace the field names in the example below with your token data into the command listed below. Leave the optional string fields blank, or 0's in number fields, if you do not want to input data into those fields. Refer to the examples provided if you are having issues.
 
 ```
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel Name Supply "Description" "{\"url\":\"https://yourURLHere.com\", \"id\":yourIDnumberhere, \"royalty\":yourRoyaltyamountHere, \"arbitrary\":\"yourArbitrarydatainHEXHere\"}"
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "Name" Supply "Description" "{\"url\":\"https://yourURLHere.com\", \"id\":yourIDnumberhere, \"royalty\":yourRoyaltyamountHere, \"arbitrary\":\"yourArbitrarydatainHEXHere\"}"
 ```
 
 #### :pushpin: Examples
 NFT with Tokel Standard data
 ```
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel MyFirstNFT 0.00000001 "This is the description field of an NFT." "{\"url\":\"https://myNFTrocks.io\", \"id\":134, \"royalty\":10, \"arbitrary\":\"\"}"
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "MyFirstNFT" 0.00000001 "This is the description field of an NFT." "{\"url\":\"https://myNFTrocks.io\", \"id\":134, \"royalty\":10, \"arbitrary\":\"\"}"
 ```
 
 NFT with Tokel Standard data with no specific ID, Royalty & arbitrary data.
 ```
-./komodo-cli -ac_name=TKLTEST6 tokenv2createtokel MyFirstNFT 0.00000001 "This is the description field of an NFT." "{\"url\":\"https://myNFTrocks.io\", \"id\":0, \"royalty\":0, \"arbitrary\":\"\"}"
+./komodo-cli -ac_name=TKLTEST6 tokenv2createtokel "My First NFT" 0.00000001 "This is the description field of an NFT." "{\"url\":\"https://myNFTrocks.io\", \"id\":0, \"royalty\":0, \"arbitrary\":\"\"}"
 ```
 
 NFT without Tokel Standard data
 ```
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel MySecondNFT 0.00000001 "This is the description field of an NFT. This NFT does not have any optional Tokel Standard data."
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "My Second NFT" 0.00000001 "This is the description field of an NFT. This NFT does not have any optional Tokel Standard data."
 ```
 
 Fixed supply token without Tokel Standard data
 ```
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel AnAwesomeToken 1 "This token has a supply of 100 million and no Tokel Standard data."
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "An Awesome Token" 1 "This token has a supply of 100 million and no Tokel Standard data."
 ```
 
 Fixed supply token with Tokel Standard data
 ```
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel AwesomeToken2 0.000001 "This token has 1 million in supply and tokel standard data" "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "Awesome Token2" 0.000001 "This token has 1 million in supply and tokel standard data" "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
 ```
 
 ####  Part 3: Ensure you have set your pubkey
@@ -91,7 +91,7 @@ cd ~/komodo/src
 ```
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2createtokel NFTShowcase 0.00000001 "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address." "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "NFTShowcase" 0.00000001 "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address." "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
 ```
 
 <collapse-text hidden title="Response">

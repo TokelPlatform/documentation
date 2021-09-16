@@ -45,7 +45,7 @@ sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoco
 
 #### Linux
 ```shell
-git clone https://github.com/TokelPlatform/komodo --branch TKLTEST --single-branch
+git clone https://github.com/TokelPlatform/komodo --branch tkltest --single-branch
 cd komodo
 ./zcutil/fetch-params.sh
 ./zcutil/build.sh -j$(expr $(nproc) - 1)
@@ -70,7 +70,7 @@ brew install protobuf
 brew install coreutils
 brew install wget
 # Clone the Komodo repo
-git clone https://github.com/TokelPlatform/komodo --branch TKLTEST --single-branch
+git clone https://github.com/TokelPlatform/komodo --branch tkltest --single-branch
 # Change master branch to other branch you wish to compile
 cd komodo
 ./zcutil/fetch-params.sh
@@ -91,7 +91,7 @@ sudo update-alternatives --config x86_64-w64-mingw32-gcc
 sudo update-alternatives --config x86_64-w64-mingw32-g++
 # (configure to use POSIX variant)
 
-git clone https://github.com/TokelPlatform/komodo --branch TKLTEST --single-branch
+git clone https://github.com/TokelPlatform/komodo --branch tkltest --single-branch
 cd komodo
 ./zcutil/fetch-params.sh
 ./zcutil/build-win.sh -j$(expr $(nproc) - 1)
