@@ -758,6 +758,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 #### Search the tokens created between specific block numbers
 
 An example to search for tokens created between specified block numebrs. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
@@ -894,6 +895,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 Step 3: Decode the raw transaction and check against the following if the data is sane
 
 ```bash
@@ -1150,6 +1152,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 </collapse-text>
 -->
+
 Step 2: Broadcast using `sendrawtransaction`
 
 ```bash
