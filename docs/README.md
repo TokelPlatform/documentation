@@ -74,19 +74,19 @@ This application is in development. You can keep up with progress on the github,
 - Knowledgebase & How-to Guides: [https://docs.tokel.io/](https://docs.tokel.io/)
 - Developer Documentation/API: [https://docs.tokel.io/](https://docs.tokel.io/)
 - Whitepaper: [Tokel Paper](https://tokel.io/TokelPaper1stEdition.pdf)
-- [How to run the Tokel blockchain](/guides/LaunchTheChain.html)
-- [Tokens RPC/API documentation](/api/tokens.html)
-- [Assets RPC/API documentation](/api/assets.html)
-- [How-to create a Token/NFT](guides/CreateAToken.html)
+  - [How to run the Tokel blockchain](/guides/LaunchTheChain.html)
+  - [Tokens RPC/API documentation](/api/tokens.html)
+  - [Assets RPC/API documentation](/api/assets.html)
+  - [How-to create a Token/NFT](guides/CreateAToken.html)
 
 ## List of Tokel Platform Blockchain Technologies
 
-- [Delayed Proof of Work (dPoW)](https://komodoplatform.com/en/blog/delayed-proof-of-work/)- Bitcoin hashrate level protection. An additional security layer that protects from 51% attacks by notarizing Tokels hash onto Komodo's chain, then on to the Bitcoin blockchain.
-- [Tokens](/api/tokens.html)/[Assets](/api/assets.html) Technology - Create your own tokens or non-fungible tokens (NFTs) and trade them immediately on-chain with the assets based tokenDEX.
+- [Delayed Proof of Work (dPoW)](https://blog.komodoplatform.com/en/delayed-proof-of-work/)- Bitcoin hashrate level protection. An additional security layer that protects from 51% attacks by notarizing Tokels hash onto Komodo's chain, then on to the Bitcoin blockchain.
+- [Tokens](https://docs.tokel.io/api/tokens/)/[Assets](https://docs.tokel.io/api/assets/) Technology - Create your own tokens or non-fungible tokens (NFTs) and trade them immediately on-chain with the assets based tokenDEX.
 
 ## Tokel Blockchain Specifics
 
-[Documentation on how to launch & run the Tokel blockchain (CLI).](/guides/LaunchTheChain.html)
+[Documentation on how to launch & run the Tokel blockchain (CLI).](https://docs.tokel.io/guides/LaunchTheChain/)
 
 - Max Supply: Approximately 200.25 million TKL
 - Block Time: 60 seconds
