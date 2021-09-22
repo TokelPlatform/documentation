@@ -54,31 +54,32 @@ Tokel is a dedicated token platform. This platform will provide a solid foundati
 The all-in-one Tokel application is an open-sourced application that will be the one stop shop for all Tokel related features. This application is built using nSPV superlite wallet technology that has been developed by the Komodo platform, for an incredibly fast and reliable experience. This application accesses all of the features offered on the Tokel blockchain whilst keeping users funds in their own wallets (completely non-custodial).
 
 This application is in development. You can keep up with progress on the github, or find out more by having a chat in our discord.
-[https://github.com/TokelPlatform/tokel_app](https://github.com/TokelPlatform/tokel_app)
+[https://github.com/TokelPlatform/tokel_dapp](https://github.com/TokelPlatform/tokel_dapp/releases)
 
 ### Application features include
 
 - A TKL coin wallet
 - A multi-token wallet (you are able to hold all tokens that are in existence on the Tokel blockchain)
-- A tokenDEX trading platform
+- A tokenDEX trading platform (TKL <-> Token/NFT only)
 - A decentralized NFT marketplace
 - A simple to use Token creation tool
 - A token explorer for all tokens on the Tokel blockchain
 
 ## Tokel Resources
 
-- Tokel Website: [https://tokel.io](https://tokel.io)
-- Tokel Block Explorer: [https://explorer.tokel.io](https://explorer.tokel.io)
-- Tokel Discord: [https://discord.gg/DZvuAR6QzX](https://discord.gg/DZvuAR6QzX)
+- Tokel Website: [https://tokel.io/](https://tokel.io)
+- Tokel Block Explorer: [https://explorer.tokel.io/](https://explorer.tokel.io)
+- Tokel Discord: [http://discord.tokel.io/](http://discord.tokel.io)
 - Email: [contact@tokel.io](mailto:contact@tokel.io)
-- Knowledgebase & How-to: [TBD](https://TBD)
-- API references & Developer Documentation: [https://developers.komodoplatform.com](https://developers.komodoplatform.com/)
+- Knowledgebase & How-to Guides: [https://docs.tokel.io/](https://docs.tokel.io/)
+- Developer Documentation/API: [https://docs.tokel.io/](https://docs.tokel.io/)
 - Whitepaper: [Tokel Paper](https://tokel.io/TokelPaper1stEdition.pdf)
-- [How to run the blockchain](/guides/LaunchTheChain.html)
+- [How to run the Tokel blockchain](/guides/LaunchTheChain.html)
 - [Tokens RPC/API documentation](/api/tokens.html)
 - [Assets RPC/API documentation](/api/assets.html)
+- [How-to create a Token/NFT](guides/CreateAToken.html)
 
-## List of Tokel Platform Technologies
+## List of Tokel Platform Blockchain Technologies
 
 - [Delayed Proof of Work (dPoW)](https://komodoplatform.com/en/blog/delayed-proof-of-work/)- Bitcoin hashrate level protection. An additional security layer that protects from 51% attacks by notarizing Tokels hash onto Komodo's chain, then on to the Bitcoin blockchain.
 - [Tokens](/api/tokens.html)/[Assets](/api/assets.html) Technology - Create your own tokens or non-fungible tokens (NFTs) and trade them immediately on-chain with the assets based tokenDEX.
@@ -104,4 +105,5 @@ http://tokel.daemoncoins.com/
 
 ## Exchanges
 
-[AtomicDEX application](https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/tag/0.5.0-beta)
+[AtomicDEX application](https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/)
+[How-to use AtomicDEX guide](guides/HowToUseAtomicDEX.html)
