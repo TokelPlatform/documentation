@@ -71,9 +71,9 @@ This application is in development. You can keep up with progress on the github,
 - Tokel Block Explorer: [https://explorer.tokel.io/](https://explorer.tokel.io)
 - Tokel Discord: [http://discord.tokel.io/](http://discord.tokel.io)
 - Email: [contact@tokel.io](mailto:contact@tokel.io)
+- Whitepaper: [Tokel Paper](https://tokel.io/TokelPaper1stEdition.pdf)
 - Knowledgebase & How-to Guides: [https://docs.tokel.io/](https://docs.tokel.io/)
 - Developer Documentation/API: [https://docs.tokel.io/](https://docs.tokel.io/)
-- Whitepaper: [Tokel Paper](https://tokel.io/TokelPaper1stEdition.pdf)
   - [How to run the Tokel blockchain](/guides/LaunchTheChain.html)
   - [Tokens RPC/API documentation](/api/tokens.html)
   - [Assets RPC/API documentation](/api/assets.html)
@@ -106,4 +106,5 @@ http://tokel.daemoncoins.com/
 ## Exchanges
 
 [AtomicDEX application](https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/)
+
 [How-to use AtomicDEX guide](guides/HowToUseAtomicDEX.html)
