@@ -16,7 +16,7 @@ This documentation was taken and updated from the [Komodo platform developer doc
 - `tokenv2balance tokenid [pubkey]`
 - `tokenv2createtokel name supply [description] [tokens data]`
 - `tokenv2infotokel tokenid`
-- `tokenv2list [begin-height] [end-height]`
+- `tokenv2list [json params]`
 - `tokenv2transfer tokenid destpubkey amount`
 - `tokenv2transfermany tokenid1 tokenid2 ... destpubkey amount`
 
@@ -679,9 +679,9 @@ Command:
 
 ## tokenv2list
 
-**tokenv2list [begin-height][end-height]**
+**tokenv2list [json params]**
 
-The `tokenv2list` method lists all tokens created on Tokel. Enter an optional begin and end block height number to search for tokens created between specific block numbers.
+The `tokenv2list` method lists all tokens created on Tokel. Enter an optional json string to search for tokens created between specific block numbers, search for tokens created by a specific pubkey, or search for tokens created on a specific CC address.
 
 ### Arguments
 
@@ -689,6 +689,8 @@ The `tokenv2list` method lists all tokens created on Tokel. Enter an optional be
 | ------------ | ------------------ | ------------------------------------ |
 | begin-height | (number, optional) | Block number to start searching from, inclusive |
 | end-height   | (number, optional) | Block number to end searching from, inclusive   |
+| pubkey       | (hexstring, optional) | Search tokens created by a specific pubkey   |
+| address      | (string, optional) | Search tokens created on a specific cc address  |
 
 ### Response
 
@@ -733,6 +735,7 @@ Command:
 ```
 
 </collapse-text>
+
 <!-- need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
@@ -766,7 +769,7 @@ An example to search for tokens created between specified block numebrs. This co
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2list 16000 16337
+./komodo-cli -ac_name=TKLTEST5 tokenv2list "{ \"beginHeight\":16000, \"endHeight\":16337}"
 ```
 
 <collapse-text hidden title="Response">
