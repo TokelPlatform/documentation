@@ -74,10 +74,10 @@ This application is in development. You can keep up with progress on the github,
 - Whitepaper: [Tokel Paper](https://tokel.io/TokelPaper1stEdition.pdf)
 - Knowledgebase & How-to Guides: [https://docs.tokel.io/](https://docs.tokel.io/)
 - Developer Documentation/API: [https://docs.tokel.io/](https://docs.tokel.io/)
-  - [How to run the Tokel blockchain](/guides/LaunchTheChain.html)
-  - [Tokens RPC/API documentation](/api/tokens.html)
-  - [Assets RPC/API documentation](/api/assets.html)
-  - [How-to create a Token/NFT](guides/CreateAToken.html)
+  - [How to run the Tokel blockchain](/guides/LaunchTheChain/)
+  - [Tokens RPC/API documentation](/api/tokens/)
+  - [Assets RPC/API documentation](/api/assets/)
+  - [How-to create a Token/NFT](guides/CreateAToken/)
 
 ## List of Tokel Platform Blockchain Technologies
 
