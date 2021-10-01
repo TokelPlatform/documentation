@@ -1,5 +1,11 @@
 ---
-title: Tokel Documentation
+meta:
+  - name: "og:description"
+    content: Tokel is a dedicated token & NFT platform offering end-to-end token solutions for fixed supply and non-fungible tokens (NFT's)
+  - name: description
+    content: Tokel is a dedicated token & NFT platform offering end-to-end token solutions for fixed supply and non-fungible tokens (NFT's)"
+
+title: Tokel's Creator Documentation - Tokel Platform
 description: Documentation for creators building on the Tokel Platform.
 
 tags:
