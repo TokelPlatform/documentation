@@ -1,12 +1,17 @@
-## Launching the Tokel blockchain
+## Introduction
+
+Tokel is a completely independent blockchain created using Komodo technologies. In order to run the Tokel blockchain, you must build the Komodo daemon and launch the Tokel blockchain through that. You do **not** have to run the Komodo blockchain in order to run and use the Tokel blockchain.
+
+[Komodo technology](https://developers.komodoplatform.com/basic-docs/start-here/about-komodo-platform/product-introductions.html#smart-chains-antara) allows anyone to create smartchains which are independent blockchains, such as Tokel.
+
+You must ensure you are running the chain from the `tokel` [branch of komodo](https://github.com/KomodoPlatform/komodo/tree/tokel)
+
+## Preparing your environment
 
 ### Build Komodo (yep, the komodo daemon runs Tokel)
 
-Tokel is a completely independant blockchain created using Komodo technologies. In order to run the Tokel blockchain, you must build the Komodo daemon and launch the Tokel blockchain using that. You do **not** have to run the Komodo blockchain in order to run and use the Tokel blockchain.
-
-Komodo technology allows anyone to create smartchains which are independent blockchains, such as Tokel.
-
 #### Dependencies
+
 
 ```shell
 #The following packages are needed:
@@ -70,26 +75,6 @@ cd komodo
 
 To reset the Tokel blockchain change into the *~/.komodo/TOKEL* data directory and delete the corresponding files by running `rm -rf blocks chainstate debug.log komodostate db.log`
 
-### Create tokel.conf
-
-Create a tokel.conf file:
-
-```
-mkdir ~/.komodo/tokel
-cd ~/.komodo/tokel
-touch tokel.conf
-
-#Add the following lines to the tokel.conf file and change the username/password:
-rpcuser=**yourrpcusername**
-rpcpassword=**yoursecurerpcpassword**
-rpcbind=127.0.0.1
-txindex=1
-addnode=135.125.204.169
-addnode=192.99.71.125
-addressindex=1
-spentindex=1
-```
-
 ## Launch the Tokel blockchain
 
 Change to the Komodo src directory:
@@ -101,7 +86,7 @@ cd ~/komodo/src
 Launch the Tokel chain command:
 
 ```
-./komodod -ac_name=TOKEL ************** ADD PARAMS
+./komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 &
 ```
 
 Now wait for the chain to finish syncing. This might take while depending on your machine and internet connection. You can check check sync progress by using tail -f on the debug.log file in the coin data directory. Double check the number of blocks you've downloaded with an explorer to verify you're up to the latest block.
@@ -138,15 +123,10 @@ Wait a minute or so for the blockchain to stop, then relaunch the Tokel blockcha
 
 ```
 cd ~/komodo/src
-./komodod -ac_name=TOKEL ****ADD PARAMS***** -pubkey=**YOURPUBKEYHERE** &
+./komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 -pubkey=**YOURPUBKEYHERE** &
 ```
 
 You are now ready to use the Tokel blockchain to its fullest extent.
-
-
-**NOTE TO EXCHANGES:**
-Please use the `-exchange` option when launching the Tokel chain. Please ensure you have the entire transaction history under the same `exchange` mode. Otherwise you will get wallet conflicts.
-
 
 License
 -------

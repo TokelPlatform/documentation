@@ -8,17 +8,29 @@ var sidebar = [
     sidebarDepth: 1, 
   },
   {
-    title: "Guides",
+    title: "How-to Guides",
     collapsible: true,
     children: [
       [
         "/guides/LaunchTheChain/",
-        "Launch the Chain",
+        "Launch the Tokel Chain",
+      ],
+      [
+        "/guides/LaunchTKLTESTchain/",
+        "Launch the TKLTEST Chain",
+      ],
+      [
+        "/guides/CreateAToken/",
+        "Create a token/NFT",
+      ],
+      [
+        "/guides/HowToUseAtomicDEX/",
+        "How to use AtomicDEX",
       ],
     ],
   },
   {
-    title: "API",
+    title: "API/RPC",
     collapsible: true,
     children: [
       [
@@ -27,7 +39,7 @@ var sidebar = [
       ],
       [
         "/api/assets/",
-        "Assets",
+        "Assets (tokenDEX)",
       ],
     ],
   },

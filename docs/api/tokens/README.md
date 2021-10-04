@@ -1,22 +1,22 @@
-# Tokel Tokens RPCs
+# Tokel Token RPCs
 
 ## Introduction
 
-This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html).
+The Tokens Module enables support for the on-chain creation of colored coins, otherwise called tokens. The created tokens are used with another module that supports on-chain operations for tokens. The [Assets Module](http://docs.tokel.io/api/assets/) provides buy/sell (tokenDEX) operations for tokens. Please refer to the Assets API documentation for further information on Assets.
 
-The Tokens Module enables support for the on-chain creation of colored coins, also called tokens. The created tokens are used with another module that supports operations on tokens. For example, the [Assets Module](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html) provides buy/sell (tokenDEX) operations for `tokens`. Please refer to the Assets API documentation for further information on Assets.
+The tokens module requires locking a proportional amount of Tokel (TKL) coins. Each satoshi (0.00000001) of TKL is equal to one token within the total supply. For example, if you wanted to create a token with a supply of 100 million, this would require locking 1 TKL. Once the coins are locked, they are effectively unusable, or burnt; tokens now take the place of the native coin.
 
-The `tokens` module requires locking a proportional amount of Tokel (TKL) coins. Each satoshi (0.00000001) of TKL is equal to one token within the total supply. For example, if you wanted to create a token with a supply of 100 million, this would require locking 1 TKL. Once the coins are locked, they are effectively unusable, or burnt; tokens now take the place of the native coin.
+Tokel uses the v2 version of the tokens module that Komodo offers, thus all commands are required to be lead with `tokenv2`. Although it lists `token` (v1) commands on the blockchain `help` output, these are not supported or enabled on the Tokel blockchain.
 
-## TokensV2 RPC
+This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html). Tokel has added features that some branches of Komodo do not have. Please refer to this documentation for all Tokel specific RPCs.
+
+## Tokenv2 RPCs
 
 - `tokenv2address [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
-- `tokenv2create name supply [description] [tokens data]`
 - `tokenv2createtokel name supply [description] [tokens data]`
-- `tokenv2info tokenid`
 - `tokenv2infotokel tokenid`
-- `tokenv2list [begin-height] [end-height]`
+- `tokenv2list [json params]`
 - `tokenv2transfer tokenid destpubkey amount`
 - `tokenv2transfermany tokenid1 tokenid2 ... destpubkey amount`
 
@@ -68,7 +68,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -99,6 +99,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 ## tokenv2balance
 
@@ -142,7 +143,7 @@ Command:
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -167,7 +168,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
-
+-->
 Check the token balance of a specific pubkey
 
 ```bash
@@ -186,7 +187,7 @@ Check the token balance of a specific pubkey
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -211,69 +212,48 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
-<!-- ## tokenv2createtokel -->
+## tokenv2createtokel
 
-## tokenv2create
+**tokenv2createtokel name supply description [token data]**
 
-**tokenv2create name supply description [token data]**
+The `tokenv2createtokel` method creates a new fixed supply or non-fungible token that incorporates the Tokel Standard token data format.
 
-The `tokenv2create` method creates a new token.
+For every token created, you are required to spend one satoshi (0.00000001) of the Tokel coin (TKL). For example, 1 TKL creates a maximum 100000000 tokens. As each TKL satoshi is used to create a coloured coin, once the TKL has been spent to create the token, it is effectively burnt and no longer in the circulating supply of TKL. This method is used to create all types (NFT & Fixed supply) of tokens on the Tokel blockchain. The data you input into the token on creation is non editable. Once it is created, you cannot change it, so be dilligent and ensure you haven't made any errors! If you would like to write external data to your token, consider using the OraclesCC methods.
 
-For every token created, the method requires one satoshi of the Tokel coin. For example, `1 TKL` creates a maximum `100000000` tokens. As each TKL satoshi is used to create a coloured coin, once the TKL has been spent to create the token, it is effectively burnt and no longer in the circulating supply of TKL.
+The token data field is optional and is broken down into a URL (we suggest using IPFS for storing images/audio/video/other), ID (used to identify sets of NFTs), a royalty amount (x/1000), and an arbitrary data field that is input as hex.
 
-The method returns a hex-encoded transaction which should then be broadcast using `sendrawtransaction`.
-
-`sendrawtransaction` then returns a `txid`, which is your `tokenid`.
+For creators/developers that require more flexibility (or do not want to follow the Tokel Standard) for the data format they input onto the token, you can use the `tokenv2create` RPC. Data from this RPC may not show within the Tokel Application.
 
 #### Non-Fungible Tokens
 
-A non-fungible token contains an additional array of data describing its corresponding asset. The data has an eval code which binds this non-fungible token to an Antara Module responsible for validation. Arbitrary data can be added to the NFT data field using the `XX` evalcode. This information needs to be converted from a string to HEX code using a website like https://www.rapidtables.com/convert/number/ascii-to-hex.html.
+To create a non-fungible token, simply set the `supply` field of the RPC to `0.00000001`. This will use 1 satoshi of TKL to create a single token. As the name suggests, non-fungible tokens are not fungible with anything else. As each NFT is individual and unique, it should only ever have a supply of 1. NFT's are perfect to signify the ownership of digital or physical assets.
 
-### Tokel Standard 1 validation code: f7 (01-02-03-04)
+If you would like to divide the ownership of a single asset into many allocations, you should set the supply to however many allocations you want. These coins are not considered NFT's as they are then all fungible with one another. 
 
-```
-'f701' - NFT data evalcode (f7) and version (01)
-'01' - Code of field 'ID'
-'33' - Value of field 'ID' (51) in compact size format, 65535 (example of a big value) (format is here https://en.bitcoin.it/wiki/Protocol_documentation#Variable_length_integer)
-'02' - Code of URL field
-'11' - URL length in hex (17 in decimal)
-'68747470733a2f2f746f6b656c2e696f2f' - url value in hex (https://tokel.io/)
-'03' - Code of Royalty % field
-'64' - 100 in hex (Value is represented as integer fraction of 1000, acceptable values are from 0 (no royalty) to 999 (max royalty of 0,999))
-'04' - Code of arbitrary data field
-'11' - Arbitrary data length in hex (17 in decimal)
-'68747470733a2f2f746f6b656c2e696f2f' - Arbitrary data value in hex (https://tokel.io/)
-```
+#### Fixed Supply Tokens
 
-### Arbitrary data validation code: 00
-
-```
-'00' - Arbitrary data evalcode
-'XXX' - Data field (any format converted to hex)
-```
-
-To create a non-fungible token, use only 1 satoshi (0.00000001 TKL). You will not be able to add the data field to tokens that are not NFTs.
-
-For more information on NFT data validation and evalcodes, please read `XYZ`
+All tokens created on Tokel are of a fixed supply, meaning that nobody can create additional supply of any specific token on chain, once the token has been created. Although this is the case, users can burn tokens. Creators/projects can incentivise users burning tokens to permanently reduce the supply of their token. 
 
 #### Fractional Tokens
 
 In order to create a token that can be divided and transferred in fractional amounts, it must be handled on the application side of development.
 
-To create a token that is divisible to one decimal place, for example, consider 10 tokens as a single unit. Sending one satoshi's worth of the token is the equivalent of sending one decimal point of the actual token.
+For example, to create a token that is divisible to one decimal place, have your application consider 10 tokens as a single unit. In this case, sending one token is the equivalent of sending one decimal point of the actual token.
 
 ### Arguments
 
+The method returns a hex-encoded transaction which should then be broadcast using `sendrawtransaction`.
+
+`sendrawtransaction` then returns a `txid`, which is your `tokenid`.
+
 | Name        | Type     | Description                                                                                                                                                          |
 | ----------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| name        | (string) | the name of the token                                                                                                                                                |
+| name        | (string) | the name of the token (max length, 32)                                                                                                                                                |
 | supply      | (number) | the amount of TKL coins used to create the tokens, NOT the amount/supply of tokens you want in existence; 1 satoshi creates 1 token. 1 TKL creates 100000000 tokens. |
-| description | (string) | the description of the token                                                                                                                                         |
-| nft data    | (hex)    | Arbitrary data that is hex encoded (NFTs only)                                                                                                                       |
-
-- TOKENS_MAX_NAME_LENGTH = 32;
-- TOKENS_MAX_DESC_LENGTH = 4096;
+| description | (string) | the description of the token (max length, 4096)                                                                                                                                         |
+| token data    | (json, optional)    | Additional token data using the Tokel Standard data format                                                                                                                        |
 
 ### Response
 
@@ -282,42 +262,136 @@ To create a token that is divisible to one decimal place, for example, consider 
 | result | (string) | whether the command succeeded                                                                        |
 | hex    | (string) | a raw transaction in hex-encoded format; you must broadcast this transaction to complete the command |
 
+#### Tokel Standard data format
+
+Tokel standard data allows creators to add predefined properties to their token, whilst giving creators flexibility through the arbitrary data field. All fields are optional, but the format must be followed when creating your token. 
+
+##### URL
+The URL field can be used to show users where the digital asset is stored. We recommend using IPFS (The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system.) for file storing.
+
+##### ID
+The ID field allows for creators to uniquely identify their tokens through allocating them a specific number, and can be used however the creator wants. An example of how a creator could use the ID fields is if they wanted to create a set of 10 NFT's in a specific collection, they would simply set the same ID number for all of those NFT's, and not use it for any other creations. With this logic, a creator may set the ID of 1 for their first collection of NFT's, then set 2 for their next collection. Another use may be to identify different ranks of NFT's. Say your game created NFT's with levels associated, the ID field could be used to identify the level of the NFT. I.E. An ID of 1 may represent a level 1 NFT, an ID of 10 may represent a level 10 NFT, so on and so fourth.
+
+
+##### Royalty
+The royalty field allows the creator to take royalties from future sales of their token. The number in this field represents x/1000 of the value of a sale. Say the royalty was 500 (500/1000), then for each sale of the token, using the tokenDEX (assetsCC RPCs), 50% of the value would be automatically transferred to the creators address, and 50% to the seller. If the royalty value was 10 (10/1000), 1% of every sale would be transferred to the creators address, and 99% to the seller. This feature gives the creator the ability to generate revenue from future sales of their token. This can significantly disrupt and help creators innovate the way they generate revenue from their creations, as their revenue potential is not limited to the original sale value. 
+
+For example, a project could use tokens as a key to unlock access to their educational courseware. A person would buy the token from the project, then be able to onsell it once they have completed the course. The project would reap the benefits of the original sale, but also generate revenue from the onselling of the tokens in the future. The user would also benefit as they would be able to onsell the course key (token) once they have finished the course and no longer need it. There are endless possibilties of how to change incentive structures and generate revenue with this on-chain feature.
+
+##### Arbitrary
+This field gives creators the flexibility of adding extra properties, or application specific data to their token. The arbitrary data field is kept as hex on chain, so once the creator has the required data format, they will need to convert it to hex, and input it into this field. An example of a creator using this field to add extra properties to their token is by adding a json that holds the extra data. See the ["NFT Creation Example"](http://docs.tokel.io/api/tokens/#tokenv2createtokel) for an example where we store the properties of size, color, weapon and number as a json, converted to hex, within the arbitrary data field.
+
+#### See below for an example of the Tokel Standard data format.
+
+<collapse-text hidden title="Response">
+
+```json
+"{"url":"X", "id":X, "royalty":X, "arbitrary":"X"}"
+```
+
+</collapse-text>
+
+See the example below for how the Tokel Standard data is stored in hex format within the opreturn field.
+
+<collapse-text hidden title="Response">
+  
+Tokel Standard validation code: f7 (01-02-03-04)
+
+```
+'f701' - Token data evalcode (f7) and version (01)
+'01' - Code of field 'ID'
+'X' - Value of field 'ID' in compact size format
+'02' - Code of URL field
+'X' - URL length in hex
+'68747470733a2f2f746f6b656c2e696f2f' - URL value in hex (this example shows "https://tokel.io/")
+'03' - Code of Royalty % field
+'X' - Royalty amount in hex (Value is represented as integer fraction of 1000, acceptable values are from 0 (no royalty) to 999 (max royalty of 0,999))
+'04' - Code of arbitrary data field
+'X' - Arbitrary data length in hex
+'X' - Arbitrary data value in hex
+```
+  
+Example from above data (note that you would be required to input data where `X` is shown):
+  
+```
+f70101X02X68747470733a2f2f746f6b656c2e696f2f03X04XX
+```
+  
+</collapse-text>
+
+See below for an example of how to store Arbitrary data (non Tokel Standard) format in hex within the opreturn field.
+
+<collapse-text hidden title="Response">
+ 
+```
+'00' - Arbitrary data evalcode
+'XXX' - Data field (any format and data converted to hex)
+```
+
+Example from the above data:
+
+```
+00XXX
+```
+</collapse-text>
+  
 #### :pushpin: Examples
 
-#### New JSON input examples need to be added
+#### NFT Creation Example
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2createtokel NewT0912ken 0.00000001 "Just a random token. 12$%^&*()_+-={}][" "{\"url\":\"https://tokel.io/roadmap\", \"id\":69, \"royalty\":100, \"arbitrary\":\"54686973206973206120746573742068657820737472696e6720746f20696e636f72706f726174652061726269747261727920646174612e\"}"
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "NFTShowcase" 0.00000001 "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address." "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
 ```
-
-Check the NFT:
-
-<collapse-text hidden title="Response">
-  
-```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2infotokel f3ef3ed5a9a26245ab09e7d0e6ade2e5bd053c27315be0184ee17fc58c3ab083
-```
-
-</collapse-text>
 
 <collapse-text hidden title="Response">
 
 ```json
 {
   "result": "success",
-  "tokenid": "f3ef3ed5a9a26245ab09e7d0e6ade2e5bd053c27315be0184ee17fc58c3ab083",
+  "hex": "0400008085202f89010053c31a8c74b875040db6808f95a70af35ff895b534d973332e861270815223000000004847304402206e624bc5ae94124c817db37592d49e6094d7d265c94fb497167489246fe4023f02206b38f5211da0f958bf3834e6684e5b6ee5cc0450665ff007d07ad783d547b21001ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc01000000000000006e434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f701012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75df92f50500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000fd25026a4d2102f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0b4e465453686f7763617365fd3d0154686973204e4654206372656174696f6e206578616d706c652073686f776361736573207573696e6720612073696e676c65207361746f73686920696e2074686520737570706c79206669656c6420746f20637265617465203120746f6b656e2e20497420616c736f2073686f777320686f7720492063616e206164642074686520696d61676520696e746f207468652055524c2c20616e642075736520746865206172626974726172792064617461206669656c6420746f20616464206164646974696f6e616c2070726f7065727469657320746f206d79204e46542e20353025206f66207468652076616c7565206f6620616c6c2074726164657320636f6e647563746564207669612061737365747320525043732077696c6c2062652073656e7420746f207468652063726561746f727320616464726573732eaff701026668747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f546f6b656c506c6174666f726d2f746f6b656c5f6170702f646576656c6f706d656e742f6272616e645f7061636b6167652f6173736574732f746f6b656c78332e706e67010103fdf401043d7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d00000000b83f00000000000000000000000000"
+}
+```
+
+</collapse-text>
+
+Step 2: Broadcast the raw transaction hex
+
+```bash
+./komodo-cli -ac_name=TKLTEST sendrawtransaction 0400008085202f89010053c31a8c74b875040db6808f95a70af35ff895b534d973332e861270815223000000004847304402206e624bc5ae94124c817db37592d49e6094d7d265c94fb497167489246fe4023f02206b38f5211da0f958bf3834e6684e5b6ee5cc0450665ff007d07ad783d547b21001ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc01000000000000006e434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f701012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75df92f50500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000fd25026a4d2102f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0b4e465453686f7763617365fd3d0154686973204e4654206372656174696f6e206578616d706c652073686f776361736573207573696e6720612073696e676c65207361746f73686920696e2074686520737570706c79206669656c6420746f20637265617465203120746f6b656e2e20497420616c736f2073686f777320686f7720492063616e206164642074686520696d61676520696e746f207468652055524c2c20616e642075736520746865206172626974726172792064617461206669656c6420746f20616464206164646974696f6e616c2070726f7065727469657320746f206d79204e46542e20353025206f66207468652076616c7565206f6620616c6c2074726164657320636f6e647563746564207669612061737365747320525043732077696c6c2062652073656e7420746f207468652063726561746f727320616464726573732eaff701026668747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f546f6b656c506c6174666f726d2f746f6b656c5f6170702f646576656c6f706d656e742f6272616e645f7061636b6167652f6173736574732f746f6b656c78332e706e67010103fdf401043d7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d00000000b83f00000000000000000000000000
+```
+
+<collapse-text hidden title="Response">
+
+```bash
+8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e
+```
+
+</collapse-text>
+
+Step 3 (Optional): Check your NFT data
+
+```
+./komodo-cli -ac_name=TKLTEST tokenv2infotokel 8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e
+```
+
+<collapse-text hidden title="Response">
+
+```json
+{
+  "result": "success",
+  "tokenid": "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
   "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
-  "name": "NewT0912ken",
+  "name": "NFTShowcase",
   "supply": 1,
-  "description": "Just a random token. 12$%^&*()_+-={}][",
-  "data": "f701",
+  "description": "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address.",
+  "data": "f701026668747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f546f6b656c506c6174666f726d2f746f6b656c5f6170702f646576656c6f706d656e742f6272616e645f7061636b6167652f6173736574732f746f6b656c78332e706e67010103fdf401043d7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d",
   "dataAsJson": {
-    "id": 69,
-    "url": "https://tokel.io/roadmap",
-    "royalty": 100,
-    "arbitrary": "54686973206973206120746573742068657820737472696e6720746f20696e636f72706f726174652061726269747261727920646174612e"
+    "id": 1,
+    "url": "https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png",
+    "royalty": 500,
+    "arbitrary": "7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d"
   },
   "version": 1,
   "IsMixed": "yes"
@@ -326,12 +400,22 @@ Check the NFT:
 
 </collapse-text>
 
-#### NFT Creation Example 1
+Step 4 (Optional): Parse the HEX code from the arbitrary data field (in your application or using something like this http://www.unit-conversion.info/texttools/hexadecimal/) to see the further NFT properties
+
+<collapse-text hidden title="Response">
+
+```
+{"size": 100,"color": "gold","weapon": "words","number": 123}
+```
+
+</collapse-text>
+
+#### Fixed Supply Token Creation Example
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2create NFTDataTest 0.00000001 "Testing the new NFT data field. How good!" f7010133021168747470733a2f2f746f6b656c2e696f2f0364041168747470733a2f2f746f6b656c2e696f2f
+./komodo-cli -ac_name=TKLTEST tokenv2createtokel "ixedSUPPLY" 0.00001 "This token showcases a token that has a set supply of 1000 tokens. Each token is fungible with one another, meaning they hold exactly the same value and can be traded 1:1. This token also has a royalty amount of 1%." "{\"url\":\"https://tokel.io/\", \"id\":2, \"royalty\":10, \"arbitrary\":\"\"}"
 ```
 
 <collapse-text hidden title="Response">
@@ -339,7 +423,7 @@ Command:
 ```json
 {
   "result": "success",
-  "hex": "0400008085202f89012bb8ca3b9be7b1f4c759399f787621004f4faf4befb828a3b5e41866e865f9fe010000004847304402207165ee0ed662ef4044873c05a13ff590382e4c49ba97900f7c3466a4265a3cd302206e1bc95bb18095a7f4a759c0cd9f3095d126199a297761864b6d26ad671be7db01ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc010000000000000045434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc5fd0264810000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac00000000000000008b6a4c88f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0b4e465444617461546573742954657374696e6720746865206e6577204e46542064617461206669656c642e20486f7720676f6f64212cf7010133021168747470733a2f2f746f6b656c2e696f2f0364041168747470733a2f2f746f6b656c2e696f2f00000000ecb700000000000000000000000000"
+  "hex": "0400008085202f89010055ad600b446e61ddf411cdf33a77062b9759a9134620ede112464b7ee2fb0700000000484730440220429764402a4915e0c80d2fbefd8a9f81ac476498919f229aeafe82b4ee28676802201bfa9517a995b68a746b2c8a527e1dabb2779cb620f118aa7f9874be8ea9c99501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cce8030000000000006e434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f701012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75f88ef50500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000fd29016a4d2501f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0b4669786564535550504c59d75468697320746f6b656e2073686f776361736573206120746f6b656e20746861742068617320612073657420737570706c79206f66203130303020746f6b656e732e204561636820746f6b656e2069732066756e6769626c652077697468206f6e6520616e6f746865722c206d65616e696e67207468657920686f6c642065786163746c79207468652073616d652076616c756520616e642063616e2062652074726164656420313a312e205468697320746f6b656e20616c736f20686173206120726f79616c747920616d6f756e74206f662031252e1bf701021168747470733a2f2f746f6b656c2e696f2f0102030a040000000000c13f00000000000000000000000000"
 }
 ```
 
@@ -348,38 +432,40 @@ Command:
 Step 2: Broadcast the raw transaction hex
 
 ```bash
-./komodo-cli -ac_name=TKLTEST sendrawtransaction 0400008085202f89012bb8ca3b9be7b1f4c759399f787621004f4faf4befb828a3b5e41866e865f9fe010000004847304402207165ee0ed662ef4044873c05a13ff590382e4c49ba97900f7c3466a4265a3cd302206e1bc95bb18095a7f4a759c0cd9f3095d126199a297761864b6d26ad671be7db01ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc010000000000000045434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc5fd0264810000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac00000000000000008b6a4c88f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0b4e465444617461546573742954657374696e6720746865206e6577204e46542064617461206669656c642e20486f7720676f6f64212cf7010133021168747470733a2f2f746f6b656c2e696f2f0364041168747470733a2f2f746f6b656c2e696f2f00000000ecb700000000000000000000000000
+./komodo-cli -ac_name=TKLTEST sendrawtransaction 0400008085202f89010055ad600b446e61ddf411cdf33a77062b9759a9134620ede112464b7ee2fb0700000000484730440220429764402a4915e0c80d2fbefd8a9f81ac476498919f229aeafe82b4ee28676802201bfa9517a995b68a746b2c8a527e1dabb2779cb620f118aa7f9874be8ea9c99501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cce8030000000000006e434da240a00fa003800103af038001f5af038001f7a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f701012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75f88ef50500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000fd29016a4d2501f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0b4669786564535550504c59d75468697320746f6b656e2073686f776361736573206120746f6b656e20746861742068617320612073657420737570706c79206f66203130303020746f6b656e732e204561636820746f6b656e2069732066756e6769626c652077697468206f6e6520616e6f746865722c206d65616e696e67207468657920686f6c642065786163746c79207468652073616d652076616c756520616e642063616e2062652074726164656420313a312e205468697320746f6b656e20616c736f20686173206120726f79616c747920616d6f756e74206f662031252e1bf701021168747470733a2f2f746f6b656c2e696f2f0102030a040000000000c13f00000000000000000000000000
 ```
 
 <collapse-text hidden title="Response">
 
 ```bash
-fe2486f3cc81f4000c22b2583a4665624e79d877e6f80f107e3d49e3d032049a
+5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b
 ```
 
 </collapse-text>
 
-Check the NFT:
+Step 3 (Optional): Check your token data
 
-<collapse-text hidden title="Response">
-  
 ```bash
-komodo-cli -ac_name=TKLTEST tokenv2info fe2486f3cc81f4000c22b2583a4665624e79d877e6f80f107e3d49e3d032049a
+./komodo-cli -ac_name=TKLTEST5 tokenv2infotokel 5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b
 ```
-
-</collapse-text>
 
 <collapse-text hidden title="Response">
 
 ```json
 {
   "result": "success",
-  "tokenid": "fe2486f3cc81f4000c22b2583a4665624e79d877e6f80f107e3d49e3d032049a",
+  "tokenid": "5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b",
   "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
-  "name": "NFTDataTest",
-  "supply": 1,
-  "description": "Testing the new NFT data field. How good!",
-  "data": "f7010133021168747470733a2f2f746f6b656c2e696f2f0364041168747470733a2f2f746f6b656c2e696f2f",
+  "name": "FixedSUPPLY",
+  "supply": 1000,
+  "description": "This token showcases a token that has a set supply of 1000 tokens. Each token is fungible with one another, meaning they hold exactly the same value and can be traded 1:1. This token also has a royalty amount of 1%.",
+  "data": "f701021168747470733a2f2f746f6b656c2e696f2f0102030a0400",
+  "dataAsJson": {
+    "id": 2,
+    "url": "https://tokel.io/",
+    "royalty": 10,
+    "arbitrary": ""
+  },
   "version": 1,
   "IsMixed": "yes"
 }
@@ -387,22 +473,14 @@ komodo-cli -ac_name=TKLTEST tokenv2info fe2486f3cc81f4000c22b2583a4665624e79d877
 
 </collapse-text>
 
-Check the data field using a decoder:
+#### Arbitrary Data Token Creation Example
 
-<collapse-text hidden title="Response">
-  
-```
-To be added. Use application TS1 decoder.
-```
-
-</collapse-text>
-
-#### Non-NFT Creation Example
+This example shows a token that does not follow the Tokel Standard data format. It has completely arbitrary data within the token data section. It requires the use of the `tokenv2create` RPC.
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2create Second 0.0001 "This is the second test token created on TKLTEST"
+./komodo-cli -ac_name=TKLTEST5 tokenv2create "ArbDataExample" 0.001 "This token showcases arbitrary data field, instead of using the Tokel Standard data format" "005468697320697320636f6d706c6574656c792061726269747261727920646174612e"
 ```
 
 <collapse-text hidden title="Response">
@@ -410,30 +488,7 @@ Command:
 ```json
 {
   "result": "success",
-  "hex": "0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000"
-}
-```
-
-</collapse-text>
-
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenv2create", "params":["Second" ,"0.0001" ,"This is the second test token created on TKLTEST"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": {
-    "result": "success",
-    "hex": "0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000"
-  },
-  "error": null,
-  "id": null
+  "hex": "0400008085202f8901001679091e0acafe5ad8c78b33b382c8edffd46dcd129f8226acfff789801f740000000049483045022100b6f860884685f00052c96c9249ac367d20dd0a1b7a6855c9e7cf15836557cde90220667dc5787fd12615db5778e5fe23904244711dce5fcfa9ed03a1cc540885145501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cca086010000000000693e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f501012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75400cf40500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000b66a4cb3f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0e417262446174614578616d706c655a5468697320746f6b656e2073686f776361736573206172626974726172792064617461206669656c642c20696e7374656164206f66207573696e672074686520546f6b656c205374616e64617264206461746120666f726d617423005468697320697320636f6d706c6574656c792061726269747261727920646174612e000000001c4100000000000000000000000000"
 }
 ```
 
@@ -442,213 +497,72 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 Step 2: Broadcast the raw transaction hex
 
 ```bash
-./komodo-cli -ac_name=TKLTEST sendrawtransaction 0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000
+./komodo-cli -ac_name=TKLTEST5 sendrawtransaction 0400008085202f8901001679091e0acafe5ad8c78b33b382c8edffd46dcd129f8226acfff789801f740000000049483045022100b6f860884685f00052c96c9249ac367d20dd0a1b7a6855c9e7cf15836557cde90220667dc5787fd12615db5778e5fe23904244711dce5fcfa9ed03a1cc540885145501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cca086010000000000693e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f501012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75400cf40500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000b66a4cb3f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0e417262446174614578616d706c655a5468697320746f6b656e2073686f776361736573206172626974726172792064617461206669656c642c20696e7374656164206f66207573696e672074686520546f6b656c205374616e64617264206461746120666f726d617423005468697320697320636f6d706c6574656c792061726269747261727920646174612e000000001c4100000000000000000000000000
 ```
 
 <collapse-text hidden title="Response">
 
 ```bash
-0cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242
+6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a
 ```
 
 </collapse-text>
 
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command (curl sendrawtransaction):
+Step 3 (Optional): Check your token data
 
 ```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"sendrawtransaction", "params":["0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
+./komodo-cli -ac_name=TKLTEST5 tokenv2info 6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a
 ```
 
 <collapse-text hidden title="Response">
 
 ```json
 {
-  "result": "0cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242",
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
-
-Step 3 (Optional): Use decoderawtransaction to verify the output is sane **_Need to update this_**
-
-```bash
-./komodo-cli -ac_name=TKLTEST decoderawtransaction 0400008085202f8901e50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232020000004847304402206bfb231a22a73d3ab1b5990cec543d50a864b31829efc430f76b75e2d261328002204f90ad25c3bcf0396b5c189fc787df0fb84ae4bbe9880c440401b7cafe141c1201ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cc1027000000000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc90a9c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000616a4c5ef563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee065365636f6e64305468697320697320746865207365636f6e64207465737420746f6b656e2063726561746564206f6e20544b4c5445535400000000002e0400000000000000000000000000
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "txid": "e4895451cae47f8f10303c3594888b739f044f7c778623318d877e8df365cc66",
-  "size": 335,
+  "result": "success",
+  "tokenid": "6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a",
+  "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
+  "name": "ArbDataExample",
+  "supply": 100000,
+  "description": "This token showcases arbitrary data field, instead of using the Tokel Standard data format",
+  "data": "005468697320697320636f6d706c6574656c792061726269747261727920646174612e",
   "version": 1,
-  "locktime": 0,
-  "vin": [
-    {
-      "txid": "307c094bce80205ec56abd43041530b0cd6faf449ea84cd2ae49339cfc3c222c",
-      "vout": 2,
-      "scriptSig": {
-        "asm": "3045022100dc83b88f5ed1f01aab7dee8bd8f2b3c0bf83537c9b3cbb0c6ea78ebafdf4c6f60220518440e7f43d24c5733531a8d5a825dbb90e716f7ba20c0d469e7004c1fcc5aa01",
-        "hex": "483045022100dc83b88f5ed1f01aab7dee8bd8f2b3c0bf83537c9b3cbb0c6ea78ebafdf4c6f60220518440e7f43d24c5733531a8d5a825dbb90e716f7ba20c0d469e7004c1fcc5aa01"
-      },
-      "sequence": 4294967295
-    }
-  ],
-  "vout": [
-    {
-      "value": 10.0,
-      "valueSat": 1000000000,
-      "n": 0,
-      "scriptPubKey": {
-        "asm": "a22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401 OP_CHECKCRYPTOCONDITION",
-        "hex": "2ea22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401cc",
-        "reqSigs": 1,
-        "type": "cryptocondition",
-        "addresses": ["RRPpWbVdxcxmhx4xnWnVZFDfGc9p1177ti"]
-      }
-    },
-    {
-      "value": 0.0001,
-      "valueSat": 10000,
-      "n": 1,
-      "scriptPubKey": {
-        "asm": "02adf84e0e075cf90868bd4e3d34a03420e034719649c41f371fc70d8e33aa2702 OP_CHECKSIG",
-        "hex": "2102adf84e0e075cf90868bd4e3d34a03420e034719649c41f371fc70d8e33aa2702ac",
-        "reqSigs": 1,
-        "type": "pubkey",
-        "addresses": ["RFYE2yL3KknWdHK6uNhvWacYsCUtwzjY3u"]
-      }
-    },
-    {
-      "value": 99889.9996,
-      "valueSat": 9988999960000,
-      "n": 2,
-      "scriptPubKey": {
-        "asm": "03fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc OP_CHECKSIG",
-        "hex": "2103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abcac",
-        "reqSigs": 1,
-        "type": "pubkey",
-        "addresses": ["RANyPgfZZLhSjQB9jrzztSw66zMMYDZuxQ"]
-      }
-    },
-    {
-      "value": 0.0,
-      "valueSat": 0,
-      "n": 3,
-      "scriptPubKey": {
-        "asm": "OP_RETURN e3632103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc0354414b0e54657374696e672070686173652e",
-        "hex": "6a37e3632103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc0354414b0e54657374696e672070686173652e",
-        "type": "nulldata"
-      }
-    }
-  ]
+  "IsMixed": "yes"
 }
 ```
 
 </collapse-text>
 
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"decoderawtransaction", "params":["01000000012c223cfc9c3349aed24ca89e44af6fcdb030150443bd6ac55e2080ce4b097c300200000049483045022100dc83b88f5ed1f01aab7dee8bd8f2b3c0bf83537c9b3cbb0c6ea78ebafdf4c6f60220518440e7f43d24c5733531a8d5a825dbb90e716f7ba20c0d469e7004c1fcc5aa01ffffffff0400ca9a3b00000000302ea22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401cc1027000000000000232102adf84e0e075cf90868bd4e3d34a03420e034719649c41f371fc70d8e33aa2702acc055cbbe15090000232103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abcac0000000000000000396a37e3632103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc0354414b0e54657374696e672070686173652e00000000"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
+Step 4 (Optional): Parse the HEX code from the arbitrary data field (in your application or using something like this http://www.unit-conversion.info/texttools/hexadecimal/) You will need to remove the leading `00`'s.
 
 <collapse-text hidden title="Response">
 
-```json
-{
-  "result": {
-    "txid": "e4895451cae47f8f10303c3594888b739f044f7c778623318d877e8df365cc66",
-    "overwintered": false,
-    "version": 1,
-    "locktime": 0,
-    "vin": [
-      {
-        "txid": "307c094bce80205ec56abd43041530b0cd6faf449ea84cd2ae49339cfc3c222c",
-        "vout": 2,
-        "scriptSig": {
-          "asm": "3045022100dc83b88f5ed1f01aab7dee8bd8f2b3c0bf83537c9b3cbb0c6ea78ebafdf4c6f60220518440e7f43d24c5733531a8d5a825dbb90e716f7ba20c0d469e7004c1fcc5aa[ALL]",
-          "hex": "483045022100dc83b88f5ed1f01aab7dee8bd8f2b3c0bf83537c9b3cbb0c6ea78ebafdf4c6f60220518440e7f43d24c5733531a8d5a825dbb90e716f7ba20c0d469e7004c1fcc5aa01"
-        },
-        "sequence": 4294967295
-      }
-    ],
-    "vout": [
-      {
-        "value": 10.0,
-        "valueZat": 1000000000,
-        "n": 0,
-        "scriptPubKey": {
-          "asm": "a22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401 OP_CHECKCRYPTOCONDITION",
-          "hex": "2ea22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401cc",
-          "reqSigs": 1,
-          "type": "cryptocondition",
-          "addresses": ["RRPpWbVdxcxmhx4xnWnVZFDfGc9p1177ti"]
-        }
-      },
-      {
-        "value": 0.0001,
-        "valueZat": 10000,
-        "n": 1,
-        "scriptPubKey": {
-          "asm": "02adf84e0e075cf90868bd4e3d34a03420e034719649c41f371fc70d8e33aa2702 OP_CHECKSIG",
-          "hex": "2102adf84e0e075cf90868bd4e3d34a03420e034719649c41f371fc70d8e33aa2702ac",
-          "reqSigs": 1,
-          "type": "pubkey",
-          "addresses": ["RFYE2yL3KknWdHK6uNhvWacYsCUtwzjY3u"]
-        }
-      },
-      {
-        "value": 99889.9996,
-        "valueZat": 9988999960000,
-        "n": 2,
-        "scriptPubKey": {
-          "asm": "03fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc OP_CHECKSIG",
-          "hex": "2103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abcac",
-          "reqSigs": 1,
-          "type": "pubkey",
-          "addresses": ["RANyPgfZZLhSjQB9jrzztSw66zMMYDZuxQ"]
-        }
-      },
-      {
-        "value": 0.0,
-        "valueZat": 0,
-        "n": 3,
-        "scriptPubKey": {
-          "asm": "OP_RETURN e3632103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc0354414b0e54657374696e672070686173652e",
-          "hex": "6a37e3632103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc0354414b0e54657374696e672070686173652e",
-          "type": "nulldata"
-        }
-      }
-    ],
-    "vjoinsplit": []
-  },
-  "error": null,
-  "id": "curltest"
-}
+Line of interest:
+```
+  "data": "005468697320697320636f6d706c6574656c792061726269747261727920646174612e",
 ```
 
+Hex to parse: 
+```
+5468697320697320636f6d706c6574656c792061726269747261727920646174612e
+```
+
+Parsed hex: 
+```
+"This is completely arbitrary data."
+```
 </collapse-text>
 
-<!-- ## tokenv2infotokel -->
+## tokenv2infotokel
 
-## tokenv2info
+**tokenv2infotokel tokenid**
 
-**tokenv2info tokenid**
-
-The `tokeninfo` method reveals information about any token.
+The `tokeninfotokel` method reveals information about any token and outputs the `data` hex code as an easy to read json. Token data must follow the Tokel Standard for this RPC to output the data as json. If your token does not follow the Tokel Standard, use the `tokenv2info` RPC to have your data output as hex only. 
 
 ### Arguments
 
 | Name    | Type     | Description                        |
 | ------- | -------- | ---------------------------------- |
-| tokenid | (string) | the txid that identifies the token |
+| tokenid | (string) | the unique txid that identifies the token |
 
 ### Response
 
@@ -660,19 +574,25 @@ The `tokeninfo` method reveals information about any token.
 | name          | (string)          | the name of the token                                                        |
 | supply        | (number)          | the total supply of the token                                                |
 | description   | (string)          | the token description provided by the creator at token creation              |
-| data          | (string,optional) | the data related to the non-fungible token, in hex                           |
-| IsImported    | (string,optional) | if 'yes' this token was imported from another chain                          |
-| sourceChain   | (string,optional) | the name of the imported token's source chain                                |
-| sourceTokenId | (string,optional) | for an imported token, the `tokenid` of the source token on the source chain |
-
-**_ISMIXED?_**
+| data          | (string,optional) | the data related to the token, in hex                                        |
+| dataAsJson    | (string,optional) | the hex data output converted to a json                                      |
+| id            | (number,optional) | the id of the token                                                          |
+| url           | (string,optional) | the url associated with the token                                            |
+| royalty       | (number,optional) | the royalty amount (x/1000)                                                  |
+| arbitrary     | (string,optional) | the arbitrary data of the token as hex                                       |
+| version       | (number)          | indicates the opreturn token data structure version                          |
+| IsMixed       | (boolean)         | indicates whether the token is using cryptocondition v2                      |
 
 #### :pushpin: Examples
+
+#### Token with data example - using `tokenv2infotokel`
+
+Note the Tokel Standard data output in the dataAsJson field.
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2info 8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc
+./komodo-cli -ac_name=TKLTEST tokenv2info 8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e
 ```
 
 <collapse-text hidden title="Response">
@@ -680,11 +600,18 @@ Command:
 ```json
 {
   "result": "success",
-  "tokenid": "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc",
+  "tokenid": "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
   "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
-  "name": "First",
-  "supply": 100000000,
-  "description": "This is the first test token created on TKLTEST",
+  "name": "NFTShowcase",
+  "supply": 1,
+  "description": "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address.",
+  "data": "f701026668747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f546f6b656c506c6174666f726d2f746f6b656c5f6170702f646576656c6f706d656e742f6272616e645f7061636b6167652f6173736574732f746f6b656c78332e706e67010103fdf401043d7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d",
+  "dataAsJson": {
+    "id": 1,
+    "url": "https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png",
+    "royalty": 500,
+    "arbitrary": "7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d"
+  },
   "version": 1,
   "IsMixed": "yes"
 }
@@ -692,74 +619,124 @@ Command:
 
 </collapse-text>
 
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
+#### Token with data example - using `tokenv2info`
+
+Note the absence of the dataAsJson field for the same token, but the different RPC. You will need to manually decode the hex format output if you do not use the `tokenv2infotokel` RPC.
 
 Command:
 
 ```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenv2info", "params":["8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
+./komodo-cli -ac_name=TKLTEST tokenv2info 8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e
 ```
 
 <collapse-text hidden title="Response">
 
 ```json
 {
-  "result": {
-    "result": "success",
-    "tokenid": "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc",
-    "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
-    "name": "First",
-    "supply": 100000000,
-    "description": "This is the first test token created on TKLTEST",
-    "version": 1,
-    "IsMixed": "yes"
-  },
-  "error": null,
-  "id": "curltest"
+  "result": "success",
+  "tokenid": "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
+  "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
+  "name": "NFTShowcase",
+  "supply": 1,
+  "description": "This NFT creation example showcases using a single satoshi in the supply field to create 1 token. It also shows how I can add the image into the URL, and use the arbitrary data field to add additional properties to my NFT. 50% of the value of all trades conducted via assets RPCs will be sent to the creators address.",
+  "data": "f701026668747470733a2f2f7261772e67697468756275736572636f6e74656e742e636f6d2f546f6b656c506c6174666f726d2f746f6b656c5f6170702f646576656c6f706d656e742f6272616e645f7061636b6167652f6173736574732f746f6b656c78332e706e67010103fdf401043d7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d",
+  "version": 1,
+  "IsMixed": "yes"
 }
 ```
 
 </collapse-text>
 
+#### No data example
+
+Note the absence of any data output.
+
+Command:
+
+```bash
+./komodo-cli -ac_name=TKLTEST tokenv2info 3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8
+```
+
+<collapse-text hidden title="Response">
+
+```json
+{
+  "result": "success",
+  "tokenid": "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8",
+  "owner": "02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee",
+  "name": "nodatatest",
+  "supply": 100000000,
+  "description": "This token does not have any data",
+  "version": 1,
+  "IsMixed": "yes"
+}
+```
+
+</collapse-text>
+
+
+</collapse-text>
+
 ## tokenv2list
 
-**tokenv2list [begin-height][end-height]**
+**tokenv2list [json params]**
 
-The `tokenv2list` method lists all available tokens on Tokel. Enter an optional begin and end block height number to search for tokens created between specific block numbers.
+The `tokenv2list` method lists all tokens created on Tokel. Enter an optional json string to search for tokens created between specific block numbers, search for tokens created by a specific pubkey, or search for tokens created on a specific CC address.
 
 ### Arguments
 
 | Name         | Type               | Description                          |
 | ------------ | ------------------ | ------------------------------------ |
-| begin-height | (number, optional) | Block number to start searching from |
-| end-height   | (number, optional) | Block number to end searching from   |
+| begin-height | (number, optional) | Block number to start searching from, inclusive |
+| end-height   | (number, optional) | Block number to end searching from, inclusive   |
+| pubkey       | (hexstring, optional) | Search tokens created by a specific pubkey   |
+| address      | (string, optional) | Search tokens created on a specific cc address  |
 
 ### Response
 
 | Name    | Type               | Description                           |
 | ------- | ------------------ | ------------------------------------- |
-| tokenid | (array of strings) | the identifying txid for the token id |
+| tokenid | (array of strings) | the identifying txid (tokenid) for tokens created within the block begin & end heights, or all blocks if left blank |
 
 #### :pushpin: Examples
+
+#### Search all tokens
+
+An example to search for all tokens created on the blockchain. Note that the time take to output the tokenids is proportional to how many tokens there are on the blockchain. The more tokens created, the longer this will take.
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2list 2000 2200
+./komodo-cli -ac_name=TKLTEST tokenv2list
 ```
 
 <collapse-text hidden title="Response">
 
 ```bash
 [
-  "a283693b37b3bd94edd91ba31345310a9b47946c626cb14189d67931a0cde705",
-  "0cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242",
-  "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc"
+  "5efd03ac08eac8e075320ffe6a3bb6b9593a55231b7b3c8752d76b8814e96b04",
+  "b6ccd393052944f9c6aee83711585c8cc3b1be6ba3c95c31f31401a891bdbf1f",
+  "8b1fbb05db52f5e273ddaad24046fe705cbd9feebe5727bf27764fec721a2a3d",
+  "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
+  "5509c6e019ce1e592badda96823890e5d83d56b08c2af277ae6c39720fa61968",
+  "fc6df1be0e84be874f86d3a1b9b9bdcf6b2d0fc02438f0784e27b9ee08106575",
+  "5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b",
+  "5040a4770793d85993f1420707b4e1eafc76851190bb63ba88e7f40216ff0d80",
+  "f3ef3ed5a9a26245ab09e7d0e6ade2e5bd053c27315be0184ee17fc58c3ab083",
+  "428f4d075c042f16cc9ff6166fb88598321de8dd08838c51335642d2c85eed8e",
+  "8903e66e56221726fdbf8b361a07afe33a54bb2c5a2fe1df463ed606a20f4395",
+  "5ff88aaf58ae1d04c6b9c41a22dd66d9872411b8ca25fd5ee1ccdcb80aaba4ca",
+  "b905d627b3967405521f2aa2f8ab8aed70a4e474ec62df52db07965e29a3f5cb",
+  "14fc2fbd6777b31a24d505e97d597b27771263c0d0acfcf14c1d9326bad2b8cc",
+  "30902e829d335f748403434ca442cfae06c9bdd34249e289657c23585a1e82d7",
+  "a85eac6f1894e24c4e07ca4f96849bfcbbf1f24bd27efa1a1d1f60a033f5e6e1",
+  "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8"
 ]
 ```
 
 </collapse-text>
 
+<!-- need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -783,6 +760,29 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
+
+#### Search the tokens created between specific block numbers
+
+An example to search for tokens created between specified block numebrs. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
+
+Command:
+
+```bash
+./komodo-cli -ac_name=TKLTEST5 tokenv2list "{ \"beginHeight\":16000, \"endHeight\":16337}"
+```
+
+<collapse-text hidden title="Response">
+
+```bash
+[
+  "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
+  "5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b",
+  "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8"
+]
+```
+
+</collapse-text>
 
 ## tokenv2transfer
 
@@ -790,9 +790,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 The `tokenv2transfer` method transfers tokens from one Antara Address to another.
 
-It is similar to the [sendmany](../komodo-api/wallet.html#sendmany) method used to send coins on the parent chain.
-
-The method returns a raw hex, which must be broadcast using [sendrawtransaction](../komodo-api/rawtransactions.html#sendrawtransaction) to complete the command.
+The method returns a raw hex, which must be broadcast using [sendrawtransaction](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/rawtransactions.html#sendrawtransaction) to complete the command.
 
 ::: tip
 The source `txid/vout` needs to be specified as it is critical to match outputs with inputs.
@@ -835,7 +833,7 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-
+<!-- ## Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -858,6 +856,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 Step 2: Broadcast using `sendrawtransaction`
 
@@ -878,7 +877,7 @@ AssetValidate.(t) passed
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -898,6 +897,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 Step 3: Decode the raw transaction and check against the following if the data is sane
 
@@ -985,7 +985,7 @@ Step 3: Decode the raw transaction and check against the following if the data i
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -1079,6 +1079,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 ## tokenv2transfermany
 
@@ -1086,9 +1087,9 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 The `tokenv2transfermany` method transfers multiple tokens from one Antara Address to another. There is no limit on how many different tokens can be sent to the one address, simply keep adding more tokenid's one after another, prior to the `destpubkey` and `amount`.
 
-It is similar to the [sendmany](../komodo-api/wallet.html#sendmany) method used to send coins on the parent chain.
+It is similar to the [sendmany](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/wallet.html#sendmany) method used to send coins on the parent chain.
 
-The method returns a raw hex, which must be broadcast using [sendrawtransaction](../komodo-api/rawtransactions.html#sendrawtransaction) to complete the command.
+The method returns a raw hex, which must be broadcast using [sendrawtransaction](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/rawtransactions.html#sendrawtransaction) to complete the command.
 
 ::: tip
 The source `txid/vout` needs to be specified as it is critical to match outputs with inputs.
@@ -1131,7 +1132,7 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -1153,6 +1154,7 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
 
 Step 2: Broadcast using `sendrawtransaction`
 
@@ -1169,7 +1171,7 @@ fc0c7149d367acd92b530bb2a075bf206156122757cf148ee72cc2dd1ca78f4c
 ```
 
 </collapse-text>
-
+<!-- Need to update curl commands
 You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
 Command:
@@ -1189,3 +1191,4 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 ```
 
 </collapse-text>
+-->
