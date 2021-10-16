@@ -108,6 +108,7 @@ This application is in development. You can keep up with progress on the github,
 We do not run or endorse any specific mining pools, merely provide options for miners to conduct their own due diligence and make their own decision to use.
 
 http://tokel.daemoncoins.com/
+http://chickepool.com/
 
 ## Exchanges
 
