@@ -4,7 +4,7 @@ Tokel is a completely independent blockchain created using Komodo technologies. 
 
 [Komodo technology](https://developers.komodoplatform.com/basic-docs/start-here/about-komodo-platform/product-introductions.html#smart-chains-antara) allows anyone to create smartchains which are independent blockchains, such as Tokel.
 
-You must ensure you are running the chain from the `tokel` [branch of komodo](https://github.com/KomodoPlatform/komodo/tree/tokel)
+You must ensure you are running the chain from the `tokel` [branch of this repository](https://github.com/TokelPlatform/komodo/tree/tokel)
 
 ## Preparing your environment
 
@@ -20,7 +20,7 @@ sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoco
 
 #### Linux
 ```shell
-git clone https://github.com/komodoplatform/komodo --branch tokel --single-branch
+git clone https://github.com/TokelPlatform/komodo --branch tokel --single-branch
 cd komodo
 ./zcutil/fetch-params.sh
 ./zcutil/build.sh -j$(expr $(nproc) - 1)
@@ -45,7 +45,7 @@ brew install protobuf
 brew install coreutils
 brew install wget
 # Clone the Komodo repo
-git clone https://github.com/komodoplatform/komodo --branch tokel --single-branch
+git clone https://github.com/TokelPlatform/komodo --branch tokel --single-branch
 # Change master branch to other branch you wish to compile
 cd komodo
 ./zcutil/fetch-params.sh
@@ -66,7 +66,7 @@ sudo update-alternatives --config x86_64-w64-mingw32-gcc
 sudo update-alternatives --config x86_64-w64-mingw32-g++
 # (configure to use POSIX variant)
 
-git clone https://github.com/komodoplatform/komodo --branch tokel --single-branch
+git clone https://github.com/TokelPlatform/komodo --branch tokel --single-branch
 cd komodo
 ./zcutil/fetch-params.sh
 ./zcutil/build-win.sh -j$(expr $(nproc) - 1)
