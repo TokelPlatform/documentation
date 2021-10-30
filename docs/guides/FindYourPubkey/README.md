@@ -26,19 +26,18 @@ https://github.com/TokelPlatform/tokel_dapp/releases
 #### Step 2:
 Log in to your wallet using your private key
 
-https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Random/Login.png
+![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Random/Login.png)
 
 #### Step 3:
 Click on the area that says 'No tokens yet'.
 
-https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Random/ClickHere.png
+![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Random/ClickHere.png)
 
 #### Step 4:
 Copy the token address listed.
+![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Random/TokenAddress.png)
 
-https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Random/TokenAddress.png
-
-#### If you have tokens already
+#### Alternate step 4: If you have tokens already
 Click on any token
 
 #### Step 5:
