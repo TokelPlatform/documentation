@@ -1,4 +1,4 @@
-## How to find your token address.
+## How to find your token address (pubkey).
 
 This step-by-step how-to guide will show you how you can find your token address. To receive tokens & NFTs on the Tokel platform, you must give the token sender your token address, otherwise known as your pubkey. This address is different to your TKL coin address (i.e R4GNVd4zmTAlOtWrpXeb8GeGCEdkA9YZxj), as you cannot send tokens to this address.
 
