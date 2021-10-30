@@ -37,7 +37,7 @@ Click on the area that says 'No tokens yet'.
 Copy the token address listed.
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Random/TokenAddress.png)
 
-#### If you have tokens already
+#### Alternate step 4: If you have tokens already
 Click on any token
 
 #### Step 5:
