@@ -12,8 +12,8 @@ There are no differences between NFTs or normal tokens on the Tokel platform oth
 Pubkey = 'Public Key' - This is the key you need to use to receive tokens on the Tokel blockchain. We call it your 'token address'
 
 #### Examples
-`Coin address = RDomQ4tftJGjcHBVpAUx549jZfxtJx74r5
-`Token (NFT or normal token) address = 02dd22c272504af79b220ba37c12f777596eff4f54598e2db65be325a9393a3a26
+- Coin address = `RDomQ4tftJGjcHBVpAUx549jZfxtJx74r5`
+- Token (NFT or normal token) address = `02dd22c272504af79b220ba37c12f777596eff4f54598e2db65be325a9393a3a26`
 
 There are two methods to finding your pubkey. The recommended (and easiest) option is to use the Tokel decentralized application. The second is to use command line interface and run a full blockchain node (more technical).
 
