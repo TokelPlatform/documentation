@@ -1,5 +1,5 @@
 
-## How to create a token (or NFT)
+# How to create a token (or NFT)
 
 In this guide, you will learn how to create a token using command line interface (CLI). This guide assumes a basic level of understanding on how to use CLI & interact with blockchain RPCs. For example, we assume that you have already setup and are running the `TKLTEST` blockchain, at a minimum. If you have not gotten that far, we would suggest [reading this guide](https://docs.tokel.io/guides/LaunchTKLTESTchain/#what-is-tkltest) and setting up the `TKLTEST` chain to practice with.
 
