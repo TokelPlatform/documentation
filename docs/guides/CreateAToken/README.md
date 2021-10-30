@@ -1,12 +1,12 @@
 
-## How to create a token (or NFT)
+# How to create a token (or NFT)
 
 In this guide, you will learn how to create a token using command line interface (CLI). This guide assumes a basic level of understanding on how to use CLI & interact with blockchain RPCs. For example, we assume that you have already setup and are running the `TKLTEST` blockchain, at a minimum. If you have not gotten that far, we would suggest [reading this guide](https://docs.tokel.io/guides/LaunchTKLTESTchain/#what-is-tkltest) and setting up the `TKLTEST` chain to practice with.
 
-### Suggested reading
+## Suggested reading
 In order to create a token, you will need to familiarise yourself with the [tokenv2createtokel](https://docs.tokel.io/api/tokens/#tokenv2createtokel) and [tokenv2infotokel](https://docs.tokel.io/api/tokens/#tokenv2infotokel) RPCs. Please read these beforehand and refer to them as you require.
 
-#### Part 1: Decide on your token details
+### Part 1: Decide on your token details
 You must decide upon the following details. The first few are required, the later few are optional. 
 
 Required:
@@ -22,7 +22,7 @@ Optional (Tokel Standard data):
 
 If you aren't familiar with what these fields represent, I'll point you to this [documentation](https://docs.tokel.io/api/tokens/#arguments-3).
 
-#### Part 2: Create your transaction
+### Part 2: Create your transaction
 Replace the field names in the example below with your token data into the command listed below. Leave the optional string fields blank, or 0's in number fields, if you do not want to input data into those fields. Refer to the examples provided if you are having issues.
 
 ```
@@ -55,7 +55,7 @@ Fixed supply token with Tokel Standard data
 ./komodo-cli -ac_name=TKLTEST tokenv2createtokel "Awesome Token2" 0.000001 "This token has 1 million in supply and tokel standard data" "{\"url\":\"https://raw.githubusercontent.com/TokelPlatform/tokel_app/development/brand_package/assets/tokelx3.png\", \"id\":1, \"royalty\":500, \"arbitrary\":\"7b2273697a65223a203130302c22636f6c6f72223a2022676f6c64222c22776561706f6e223a2022776f726473222c226e756d626572223a203132337d\"}"
 ```
 
-####  Part 3: Ensure you have set your pubkey
+###  Part 3: Ensure you have set your pubkey
 To interact with tokens, you must have set `-pubkey=YOURPUBKEY` on chain launch, or used the `setpubkey YOURPUBKEY` RPC to set your pubkey after the chain has started. An easy way to know whether this is the case, is if you get the error below whilst doing any `tokenv2` command.
 
 ```
@@ -74,7 +74,7 @@ Command Option 2 (set pubkey after the chain is launch) - not recommended as it 
 ./komodo-cli -ac_name=TKLTEST setpubkey YOURPUBKEYHERE
 ```
 
-#### Part 4: Create your token
+### Part 4: Create your token
 For every token you create, you will need a corresponding satoshi of the TKL coin. 
 
 1 satoshi = 1 token. 1 TKL = 100million tokens.
@@ -165,5 +165,5 @@ If you see the following error, continuing waiting until your token has been min
 }
 ```
 
-#### Congratulations!
+### Congratulations!
 You have created your very first Tokel token! The world of tokens is now at your fingertips. Continue using the TKLTEST chain to enhance your skills or move on to the real deal, the Tokel main chain, to create your token for real and maximize the features that the Tokel Platform brings you.
