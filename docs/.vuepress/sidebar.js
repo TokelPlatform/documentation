@@ -27,6 +27,10 @@ var sidebar = [
         "/guides/HowToUseAtomicDEX/",
         "How to use AtomicDEX",
       ],
+      [
+        "/guides/FindYourPubkey/",
+        "How to find your token address",
+      ],
     ],
   },
   {
