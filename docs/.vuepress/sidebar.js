@@ -42,10 +42,6 @@ var sidebar = [
     collapsible: true,
     children: [
       [
-        "/api/wallet/",
-        "Wallet",
-      ],
-      [
         "/api/tokens/",
         "Tokens",
       ],
