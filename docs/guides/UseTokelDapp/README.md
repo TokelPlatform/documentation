@@ -69,7 +69,7 @@ If you've just installed the dApp, it will launch automatically. If you want to 
 
 You can log straight into the dApp using any private key/WIF or seed phrase from an already known address. All you need to do is input the private key/WIF or seed phrase into the input field and click login.
 
-Note: THIS IS NOT A PASSWORD FIELD. This input field is currently for private keys, WIFs or seed phrases only. 
+::: tip Note: THIS IS NOT A PASSWORD FIELD. This input field is currently for private keys, WIFs or seed phrases only.  :::
 
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Tokel_dApp_Images/TokelDapp11.png)
 
@@ -142,7 +142,7 @@ The dApp will output your transaction data and a link to the transaction on the 
 
 This will output your TKL coin address with a button to copy it to clipboard and also a QR code that outputs the address.
 
-Note: You are not able to send tokens to this address. To receive tokens, please look at the Send/Receive tokens section of this guide.
+::: tip Note: You are not able to send tokens to this address. To receive tokens, please look at the Send/Receive tokens section of this guide. :::
 
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Tokel_dApp_Images/TokelDapp14.png)
 
@@ -181,7 +181,7 @@ This will output all of the associated data for that specific token. This includ
 
 If you are sending an NFT, you will only be able to send 1 of them.
 
-Note: You cannot send tokens to a TKL coin address.
+::: tip Note: You cannot send tokens to a TKL coin address. :::
 
 An example of a token address (pubkey) is: 020e0f6fe6e0fcdcac541eb728d6fe538a12adff20412b3c8a7fa892b223a47c2f
 
@@ -200,7 +200,7 @@ An example of a token address (pubkey) is: 020e0f6fe6e0fcdcac541eb728d6fe538a12a
 
 This will output your TKL coin address with a button to copy it to clipboard and also a QR code that outputs the address.
 
-Note: You are not able to send tokens to this address. To receive tokens, please look at the Send/Receive tokens section of this guide.
+::: tip Note: You are not able to send tokens to this address. To receive tokens, please look at the Send/Receive tokens section of this guide. :::
 
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Tokel_dApp_Images/TokelDapp28.png)
 
