@@ -16,20 +16,24 @@ var sidebar = [
         "Launch the Tokel Chain",
       ],
       [
-        "/guides/LaunchTKLTESTchain/",
-        "Launch the TKLTEST Chain",
+        "/guides/UseTokelDapp/",
+        "Use the Tokel dApp",
       ],
       [
         "/guides/CreateAToken/",
         "Create a token/NFT",
       ],
       [
-        "/guides/HowToUseAtomicDEX/",
-        "How to use AtomicDEX",
+        "/guides/FindYourPubkey/",
+        "Find your token address",
       ],
       [
-        "/guides/FindYourPubkey/",
-        "How to find your token address",
+        "/guides/HowToUseAtomicDEX/",
+        "Use AtomicDEX",
+      ],
+      [
+        "/guides/LaunchTKLTESTchain/",
+        "Launch the TKLTEST Chain",
       ],
     ],
   },
@@ -37,6 +41,10 @@ var sidebar = [
     title: "API/RPC",
     collapsible: true,
     children: [
+      [
+        "/api/wallet/",
+        "Wallet",
+      ],
       [
         "/api/tokens/",
         "Tokens",
