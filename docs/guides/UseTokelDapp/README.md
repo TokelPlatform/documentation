@@ -11,7 +11,8 @@ Download the appropriate operating system version of the latest Tokel dApp from 
 
 https://github.com/TokelPlatform/tokel_dapp/releases
 
-Version 1.1.2 picture, but please use the latest release.
+Version 1.1.2 is pictured, but please use the latest release.
+
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Tokel_dApp_Images/TokelDapp1.png)
 
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Tokel_dApp_Images/TokelDapp2.png)
