@@ -101,11 +101,12 @@ This application is in development. You can keep up with progress on the github,
 
 We do not run or endorse any specific mining pools, merely provide options for miners to conduct their own due diligence and make their own decision to use.
 
-http://tokel.daemoncoins.com/
 
-http://chickepool.com/
+[http://tokel.daemoncoins.com/](http://tokel.daemoncoins.com/)
 
-https://tokel.nordpool.host/
+[http://chickepool.com/](http://chickepool.com/)
+
+[https://tokel.nordpool.host/](https://tokel.nordpool.host/)
 
 ## Exchanges
 
