@@ -5,7 +5,8 @@
 ### Step 1:
 
 Download the newest version of AtomicDEX wallet for your operating system from the KomodoPlatform/atomicDEX-Desktop github repository (v0.5.0 shown in example pictures)
-https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/
+
+[https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/](https://github.com/KomodoPlatform/atomicDEX-Desktop/releases/)
 
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/AtomicDEX_Guide/Github1.png)
 

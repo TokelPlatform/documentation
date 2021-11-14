@@ -51,7 +51,7 @@ This will show you your token address (pubkey). You can copy this address direct
 #### Step 1:
 Use this guide to setup and run the Tokel blockchain (if you haven't already).
 
-![https://docs.tokel.io/guides/LaunchTheChain/](https://docs.tokel.io/guides/LaunchTheChain/)
+[https://docs.tokel.io/guides/LaunchTheChain/](https://docs.tokel.io/guides/LaunchTheChain/)
 
 #### Step 2:
 Get the pubkey (token address) using `validateaddress` RPC

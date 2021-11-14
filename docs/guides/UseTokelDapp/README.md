@@ -9,7 +9,7 @@
 
 Download the appropriate operating system version of the latest Tokel dApp from the TokelPlatform/tokel_dapp github repository
 
-https://github.com/TokelPlatform/tokel_dapp/releases
+[https://github.com/TokelPlatform/tokel_dapp/releases](https://github.com/TokelPlatform/tokel_dapp/releases)
 
 Version 1.1.2 is pictured, but please use the latest release.
 
@@ -157,7 +157,7 @@ This is your TKL coin address. This address is the associated address with the p
 
 If you'd like to check the balance of this address accross Komodo and all of it's smart chains, you can use this asset viewer.
 
-https://dexstats.info/assetviewer.php
+[https://dexstats.info/assetviewer.php](https://dexstats.info/assetviewer.php)
 
 
 
