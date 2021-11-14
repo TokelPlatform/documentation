@@ -49,6 +49,42 @@ var sidebar = [
         "/api/assets/",
         "Assets (tokenDEX)",
       ],
+      [
+        "/api/address/",
+        "Address",
+      ],
+      [
+        "/api/blockchain/",
+        "Blockchain",
+      ],
+      [
+        "/api/control/",
+        "Control",
+      ],
+      [
+        "/api/generate/",
+        "Generate",
+      ],
+      [
+        "/api/mining/",
+        "Mining",
+      ],
+      [
+        "/api/network/",
+        "Network",
+      ],
+      [
+        "/api/raw transactions/",
+        "Raw Transactions",
+      ],
+      [
+        "/api/utility/",
+        "Utility",
+      ],
+      [
+        "/api/wallet/",
+        "Wallet",
+      ],
     ],
   },
   // {
