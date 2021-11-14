@@ -70,7 +70,7 @@ If you've just installed the dApp, it will launch automatically. If you want to 
 
 You can log straight into the dApp using any private key/WIF or seed phrase from an already known address. All you need to do is input the private key/WIF or seed phrase into the input field and click login.
 
-::: tip Note: THIS IS NOT A PASSWORD FIELD. This input field is currently for private keys, WIFs or seed phrases only.  :::
+::: tip Note: THIS IS NOT A PASSWORD FIELD. This input field is currently for private keys, WIFs or seed phrases only. :::
 
 ![picture](https://raw.githubusercontent.com/TokelPlatform/tokel_brand/main/Tokel_dApp_Images/TokelDapp11.png)
 
