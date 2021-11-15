@@ -110,7 +110,7 @@ We do not run or endorse any specific mining pools, merely provide options for m
 
 [http://tokel.daemoncoins.com/](http://tokel.daemoncoins.com/)
 
-[http://chickepool.com/](http://chickepool.com/)
+[http://chickenpool.com/](http://chickenpool.com/)
 
 [https://tokel.nordpool.host/](https://tokel.nordpool.host/)
 
