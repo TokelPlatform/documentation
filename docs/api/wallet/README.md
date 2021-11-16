@@ -1360,7 +1360,6 @@ The `listaddressgroupings` method lists groups of addresses which have had their
 | ---------- | ------------------ | ------------------------ |
 | "address", | (string)           | the address              |
 | amount,    | (numeric)          | the amount               |
-| "account"  | (string, optional) | (DEPRECATED) the account |
 
 #### :pushpin: Examples
 
