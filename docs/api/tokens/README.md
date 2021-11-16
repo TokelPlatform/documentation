@@ -15,9 +15,9 @@ This documentation was taken and updated from the [Komodo platform developer doc
 - `tokenv2allbalances [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
 - `tokenv2indexkey [pubkey]`
-- `tokenv2createtokel name supply [description] [tokens data]`
+- `tokenv2createtokel name supply [description] [token data]`
 - `tokenv2infotokel tokenid`
-- `tokenv2list [begin-height] [end-height]`
+- `tokenv2list [json params]`
 - `tokenv2transfer tokenid destpubkey amount`
 - `tokenv2transfermany tokenid1 tokenid2 ... destpubkey amount`
 
