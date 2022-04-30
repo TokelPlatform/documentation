@@ -2,11 +2,13 @@
 
 ## Introduction
 
-The Assets Module provides basic decentralised exchange (DEX) functionality for trading `tokens` created using the [Tokens](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html) module.
+The Assets Module provides basic decentralised exchange (DEX) functionality for trading `tokens` created using the [Tokens](https://docs.tokel.io/api/tokens/) module.
 
-The Asset Module allows anyone to buy or sell tokens by using Tokel coins to submit buy/sell orders/bids. This information is referenced from the [Komodo developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html)
+The Asset Module allows anyone to buy or sell tokens by using Tokel coins to submit buy/sell orders/bids. This is done using indexed 'on-chain orderbooks'. All trades are carried out using on-chain consensus rules and require no intermediary to conduct.
 
 Each bid/ask order requires a single transaction fee and are broadcast on the blockchain for everyone to see. The orders will remain active for a default of 40320 blocks (~4 weeks) post the block that has your bid/ask transaction in it (you also have the option of specifying the expiry block in your ask/bid command, but this is not recommended). After such time, the order will remain on the blockchain but be 'expired' and unable to be filled. Anybody can then use the `tokenv2cancelask/bid` RPC to remove this order from the chain.
+
+This information is referenced from the [Komodo developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/assets.html). Tokel has added features that some branches of Komodo do not have. Please refer to this documentation for all Tokel specific RPCs.
 
 ### Assets Module Flow
 

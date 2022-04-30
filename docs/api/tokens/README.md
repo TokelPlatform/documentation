@@ -8,98 +8,58 @@ The tokens module requires locking a proportional amount of Tokel (TKL) coins. E
 
 Tokel uses the v2 version of the tokens module that Komodo offers, thus all commands are required to be lead with `tokenv2`. Although it lists `token` (v1) commands on the blockchain `help` output, these are not supported or enabled on the Tokel blockchain.
 
-This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html). Tokel has added features that some branches of Komodo do not have. Please refer to this documentation for all Tokel specific RPCs.
+This documentation was taken and updated from the [Komodo platform developer documentation](https://developers.komodoplatform.com/basic-docs/antara/antara-api/tokens.html). Tokel has added features that some branches of Komodo do not have. Please refer to our documentation for all Tokel specific RPCs.
 
 ## Tokenv2 RPCs
 
-- `tokenv2address [pubkey]`
+- `tokenv2allbalances [pubkey]`
 - `tokenv2balance tokenid [pubkey]`
-- `tokenv2createtokel name supply [description] [tokens data]`
+- `tokenv2indexkey [pubkey]`
+- `tokenv2createtokel name supply [description] [token data]`
 - `tokenv2infotokel tokenid`
 - `tokenv2list [json params]`
 - `tokenv2transfer tokenid destpubkey amount`
 - `tokenv2transfermany tokenid1 tokenid2 ... destpubkey amount`
 
-## tokenv2address
+## tokenv2allbalances
 
-**tokenv2address [pubkey]**
+**tokenv2allbalances [pubkey]**
 
-The `tokenv2address` method returns information about a token address according to a specific `pubkey`. If no `pubkey` is provided, the `pubkey` used to launch the daemon is used by default.
+The `tokenv2allbalances` method returns information about all of the tokens that a specific pubkey holds. 
 
 ### Arguments
 
 | Name   | Type               | Description                                                                                                          |
 | ------ | ------------------ | -------------------------------------------------------------------------------------------------------------------- |
-| pubkey | (string, optional) | the pubkey of the desired address; if no pubkey is provided, the pubkey used to launch the daemon is used by default |
+| pubkey | (string) | the pubkey of the desired address |
 
 ### Response
 
-| Name            | Type     | Description                                                                                                                                                                |
-| --------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| result          | (string) | whether the command executed successfully                                                                                                                                  |
-| TokensCCaddress | (string) | taking the token contract's EVAL code as a modifier, this is the public address that corresponds to the token contract's privkey, also known as Tokens CC's global address |
-| myCCaddress     | (string) | taking the token contract's EVAL code as a modifier, this is the Tokens Antara address from the pubkey of the user                                                         |
-| myaddress       | (string) | the normal public address of the pubkey used to launch the chain                                                                                                           |
+| Name               | Type      | Description                                                                |
+| ------------------ | --------- | -------------------------------------------------------------------------- |
+| "tokenid"          | (string)  | the tokenid of a token that the pubkey holds                               |
+| amount             | (numeric) |  the specific amount of tokens that the pubkey holds of the listed tokenid |
+
 
 #### :pushpin: Examples
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST tokenv2address 02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee
+./komodo-cli -ac_name=TKLTEST tokenv2allbalances 0343d7592b13fcdc64bd8794b6db197a4a3a41b5b63e2f3495a6a65c5c66e3e837
 ```
 
 <collapse-text hidden title="Response">
 
 ```json
-{
-  "result": "success",
-  "GlobalPk Tokensv2 CC Address": "RSc4RycihBEWQP2GDvSYS46MvFJsTKaNVU",
-  "GlobalPk Tokensv2 CC Balance": 0.0,
-  "GlobalPk Tokensv2 Normal Address": "RDVU97zvJamGmVBSUyTm7RcYZtxjriNGkj",
-  "GlobalPk Tokensv2 Normal Balance": 0.0,
-  "pubkey Tokensv2 CC Address": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
-  "pubkey Tokensv2 CC Balance": 0.0,
-  "mypk Tokensv2 CC Address": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
-  "mypk Tokensv2 CC Balance": 0.0,
-  "mypk Normal Address": "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh",
-  "mypk Normal Balance": 9999899.9999
-}
+[
+  {
+    "91967708d11ededd288e9923f406578991b5c016acea1d4465d47357d0b51ab1": 208
+  }
+]
 ```
 
 </collapse-text>
-<!-- Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenaddressv2", "params":["02ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": "success",
-  "GlobalPk Tokensv2 CC Address": "RSc4RycihBEWQP2GDvSYS46MvFJsTKaNVU",
-  "GlobalPk Tokensv2 CC Balance": 0.00000000,
-  "GlobalPk Tokensv2 Normal Address": "RDVU97zvJamGmVBSUyTm7RcYZtxjriNGkj",
-  "GlobalPk Tokensv2 Normal Balance": 0.00000000,
-  "pubkey Tokensv2 CC Address": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
-  "pubkey Tokensv2 CC Balance": 0.00000000,
-  "mypk Tokensv2 CC Address": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
-  "mypk Tokensv2 CC Balance": 0.00000000,
-  "mypk Normal Address": "RN3hmR5oGXPpLW8oyxpVEizoNHN3Equvmh",
-  "mypk Normal Balance": 9999899.99990000
-},
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
 
 ## tokenv2balance
 
@@ -119,7 +79,7 @@ The `tokenv2balance` method checks the token balance for the provided `pubkey`. 
 | Name      | Type     | Description                                                                                             |
 | --------- | -------- | ------------------------------------------------------------------------------------------------------- |
 | result    | (string) | whether the command executed succesfully                                                                |
-| CCaddress | (string) | taking the token contract's EVAL code as a modifier, this is the CC address from the pubkey of the user |
+| CCaddress | (string) | this is the CC address (indexkey) from the pubkey provided                                              |
 | tokenid   | (string) | the txid that identifies the token                                                                      |
 | balance   | (number) | the balance of the address that corresponds to the pubkey                                               |
 
@@ -143,32 +103,7 @@ Command:
 ```
 
 </collapse-text>
-<!-- Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
 
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenbalancev2", "params":["a283693b37b3bd94edd91ba31345310a9b47946c626cb14189d67931a0cde705"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": {
-    "result": "success",
-    "CCaddress": "RVXdnHvxuAYYuupD2EukpkAwjfaU81jSrz",
-    "tokenid": "a283693b37b3bd94edd91ba31345310a9b47946c626cb14189d67931a0cde705",
-    "balance": 1
-  },
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
 Check the token balance of a specific pubkey
 
 ```bash
@@ -187,32 +122,42 @@ Check the token balance of a specific pubkey
 ```
 
 </collapse-text>
-<!-- Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
+
+## tokenv2indexkey
+
+**tokenv2indexkey [pubkey]**
+
+The `tokenv2indexkey` method returns information about the indexkey of the pubkey provided. This indexkey is specific to the Tokensv2CC module and is used to track token transactions on the Tokel blockchain.
+
+### Arguments
+
+| Name   | Type               | Description                                                                                                          |
+| ------ | ------------------ | -------------------------------------------------------------------------------------------------------------------- |
+| pubkey | (string) | the pubkey of the desired address |
+
+### Response
+
+| Name               | Type      | Description                                                                |
+| ------------------ | --------- | -------------------------------------------------------------------------- |
+| "indexkey"         | (string)  | the tokensv2CC specific indexkey associated with the given pubkey          |
+
+
+
+#### :pushpin: Examples
 
 Command:
 
 ```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenbalancev2", "params":["8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc" ,"0338f5315f9a60f669871848864aa39c182689c9892894b8c18500b3b830f280f4"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
+./komodo-cli -ac_name=TKLTEST tokenv2indexkey 0262ddd30ed4f6aa36aac83649967026e9d58bb6997c8107057895386b4f0792e9
 ```
 
 <collapse-text hidden title="Response">
 
 ```json
-{
-  "result": {
-    "result": "success",
-    "CCaddress": "RUBJvgvsnWMuzWZ9BBhrXhZY8JKZQ52oUX",
-    "tokenid": "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc",
-    "balance": 100000000
-  },
-  "error": null,
-  "id": "curltest"
-}
+CRXo3YVCZQ3wK9AENuM9YdJGhXq5Z8t1HV
 ```
 
 </collapse-text>
--->
 
 ## tokenv2createtokel
 
@@ -267,18 +212,22 @@ The method returns a hex-encoded transaction which should then be broadcast usin
 Tokel standard data allows creators to add predefined properties to their token, whilst giving creators flexibility through the arbitrary data field. All fields are optional, but the format must be followed when creating your token. 
 
 ##### URL
-The URL field can be used to show users where the digital asset is stored. We recommend using IPFS (The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system.) for file storing.
+The URL field can be used to show users where the digital asset is stored. We recommend using IPFS (The InterPlanetary File System is a protocol and peer-to-peer network for storing and sharing data in a distributed file system.) for file storing. There are many other options, including Arweave or Filecoin, and it is up to the creator to understand the best place to store any digital files such that they remain accessible to their holders and do not rely on any single centralized party.
 
 ##### ID
 The ID field allows for creators to uniquely identify their tokens through allocating them a specific number, and can be used however the creator wants. An example of how a creator could use the ID fields is if they wanted to create a set of 10 NFT's in a specific collection, they would simply set the same ID number for all of those NFT's, and not use it for any other creations. With this logic, a creator may set the ID of 1 for their first collection of NFT's, then set 2 for their next collection. Another use may be to identify different ranks of NFT's. Say your game created NFT's with levels associated, the ID field could be used to identify the level of the NFT. I.E. An ID of 1 may represent a level 1 NFT, an ID of 10 may represent a level 10 NFT, so on and so fourth.
 
+The Tokel all-in-one dApp uses the ID field to group collections together. If tokens have the same creator, same ID field, and have the same 'collectionName' (stored in the arbitrary data field), they are considered as part of the same collection.
+
 
 ##### Royalty
-The royalty field allows the creator to take royalties from future sales of their token. The number in this field represents x/1000 of the value of a sale. Say the royalty was 500 (500/1000), then for each sale of the token, using the tokenDEX (assetsCC RPCs), 50% of the value would be automatically transferred to the creators address, and 50% to the seller. If the royalty value was 10 (10/1000), 1% of every sale would be transferred to the creators address, and 99% to the seller. This feature gives the creator the ability to generate revenue from future sales of their token. This can significantly disrupt and help creators innovate the way they generate revenue from their creations, as their revenue potential is not limited to the original sale value. 
+The royalty field allows the creator to take royalties from future sales of their token. The number in this field represents x/1000 of the value of a sale. Say the royalty was 500 (500/1000), then for each sale of the token, using the on-chain token DEX (assetsCC RPCs), 50% of the value would be automatically transferred to the creators address, and 50% to the seller's address. If the royalty value was 10 (10/1000), 1% of every sale would be transferred to the creators address, and 99% to the seller. This feature gives the creator the ability to generate revenue from future sales of their token. This can significantly disrupt and help creators innovate the way they generate revenue from their creations, as their revenue potential is not limited to the original sale value. 
 
 For example, a project could use tokens as a key to unlock access to their educational courseware. A person would buy the token from the project, then be able to onsell it once they have completed the course. The project would reap the benefits of the original sale, but also generate revenue from the onselling of the tokens in the future. The user would also benefit as they would be able to onsell the course key (token) once they have finished the course and no longer need it. There are endless possibilties of how to change incentive structures and generate revenue with this on-chain feature.
 
-##### Arbitrary
+As a spam protection mechanism, all royalties that are less than 500 sats of the TKL coin are not sent to the token creator. These sats will be kept by the trader.
+
+##### Arbitrary data field
 This field gives creators the flexibility of adding extra properties, or application specific data to their token. The arbitrary data field is kept as hex on chain, so once the creator has the required data format, they will need to convert it to hex, and input it into this field. An example of a creator using this field to add extra properties to their token is by adding a json that holds the extra data. See the ["NFT Creation Example"](http://docs.tokel.io/api/tokens/#tokenv2createtokel) for an example where we store the properties of size, color, weapon and number as a json, converted to hex, within the arbitrary data field.
 
 #### See below for an example of the Tokel Standard data format.
@@ -446,7 +395,7 @@ Step 2: Broadcast the raw transaction hex
 Step 3 (Optional): Check your token data
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2infotokel 5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b
+./komodo-cli -ac_name=TKLTEST tokenv2infotokel 5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b
 ```
 
 <collapse-text hidden title="Response">
@@ -480,7 +429,7 @@ This example shows a token that does not follow the Tokel Standard data format. 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2create "ArbDataExample" 0.001 "This token showcases arbitrary data field, instead of using the Tokel Standard data format" "005468697320697320636f6d706c6574656c792061726269747261727920646174612e"
+./komodo-cli -ac_name=TKLTEST tokenv2create "ArbDataExample" 0.001 "This token showcases arbitrary data field, instead of using the Tokel Standard data format" "005468697320697320636f6d706c6574656c792061726269747261727920646174612e"
 ```
 
 <collapse-text hidden title="Response">
@@ -497,7 +446,7 @@ Command:
 Step 2: Broadcast the raw transaction hex
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 sendrawtransaction 0400008085202f8901001679091e0acafe5ad8c78b33b382c8edffd46dcd129f8226acfff789801f740000000049483045022100b6f860884685f00052c96c9249ac367d20dd0a1b7a6855c9e7cf15836557cde90220667dc5787fd12615db5778e5fe23904244711dce5fcfa9ed03a1cc540885145501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cca086010000000000693e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f501012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75400cf40500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000b66a4cb3f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0e417262446174614578616d706c655a5468697320746f6b656e2073686f776361736573206172626974726172792064617461206669656c642c20696e7374656164206f66207573696e672074686520546f6b656c205374616e64617264206461746120666f726d617423005468697320697320636f6d706c6574656c792061726269747261727920646174612e000000001c4100000000000000000000000000
+./komodo-cli -ac_name=TKLTEST sendrawtransaction 0400008085202f8901001679091e0acafe5ad8c78b33b382c8edffd46dcd129f8226acfff789801f740000000049483045022100b6f860884685f00052c96c9249ac367d20dd0a1b7a6855c9e7cf15836557cde90220667dc5787fd12615db5778e5fe23904244711dce5fcfa9ed03a1cc540885145501ffffffff041027000000000000403e4da23ba00aa003800102af038001f5a12da22b802096fec31e85a06720706ef9214c9c8b2df26940aac250e1d80f23a772b18b5a4a810302040082020204cca086010000000000693e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204cc270402f501012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee75400cf40500000000232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000b66a4cb3f563012102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee0e417262446174614578616d706c655a5468697320746f6b656e2073686f776361736573206172626974726172792064617461206669656c642c20696e7374656164206f66207573696e672074686520546f6b656c205374616e64617264206461746120666f726d617423005468697320697320636f6d706c6574656c792061726269747261727920646174612e000000001c4100000000000000000000000000
 ```
 
 <collapse-text hidden title="Response">
@@ -511,7 +460,7 @@ Step 2: Broadcast the raw transaction hex
 Step 3 (Optional): Check your token data
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2info 6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a
+./komodo-cli -ac_name=TKLTEST tokenv2info 6fbeb30770f60a8bb61cef9b5e18ed579f51cdcc415646b37d17a9f0c43a175a
 ```
 
 <collapse-text hidden title="Response">
@@ -679,7 +628,9 @@ Command:
 
 ## tokenv2list
 
+
 **tokenv2list [json params]**
+
 
 The `tokenv2list` method lists all tokens created on Tokel. Enter an optional json string to search for tokens created between specific block numbers, search for tokens created by a specific pubkey, or search for tokens created on a specific CC address.
 
@@ -690,7 +641,7 @@ The `tokenv2list` method lists all tokens created on Tokel. Enter an optional js
 | begin-height | (number, optional) | Block number to start searching from, inclusive |
 | end-height   | (number, optional) | Block number to end searching from, inclusive   |
 | pubkey       | (hexstring, optional) | Search tokens created by a specific pubkey   |
-| address      | (string, optional) | Search tokens created on a specific cc address  |
+| address     | (string, optional) | Search tokens on a specific indexkey    |
 
 ### Response
 
@@ -736,40 +687,15 @@ Command:
 
 </collapse-text>
 
-<!-- need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenv2list", "params":[]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": [
-    "a283693b37b3bd94edd91ba31345310a9b47946c626cb14189d67931a0cde705",
-    "0cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242",
-    "8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc"
-  ],
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
 
 #### Search the tokens created between specific block numbers
 
-An example to search for tokens created between specified block numebrs. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
+An example to search for tokens created between specified block numbers. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
 
 Command:
 
 ```bash
-./komodo-cli -ac_name=TKLTEST5 tokenv2list "{ \"beginHeight\":16000, \"endHeight\":16337}"
+./komodo-cli -ac_name=TKLTEST tokenv2list "{ \"beginHeight\":16000, \"endHeight\":16337}"
 ```
 
 <collapse-text hidden title="Response">
@@ -779,6 +705,30 @@ Command:
   "8d091fa784c304ba1974057f958253e4cd3c36847853645efeb201db65926f5e",
   "5da2731e5b1b21a0d446fb7b64203e5f57134b662bda9d30ab9ac54abf2cc37b",
   "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8"
+]
+```
+
+</collapse-text>
+
+#### Search the tokens on a specific indexkey
+
+You can search for all tokens on a specific [indexkey](https://docs.tokel.io/api/tokens/#tokenv2indexkey).
+
+::: tip
+Although this is labelled as 'address' it is not an address, it is an indexkey used to track token transactions. This terminology will be updated in future blockchain updates.
+:::
+
+Command:
+
+```bash
+./komodo-cli -ac_name=TKLTEST tokenv2list "{\"address\":\"CXCBz43PaF8dMLLq8DthHUgzEVWzJnQERQ\"}"
+
+<collapse-text hidden title="Response">
+
+```bash
+[
+  "3a027eff750bb69d918390f592005b36a0dbd368166ee28b46663bd84e88b0f8"
+  "91967708d11ededd288e9923f406578991b5c016acea1d4465d47357d0b51ab1"
 ]
 ```
 
@@ -797,7 +747,7 @@ The source `txid/vout` needs to be specified as it is critical to match outputs 
 :::
 
 ::: tip
-A token may be burned by using `tokentransfer` to send to a burn address.
+A token may be burned by using `tokentransfer` to send the token to a burn address.
 :::
 
 ### Arguments
@@ -833,30 +783,6 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-<!-- ## Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenv2transfer", "params":["8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc" ,"0338f5315f9a60f669871848864aa39c182689c9892894b8c18500b3b830f280f4" ,"100"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": {
-    "result": "success",
-    "hex": "0400008085202f8902cc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d020000004847304402200ac4ec79ed4c60307d4eb66bece4dca4e347ce8f016100ce83ed5113cc86211902203dda7eb751f7016e600a62c102fa4eaeb2c83c1336667657ab139e8d8e75924301ffffffffcc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140d3a7e35af97ab89719ffd8fd529ab5eb077be6906ee20957981f42b34c6d9e3c0277f560742064011e128bdcb0037b303a11c984236ea27fed6789387abbba31a100af038001f5a10001ffffffff046400000000000000403e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc9ce0f50500000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204ccc01ec44a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000256a23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc000000001e0400000000000000000000000000"
-  },
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
 
 Step 2: Broadcast using `sendrawtransaction`
 
@@ -869,35 +795,10 @@ Step 2: Broadcast using `sendrawtransaction`
 <collapse-text hidden title="Response">
 
 ```bash
-ProcessAssets
-AssetValidate (t)
-vin1 1000000000, vout0 100, vout1 999999900, transfer validated 10.00000000 -> 10.00000000
-AssetValidate.(t) passed
 32924a5a9343041fea31b167553b13237ecf6c5fd398ea0e87346e82c06b0be5
 ```
 
 </collapse-text>
-<!-- Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"sendrawtransaction", "params":["0400008085202f8902cc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d020000004847304402200ac4ec79ed4c60307d4eb66bece4dca4e347ce8f016100ce83ed5113cc86211902203dda7eb751f7016e600a62c102fa4eaeb2c83c1336667657ab139e8d8e75924301ffffffffcc9c0dd602fe8f947a7d48d1033e2c555447567cec8bffc0d81c9719de22738d010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140d3a7e35af97ab89719ffd8fd529ab5eb077be6906ee20957981f42b34c6d9e3c0277f560742064011e128bdcb0037b303a11c984236ea27fed6789387abbba31a100af038001f5a10001ffffffff046400000000000000403e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc9ce0f50500000000403e4da23ba00aa003800102af038001f5a12da22b802049163d1ec6309fc2cbc07fc13a3951bc938fd15263b0eceb4bcea6d164c0fccb810302040082020204ccc01ec44a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac0000000000000000256a23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc000000001e0400000000000000000000000000"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": "32924a5a9343041fea31b167553b13237ecf6c5fd398ea0e87346e82c06b0be5",
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
 
 Step 3: Decode the raw transaction and check against the following if the data is sane
 
@@ -985,101 +886,6 @@ Step 3: Decode the raw transaction and check against the following if the data i
 ```
 
 </collapse-text>
-<!-- Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"decoderawtransaction", "params":["01000000023b61e44ce3cedf536b52d8da11faacd041494a078e971551ed4e2bd496bc8da1000000006a4730440220111c67172740c0c2556979fdf84639ba299ff22586ebd220f25aa301f029003f02203da97a2575c0ed1b309774309f5dc952ee305a46cd83e95eae99e3564a1772f6012103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abcffffffff66cc65f38d7e878d312386777c4f049f738b8894353c30108f7fe4ca515489e4000000007b4c79a276a072a26ba067a565802103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc8140c875a14edcbece61a6c18721398c927dc1e4509863e075b3922a8e3a2da6848e037142436e9102b529ee93a9ec618a4c67b63c52790d71812bb94179056913bba100af038001e3a10001ffffffff0420a1070000000000302ea22c8020541be9f843b476373fc18d8c8fab59c98c2c009f49c07fa66b7b431e4142feae8103120c008203000401cce028933b00000000302ea22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401cc28b9486cb2430000232103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abcac0000000000000000246a22e374e4895451cae47f8f10303c3594888b739f044f7c778623318d877e8df365cc6600000000"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": {
-    "txid": "88ac2d4d27654e9d8ac195d5ab482ee9895303902eaacfbb687b1e736bb06fb4",
-    "overwintered": false,
-    "version": 1,
-    "locktime": 0,
-    "vin": [
-      {
-        "txid": "a18dbc96d42b4eed5115978e074a4941d0acfa11dad8526b53dfcee34ce4613b",
-        "vout": 0,
-        "scriptSig": {
-          "asm": "30440220111c67172740c0c2556979fdf84639ba299ff22586ebd220f25aa301f029003f02203da97a2575c0ed1b309774309f5dc952ee305a46cd83e95eae99e3564a1772f6[ALL] 03fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc",
-          "hex": "4730440220111c67172740c0c2556979fdf84639ba299ff22586ebd220f25aa301f029003f02203da97a2575c0ed1b309774309f5dc952ee305a46cd83e95eae99e3564a1772f6012103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc"
-        },
-        "sequence": 4294967295
-      },
-      {
-        "txid": "e4895451cae47f8f10303c3594888b739f044f7c778623318d877e8df365cc66",
-        "vout": 0,
-        "scriptSig": {
-          "asm": "a276a072a26ba067a565802103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc8140c875a14edcbece61a6c18721398c927dc1e4509863e075b3922a8e3a2da6848e037142436e9102b529ee93a9ec618a4c67b63c52790d71812bb94179056913bba100af038001e3a10001",
-          "hex": "4c79a276a072a26ba067a565802103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc8140c875a14edcbece61a6c18721398c927dc1e4509863e075b3922a8e3a2da6848e037142436e9102b529ee93a9ec618a4c67b63c52790d71812bb94179056913bba100af038001e3a10001"
-        },
-        "sequence": 4294967295
-      }
-    ],
-    "vout": [
-      {
-        "value": 0.005,
-        "valueZat": 500000,
-        "n": 0,
-        "scriptPubKey": {
-          "asm": "a22c8020541be9f843b476373fc18d8c8fab59c98c2c009f49c07fa66b7b431e4142feae8103120c008203000401 OP_CHECKCRYPTOCONDITION",
-          "hex": "2ea22c8020541be9f843b476373fc18d8c8fab59c98c2c009f49c07fa66b7b431e4142feae8103120c008203000401cc",
-          "reqSigs": 1,
-          "type": "cryptocondition",
-          "addresses": ["RLB1YWh4N115NFh8tbArCBGaTQ3F43Yg1F"]
-        }
-      },
-      {
-        "value": 9.995,
-        "valueZat": 999500000,
-        "n": 1,
-        "scriptPubKey": {
-          "asm": "a22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401 OP_CHECKCRYPTOCONDITION",
-          "hex": "2ea22c8020bc485b86ffd067abe520c078b74961f6b25e4efca6388c6bfd599ca3f53d8dae8103120c008203000401cc",
-          "reqSigs": 1,
-          "type": "cryptocondition",
-          "addresses": ["RRPpWbVdxcxmhx4xnWnVZFDfGc9p1177ti"]
-        }
-      },
-      {
-        "value": 744335.99945,
-        "valueZat": 74433599945000,
-        "n": 2,
-        "scriptPubKey": {
-          "asm": "03fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abc OP_CHECKSIG",
-          "hex": "2103fe754763c176e1339a3f62ee6b9484720e17ee4646b65a119e9f6370c7004abcac",
-          "reqSigs": 1,
-          "type": "pubkey",
-          "addresses": ["RANyPgfZZLhSjQB9jrzztSw66zMMYDZuxQ"]
-        }
-      },
-      {
-        "value": 0.0,
-        "valueZat": 0,
-        "n": 3,
-        "scriptPubKey": {
-          "asm": "OP_RETURN e374e4895451cae47f8f10303c3594888b739f044f7c778623318d877e8df365cc66",
-          "hex": "6a22e374e4895451cae47f8f10303c3594888b739f044f7c778623318d877e8df365cc66",
-          "type": "nulldata"
-        }
-      }
-    ],
-    "vjoinsplit": []
-  },
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
 
 ## tokenv2transfermany
 
@@ -1087,9 +893,9 @@ curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curlte
 
 The `tokenv2transfermany` method transfers multiple tokens from one Antara Address to another. There is no limit on how many different tokens can be sent to the one address, simply keep adding more tokenid's one after another, prior to the `destpubkey` and `amount`.
 
-It is similar to the [sendmany](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/wallet.html#sendmany) method used to send coins on the parent chain.
+It is similar to the [sendmany](https://docs.tokel.io/api/wallet/#sendmany) method used to send coins on the parent chain.
 
-The method returns a raw hex, which must be broadcast using [sendrawtransaction](https://docs.komodoplatform.com/basic-docs/smart-chains/smart-chain-api/rawtransactions.html#sendrawtransaction) to complete the command.
+The method returns a raw hex, which must be broadcast using [sendrawtransaction](https://docs.tokel.io/api/raw%20transactions/#sendrawtransaction) to complete the command.
 
 ::: tip
 The source `txid/vout` needs to be specified as it is critical to match outputs with inputs.
@@ -1132,29 +938,6 @@ Step 1: Create the rawtransaction
 ```
 
 </collapse-text>
-<!-- Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"tokenv2transfermany", "params":["0cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242" ,"8d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc" "0338f5315f9a60f669871848864aa39c182689c9892894b8c18500b3b830f280f4","50"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": {
-    "hex": "0400008085202f890305e7cda03179d68941b16c626c94479b0a314513a31bd9ed94bdb3373b6983a20200000049483045022100e6091d6a95173e9644c47989c777583dfb8221e9ffc9c4c05278f63f856e815202202fa05629cd16f96c68f0acbcdc64a6efc3882962b2aef4c9e073ac95182ca97201ffffffff42c21f0d3bc13a799c4c8f138594da9cdae29f0e4610dc8ccd546c9a1b63d70c010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140ce42ad2400f4ebd60d324431ca7ecf16ef2ed5e528f042c783fd380b825f6ff918079488a6a95c18218d30868b219419efdf87aafa359aa3bd1f327c1fb58577a100af038001f5a10001ffffffffe50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140f0b23b17e0dfefc18b9ce41ac14c22cd8495adfa96b7ecefa656d66a7dfa79f205bc62094490c7dc89f49b43edf5d253501e61ea861cc083868f694fefef57b9a100af038001f5a10001ffffffff053200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc24275de26000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242753200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc756ae0f50500000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc755f34c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac00000000430400000000000000000000000000"
-  },
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
 
 Step 2: Broadcast using `sendrawtransaction`
 
@@ -1171,24 +954,3 @@ fc0c7149d367acd92b530bb2a075bf206156122757cf148ee72cc2dd1ca78f4c
 ```
 
 </collapse-text>
-<!-- Need to update curl commands
-You can find your `rpcuser`, `rpcpassword`, and `rpcport` in the coin's .conf file.
-
-Command:
-
-```bash
-curl --user $rpcuser:$rpcpassword --data-binary '{"jsonrpc": "1.0", "id":"curltest", "method":"sendrawtransaction", "params":["0400008085202f890305e7cda03179d68941b16c626c94479b0a314513a31bd9ed94bdb3373b6983a20200000049483045022100e6091d6a95173e9644c47989c777583dfb8221e9ffc9c4c05278f63f856e815202202fa05629cd16f96c68f0acbcdc64a6efc3882962b2aef4c9e073ac95182ca97201ffffffff42c21f0d3bc13a799c4c8f138594da9cdae29f0e4610dc8ccd546c9a1b63d70c010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140ce42ad2400f4ebd60d324431ca7ecf16ef2ed5e528f042c783fd380b825f6ff918079488a6a95c18218d30868b219419efdf87aafa359aa3bd1f327c1fb58577a100af038001f5a10001ffffffffe50b6bc0826e34870eea98d35f6ccf7e23133b5567b131ea1f0443935a4a9232010000007b4c79a276a072a26ba067a565802102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6ee8140f0b23b17e0dfefc18b9ce41ac14c22cd8495adfa96b7ecefa656d66a7dfa79f205bc62094490c7dc89f49b43edf5d253501e61ea861cc083868f694fefef57b9a100af038001f5a10001ffffffff053200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc24275de26000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574010cd7631b9a6c54cd8cdc10460e9fe2da9cda9485138f4c9c793ac13b0d1fc242753200000000000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc756ae0f50500000000653e4da23ba00aa003800102af038001f5a12da22b8020bd7d036361bcc894a9704512e386909c5b141541ebbf99b564b6e792b188bee8810302040082020204cc23f574018d7322de19971cd8c0ff8bec7c564754552c3e03d1487d7a948ffe02d60d9ccc755f34c34a7c8d0300232102ed3fcb2ace8a53cd8ed5350dc53c507167ad39238ba70345e51764c6d517e6eeac00000000430400000000000000000000000000"]}' -H 'content-type: text/plain;' http://127.0.0.1:$rpcport/
-```
-
-<collapse-text hidden title="Response">
-
-```json
-{
-  "result": "fc0c7149d367acd92b530bb2a075bf206156122757cf148ee72cc2dd1ca78f4c",
-  "error": null,
-  "id": "curltest"
-}
-```
-
-</collapse-text>
--->
