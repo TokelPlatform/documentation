@@ -628,9 +628,11 @@ Command:
 
 ## tokenv2list
 
-**tokenv2list [json params]
 
-The `tokenv2list` method lists all tokens created on Tokel. Enter an optional begin and end block height number to search for tokens created between specific block numbers.
+**tokenv2list [json params]**
+
+
+The `tokenv2list` method lists all tokens created on Tokel. Enter an optional json string to search for tokens created between specific block numbers, search for tokens created by a specific pubkey, or search for tokens created on a specific CC address.
 
 ### Arguments
 
@@ -685,6 +687,7 @@ Command:
 
 </collapse-text>
 
+
 #### Search the tokens created between specific block numbers
 
 An example to search for tokens created between specified block numbers. This command can be used to significantly reduce the time taken to output tokens. This command can be used to log and keep a database of all tokens created up to date. For example, if your database had logged all tokens created up until the 10,000th block, you would search from `10000` to the current block height.
@@ -719,7 +722,6 @@ Command:
 
 ```bash
 ./komodo-cli -ac_name=TKLTEST tokenv2list "{\"address\":\"CXCBz43PaF8dMLLq8DthHUgzEVWzJnQERQ\"}"
-```
 
 <collapse-text hidden title="Response">
 
