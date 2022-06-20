@@ -45,7 +45,7 @@ sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoco
 
 #### Linux
 ```shell
-git clone https://github.com/TokelPlatform/komodo --branch tkltest --single-branch
+git clone https://github.com/TokelPlatform/tokel --branch tkltest --single-branch
 cd komodo
 ./zcutil/fetch-params.sh
 ./zcutil/build.sh -j$(expr $(nproc) - 1)
@@ -69,10 +69,9 @@ brew install binutils
 brew install protobuf
 brew install coreutils
 brew install wget
-# Clone the Komodo repo
-git clone https://github.com/TokelPlatform/komodo --branch tkltest --single-branch
-# Change master branch to other branch you wish to compile
-cd komodo
+# Clone the Tokel repo
+git clone https://github.com/TokelPlatform/tokel --branch tkltest --single-branch
+cd tokel
 ./zcutil/fetch-params.sh
 ./zcutil/build-mac.sh -j$(expr $(sysctl -n hw.ncpu) - 1)
 # This can take some time.
@@ -91,8 +90,8 @@ sudo update-alternatives --config x86_64-w64-mingw32-gcc
 sudo update-alternatives --config x86_64-w64-mingw32-g++
 # (configure to use POSIX variant)
 
-git clone https://github.com/TokelPlatform/komodo --branch tkltest --single-branch
-cd komodo
+git clone https://github.com/TokelPlatform/tokel --branch tkltest --single-branch
+cd tokel
 ./zcutil/fetch-params.sh
 ./zcutil/build-win.sh -j$(expr $(nproc) - 1)
 #This can take some time.
@@ -102,10 +101,10 @@ To reset the TKLTEST blockchain change into the *~/.komodo/TKLTEST* data directo
 
 ## Launch the TKLTEST blockchain
 
-Change to the Komodo src directory:
+Change to the Tokel src directory:
 
 ```
-cd ~/komodo/src
+cd ~/tokel/src
 ```
 
 Launch the TKLTEST chain command:
@@ -140,14 +139,14 @@ Once you have completed this, use the `validateaddress` RPC to find your associa
 Once you have written down your pubkey, stop the TKLTEST blockchain.
 
 ```
-cd ~/komodo/src
+cd ~/tokel/src
 ./komodo-cli -ac_name=TKLTEST stop
 ```
 
 Wait a minute or so for the blockchain to stop, then relaunch the TKLTEST blockchain with the command below. Please remove the ** and replace them with the pubkey of the address you imported.
 
 ```
-cd ~/komodo/src
+cd ~/tokel/src
 ./komodod -ac_name=TKLTEST -ac_supply=1000000000 -ac_cbmaturity=1 -ac_reward=5000000000 -ac_decay=77700000 -ac_halving=525600 -ac_cc=1 -ac_ccenable=228,236,245,246,247 -ac_adaptivepow=2 -addnode=164.132.225.134 -pubkey=**YOURPUBKEYHERE** &
 ```
 
