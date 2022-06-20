@@ -1,17 +1,14 @@
 ## Introduction
 
-Tokel is a completely independent blockchain created using Komodo technologies. In order to run the Tokel blockchain, you must build the Komodo daemon and launch the Tokel blockchain through that. You do **not** have to run the Komodo blockchain in order to run and use the Tokel blockchain.
+Tokel is a completely independent blockchain created using Komodo smart chain technologies. In order to run the Tokel blockchain, you must build the Tokel daemon and launch the Tokel blockchain through that. You do **not** have to run the Komodo blockchain in order to run or use the Tokel blockchain.
 
-[Komodo technology](https://developers.komodoplatform.com/basic-docs/start-here/about-komodo-platform/product-introductions.html#smart-chains-antara) allows anyone to create smartchains which are independent blockchains, such as Tokel.
-
-You must ensure you are running the chain from the `tokel` [branch of this repository](https://github.com/TokelPlatform/komodo/tree/tokel)
+You must ensure you are running the chain from the `tokel` [branch of this repository](https://github.com/TokelPlatform/tokel/tree/tokel)
 
 ## Preparing your environment
 
-### Build Komodo (yep, the komodo daemon runs Tokel)
+### Build the Tokel Daemon
 
 #### Dependencies
-
 
 ```shell
 #The following packages are needed:
@@ -20,8 +17,8 @@ sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoco
 
 #### Linux
 ```shell
-git clone https://github.com/TokelPlatform/komodo --branch tokel --single-branch
-cd komodo
+git clone https://github.com/TokelPlatform/tokel --branch tokel --single-branch
+cd tokel
 ./zcutil/fetch-params.sh
 ./zcutil/build.sh -j$(expr $(nproc) - 1)
 #This can take some time.
@@ -44,10 +41,9 @@ brew install binutils
 brew install protobuf
 brew install coreutils
 brew install wget
-# Clone the Komodo repo
-git clone https://github.com/TokelPlatform/komodo --branch tokel --single-branch
-# Change master branch to other branch you wish to compile
-cd komodo
+# Clone the Tokel repo
+git clone https://github.com/TokelPlatform/tokel --branch tokel --single-branch
+cd tokel
 ./zcutil/fetch-params.sh
 ./zcutil/build-mac.sh -j$(expr $(sysctl -n hw.ncpu) - 1)
 # This can take some time.
@@ -66,8 +62,8 @@ sudo update-alternatives --config x86_64-w64-mingw32-gcc
 sudo update-alternatives --config x86_64-w64-mingw32-g++
 # (configure to use POSIX variant)
 
-git clone https://github.com/TokelPlatform/komodo --branch tokel --single-branch
-cd komodo
+git clone https://github.com/TokelPlatform/tokel --branch tokel --single-branch
+cd tokel
 ./zcutil/fetch-params.sh
 ./zcutil/build-win.sh -j$(expr $(nproc) - 1)
 #This can take some time.
@@ -77,16 +73,21 @@ To reset the Tokel blockchain change into the *~/.komodo/TOKEL* data directory a
 
 ## Launch the Tokel blockchain
 
-Change to the Komodo src directory:
+Change to the Tokel src directory:
 
 ```
-cd ~/komodo/src
+cd ~/tokel/src
 ```
 
 Launch the Tokel chain command:
+```
+./tokeld &
+```
+
+The smart chain parameters are listed below if you are curious. The `tokeld` command will launch the blockchain correctly without the need to use the full command below.
 
 ```
-./komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 &
+komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 &
 ```
 
 Now wait for the chain to finish syncing. This might take while depending on your machine and internet connection. You can check check sync progress by using tail -f on the debug.log file in the coin data directory. Double check the number of blocks you've downloaded with an explorer to verify you're up to the latest block.
@@ -100,30 +101,30 @@ Tokel uses CryptoConditions that require launching the blockchain with the `-pub
 You can use the RPC below to create a new address or import a privkey you currently have.
 
 ```
-./komodo-cli -ac_name=TOKEL getnewaddress
+./tokel-cli getnewaddress
 ```
 ```
-./komodo-cli -ac_name=TOKEL importprivkey
+./tokel-cli importprivkey
 ```
 
 Once you have completed this, use the `validateaddress` RPC to find your associated pubkey.
 
 ```
-./komodo-cli -ac_name=TOKEL validateaddress *INSERTYOURADDRESSHERE*
+./tokel-cli validateaddress *INSERTYOURADDRESSHERE*
 ```
 
 Once you have written down your pubkey, stop the Tokel blockchain.
 
 ```
-cd ~/komodo/src
-./komodo-cli -ac_name=TOKEL stop
+cd ~/tokel/src
+./tokel-cli stop
 ```
 
 Wait a minute or so for the blockchain to stop, then relaunch the Tokel blockchain with the command below. Please remove the ** and replace them with the pubkey of the address you imported.
 
 ```
-cd ~/komodo/src
-./komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 -pubkey=**YOURPUBKEYHERE** &
+cd ~/tokel/src
+./tokeld -pubkey=**YOURPUBKEYHERE** &
 ```
 
 You are now ready to use the Tokel blockchain to its fullest extent.
