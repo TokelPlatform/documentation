@@ -84,10 +84,10 @@ The number represented in the 'supply' field is the amount of TKL you are going 
 We will now submit the command to create your token using the `tokenv2createtokel`, then send the transaction using `sendrawtransaction` to be mined and officially created. Replace the below commands with your token commands and output hex.
 
 #### :pushpin: Example
-Step 1: Change to the `komodo/src` directory and submit your command.
+Step 1: Change to the `tokel/src` directory and submit your command.
 
 ```bash
-cd ~/komodo/src
+cd ~/tokel/src
 ```
 
 ```bash
