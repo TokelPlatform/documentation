@@ -4,6 +4,15 @@ Tokel is a completely independent blockchain created using Komodo smart chain te
 
 You must ensure you are running the chain from the `tokel` [branch of this repository](https://github.com/TokelPlatform/tokel/tree/tokel)
 
+## What's new in daemon tokeld
+
+### Release 0.3.1
+New consensus features and fixes (activated on 24 June 2022):
+- Support for R-address as destinations for tokenv2transfer transactions
+- fixed burn pubkey (added a valid one)
+- fixed assets cc (token DEX) royalty calculation for more than 50%
+- added websockets support for nspv nodes
+
 ## Preparing your environment
 
 ### Build the Tokel Daemon
@@ -89,6 +98,10 @@ The smart chain parameters are listed below if you are curious. The `tokeld` com
 ```
 komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_reward=100000000,4250000000 -ac_end=80640,0 -ac_decay=0,77700000 -ac_halving=0,525600 -ac_cc=555 -ac_ccenable=236,245,246,247 -ac_adaptivepow=6 -addnode=135.125.204.169 -addnode=192.99.71.125 -addnode=144.76.140.197 -addnode=135.181.92.123 &
 ```
+or just
+```
+./tokeld &
+```
 
 Now wait for the chain to finish syncing. This might take while depending on your machine and internet connection. You can check check sync progress by using tail -f on the debug.log file in the coin data directory. Double check the number of blocks you've downloaded with an explorer to verify you're up to the latest block.
 
@@ -98,7 +111,10 @@ tail -f ~/.komodo/TOKEL/debug.log
 
 Tokel uses CryptoConditions that require launching the blockchain with the `-pubkey` parameter to work correctly. Once you have completed block download, you will need to create a new address or import your current address. After you have done that, you will need to stop the blockchain and launch it with the `-pubkey` parameter.
 
-You can use the RPC below to create a new address or import a privkey you currently have.
+To use tokel daemon RPC you should run the command line interface executable:<br> 
+`./komodo-cli -ac_name=TOKEL commmand params` or just `./tokel-cli commmand params` (`komodo-cli.exe` or `tokel-cli.exe` on Windows).
+
+You can use the RPC below to create a new address or import a privkey you currently have. 
 
 ```
 ./tokel-cli getnewaddress
@@ -128,6 +144,24 @@ cd ~/tokel/src
 ```
 
 You are now ready to use the Tokel blockchain to its fullest extent.
+
+### Build and run nSPV node with websockets support
+
+If you need to run a Tokel nSPV node with websockets support for providing web apps access to the blockchain you should build the daemon with --enable-websockets parameter.
+
+Building for Linux:<br>
+`./zcutil/build.sh --enable-websockets $(nproc)`
+
+Building for Mac:<br>
+`./zcutil/build-mac.sh --enable-websockets $(nproc)`
+
+Building cross-compiled executable for Windows:<br>
+`./zcutil/build-win.sh --enable-websockets $(nproc)`
+
+The default websockets port is 8192. You could change it with -wsport parameter of daemon:
+`./tokeld -wsport=your-port`
+
+Do not forget to enable incoming TCP access to this port on the firewall.
 
 License
 -------
