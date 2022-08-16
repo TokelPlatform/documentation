@@ -16,6 +16,7 @@ sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoco
 ```
 
 #### Linux
+
 ```shell
 git clone https://github.com/TokelPlatform/tokel --branch tokel --single-branch
 cd tokel
@@ -25,12 +26,14 @@ cd tokel
 ```
 
 #### OSX
+
 Ensure you have [brew](https://brew.sh) and Command Line Tools installed.
+
 ```shell
 # Install brew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 # Install Xcode, opens a pop-up window to install CLT without installing the entire Xcode package
-xcode-select --install 
+xcode-select --install
 # Update brew and install dependencies
 brew update
 brew upgrade
@@ -50,7 +53,9 @@ cd tokel
 ```
 
 #### Windows
+
 Use a debian cross-compilation setup with mingw for windows and run:
+
 ```shell
 sudo apt-get install build-essential pkg-config libc6-dev m4 g++-multilib autoconf libtool ncurses-dev unzip git zlib1g-dev wget libcurl4-gnutls-dev bsdmainutils automake curl cmake mingw-w64 libsodium-dev libevent-dev
 curl https://sh.rustup.rs -sSf | sh
@@ -69,8 +74,6 @@ cd tokel
 #This can take some time.
 ```
 
-To reset the Tokel blockchain change into the *~/.komodo/TOKEL* data directory and delete the corresponding files by running `rm -rf blocks chainstate debug.log komodostate db.log`
-
 ## Launch the Tokel blockchain
 
 Change to the Tokel src directory:
@@ -80,6 +83,7 @@ cd ~/tokel/src
 ```
 
 Launch the Tokel chain command:
+
 ```
 ./tokeld &
 ```
@@ -92,8 +96,16 @@ komodod -ac_name=TOKEL -ac_supply=100000000 -ac_eras=2 -ac_cbmaturity=1 -ac_rewa
 
 Now wait for the chain to finish syncing. This might take while depending on your machine and internet connection. You can check check sync progress by using tail -f on the debug.log file in the coin data directory. Double check the number of blocks you've downloaded with an explorer to verify you're up to the latest block.
 
+**LINUX**
+
 ```
 tail -f ~/.komodo/TOKEL/debug.log
+```
+
+**OSX**
+
+```
+tail -f ~/Library/Application\ Support/Komodo/TOKEL/debug.log
 ```
 
 Tokel uses CryptoConditions that require launching the blockchain with the `-pubkey` parameter to work correctly. Once you have completed block download, you will need to create a new address or import your current address. After you have done that, you will need to stop the blockchain and launch it with the `-pubkey` parameter.
@@ -103,6 +115,7 @@ You can use the RPC below to create a new address or import a privkey you curren
 ```
 ./tokel-cli getnewaddress
 ```
+
 ```
 ./tokel-cli importprivkey
 ```
@@ -120,7 +133,7 @@ cd ~/tokel/src
 ./tokel-cli stop
 ```
 
-Wait a minute or so for the blockchain to stop, then relaunch the Tokel blockchain with the command below. Please remove the ** and replace them with the pubkey of the address you imported.
+Wait a minute or so for the blockchain to stop, then relaunch the Tokel blockchain with the command below. Please remove the \*\* and replace them with the pubkey of the address you imported.
 
 ```
 cd ~/tokel/src
@@ -129,8 +142,28 @@ cd ~/tokel/src
 
 You are now ready to use the Tokel blockchain to its fullest extent.
 
-License
--------
+## Reset Tokel blockchain
+
+To reset the Tokel blockchain:
+
+1. change into data directory
+
+**Linux**
+_~/.komodo/TOKEL_
+
+**OSX**
+_~/Library/Application\ Support/Komodo/TOKEL/_
+
+2. Delete the corresponding files
+
+`rm -rf blocks chainstate debug.log komodostate db.log`
+
+## Tokel blockchain configuration
+
+Tokel blockchain synced blocks and all other configuration is stored in either `~/.komodo/TOKEL/` on Linux or `~/Library/Application\ Support/Komodo/TOKEL/` on OSX.
+
+## License
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
