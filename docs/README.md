@@ -28,7 +28,17 @@ tags:
 
 ## What is the Tokel platform?
 
-Tokel is a dedicated token platform. This platform will provide a solid foundation, using existing Komodo Technologies, for token projects to launch and succeed from by offering end-to-end token solutions for fixed supply and non-fungible tokens (NFT's). Furthermore Tokel aims to provide a wealth of knowledge, information and assistance for open-sourced applications, projects and businesses looking to capitalize on token economics or token applications. The Tokel platform will provide simple to use, streamlined token creation, explorer and wallet integration, decentralized exchange integration assistance and more.
+Tokel is an open-source, decentralized, token & NFT platform. 
+
+The Tokel platform makes tokenization easy and affordable for creators, businesses and projects by offering inexpensive, user-friendly solutions for token/NFT creation, asset management, and an on-chain decentralized trading functionality without the need for complicated smart contracts or expensive gas fees. 
+
+Utilizing cutting edge UTXO based technology, the Tokel blockchain offers an array of layer 1 blockchain features, removing the need for expensive smart contract development. 
+
+Tokel's super-lite, next-gen SPV technology gives users the ability to interact with their tokens in a decentralized & trust-less fashion on any device, without the inconvenience and energy cost of downloading the entire blockchain. 
+
+Tokel provides universal, accessible, and easy-to-use tokenization technology to people all over the world. 
+
+To NFT and Beyond
 
 ### What Tokel aims to offer
 
