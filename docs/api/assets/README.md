@@ -149,6 +149,7 @@ The method returns a hex value which must then be broadcast using the [sendrawtr
 | numtokens | (number) | the number of tokens to request in the order              |
 | tokenid   | (string) | the txid that identifies the token                        |
 | price     | (number) | the price to pay for each token (units are in Tokel coin) |
+| expiry-height | (number) | [optional] the block height the order will expire on. Default is 40320 blocks (4 weeks) if left empty. |
 
 ### Response
 
@@ -251,6 +252,7 @@ The `sendrawtransaction` method then returns a `txid`, which is the identificati
 | numtokens | (number) | the number of tokens to request in the order              |
 | tokenid   | (string) | the txid that identifies the token                        |
 | price     | (number) | the price to pay for each token (units are in Tokel coin) |
+| expiry-height | (number) | [optional] the block height the order will expire on. Default is 40320 blocks (4 weeks) if left empty. |
 
 ### Response
 
